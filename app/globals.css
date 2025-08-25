@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Website Color Scheme - CSS Custom Properties */
+:root {
+  /* Primary Colors */
+  --color-primary: #ffedaca;
+  --color-secondary: #3e2723;
+  
+  /* Color Variants */
+  --color-cream-50: #ffedaca;
+  --color-cream-100: #ffe8b3;
+  --color-cream-200: #ffe3c0;
+  --color-cream-300: #ffdecd;
+  --color-cream-400: #ffd9da;
+  --color-cream-500: #ffedaca;
+  --color-cream-600: #f5e2a0;
+  --color-cream-700: #ebd794;
+  --color-cream-800: #e1cc88;
+  --color-cream-900: #d7c17c;
+  
+  --color-brown-50: #8b6b68;
+  --color-brown-100: #7a5d5a;
+  --color-brown-200: #694f4c;
+  --color-brown-300: #58413e;
+  --color-brown-400: #473330;
+  --color-brown-500: #3e2723;
+  --color-brown-600: #351f1b;
+  --color-brown-700: #2c1713;
+  --color-brown-800: #230f0b;
+  --color-brown-900: #1a0703;
+  
+  /* Semantic Colors */
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: #3e2723cc;
+  --color-text-muted: #3e272399;
+  
+  --color-bg-primary: var(--color-primary);
+  --color-bg-secondary: #ffedacaf2;
+  --color-bg-muted: #ffedacae6;
+  
+  --color-accent-primary: var(--color-secondary);
+  --color-accent-secondary: var(--color-primary);
+  
+  --color-border-primary: #3e272333;
+  --color-border-secondary: #ffedaca66;
+}
+
+/* Utility classes for website colors */
+.text-brand-primary { color: var(--color-primary); }
+.text-brand-secondary { color: var(--color-secondary); }
+.bg-brand-primary { background-color: var(--color-primary); }
+.bg-brand-secondary { background-color: var(--color-secondary); }
+.border-brand-primary { border-color: var(--color-primary); }
+.border-brand-secondary { border-color: var(--color-secondary); }
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@font-face {
+  font-family: 'Neue Machina';
+  src: url('/fonts/NeueMachina.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Neue Machina', 'Inter', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
