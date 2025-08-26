@@ -207,10 +207,8 @@ export function PricingSection() {
                   const featureText = typeof feature === 'string' ? feature : feature.text
                   const isIncluded = (plan: string) => {
                     if (typeof feature === 'string') return true
-                    if (feature.all) return true
-                    if (feature.status) return feature.status
-                    if (plan === 'unlimited' && feature.unlimited !== undefined) return feature.unlimited
-                    if (plan === 'enterprise' && feature.enterprise !== undefined) return feature.enterprise
+                    if (plan === 'unlimited' && 'unlimited' in feature) return feature.unlimited
+                    if (plan === 'enterprise' && 'enterprise' in feature) return feature.enterprise
                     return false
                   }
 

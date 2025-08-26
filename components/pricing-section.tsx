@@ -233,11 +233,9 @@ export function PricingSection() {
                   const featureText = typeof feature === 'string' ? feature : feature.text
                   const isIncluded = (plan: string) => {
                     if (typeof feature === 'string') return true
-                    if (feature.all) return true
-                    if (feature.status) return feature.status
-                    if (plan === 'lite' && feature.lite !== undefined) return feature.lite
-                    if (plan === 'standard' && feature.standard !== undefined) return feature.standard
-                    if (plan === 'fullqms' && feature.fullqms !== undefined) return feature.fullqms
+                    if (plan === 'lite' && 'lite' in feature) return feature.lite
+                    if (plan === 'standard' && 'standard' in feature) return feature.standard
+                    if (plan === 'fullqms' && 'fullqms' in feature) return feature.fullqms
                     return false
                   }
 

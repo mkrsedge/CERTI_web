@@ -105,7 +105,7 @@ export default function Home() {
     
     return () => {
       clearTimeout(timer)
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill())
     }
   }, [])
 
