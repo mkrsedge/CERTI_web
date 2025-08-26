@@ -2,23 +2,20 @@
 
 import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
+import { OptimizedVideo } from './optimized-video'
 
 export function HeroSection() {
+
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Background Video */}
+      {/* Background Video with Optimization */}
       <div className="absolute inset-0 w-full h-full">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <OptimizedVideo
+          src="/gitness-spline-test (1).mp4"
           className="w-full h-full object-cover hero-video"
-          style={{ objectPosition: 'center' }}
-        >
-          <source src="/gitness-spline-test (1).mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        />
+        
         {/* Video overlay for better text readability */}
         <div className="absolute inset-0 bg-black/20"></div>
       </div>

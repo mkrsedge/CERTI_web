@@ -88,3 +88,38 @@ body {
   overscroll-behavior: contain;
 }
 
+/* Video optimization styles */
+.hero-video {
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Smooth video loading transitions */
+.video-fade-in {
+  animation: videoFadeIn 1s ease-out forwards;
+}
+
+@keyframes videoFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Loading placeholder animation */
+.video-loading {
+  background: linear-gradient(90deg, #f0f9ff 25%, #e0f2fe 50%, #f0f9ff 75%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 2s infinite;
+}
+
+@keyframes loadingShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
