@@ -2,45 +2,23 @@
 
 import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
-import { useState, useEffect } from 'react'
 
 export function HeroSection() {
-  const [videoLoaded, setVideoLoaded] = useState(false)
-
-  useEffect(() => {
-    // Simple delay to prioritize page content
-    const timer = setTimeout(() => {
-      setVideoLoaded(true)
-    }, 200)
-
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Background Video with Simple Optimization */}
+      {/* Background Video */}
       <div className="absolute inset-0 w-full h-full">
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
-          onLoadedData={() => setVideoLoaded(true)}
-          className={`w-full h-full object-cover hero-video transition-opacity duration-1000 ${
-            videoLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="w-full h-full object-cover hero-video"
           style={{ objectPosition: 'center' }}
         >
           <source src="/gitness-spline-test (1).mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        
-        {/* Loading placeholder */}
-        {!videoLoaded && (
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 animate-pulse" />
-        )}
-        
         {/* Video overlay for better text readability */}
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
