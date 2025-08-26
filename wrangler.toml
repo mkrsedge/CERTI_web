@@ -2,4 +2,4 @@ name = "certi-website"
 compatibility_date = "2024-08-01"
 
 [pages]
-# This will be set automatically when you deploy via dashboard
+pages_build_output_dir = "out"
