@@ -15,27 +15,19 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
   }
 
   useEffect(() => {
-    // Wait for GSAP to load, then initialize navigation
+    // Initialize navigation immediately for better responsiveness
     const checkGSAP = () => {
       if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollTrigger) {
-        console.log('GSAP loaded, initializing navigation...')
         initializeNavigation()
         return true
       }
       return false
     }
 
-    // Try immediately
+    // Try immediately, then retry once after a short delay
     if (!checkGSAP()) {
-      // If not available, wait a bit and try again
-      const interval = setInterval(() => {
-        if (checkGSAP()) {
-          clearInterval(interval)
-        }
-      }, 100)
-
-      // Clean up after 5 seconds
-      setTimeout(() => clearInterval(interval), 5000)
+      const timer = setTimeout(checkGSAP, 200)
+      return () => clearTimeout(timer)
     }
   }, [])
 

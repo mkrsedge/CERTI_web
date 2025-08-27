@@ -89,9 +89,9 @@ export default function Home() {
         const targetSection = document.getElementById(sectionId)
         if (targetSection) {
           gsap.to(window, {
-            duration: 2,
+            duration: 0.8,
             scrollTo: { y: targetSection, offsetY: 80 },
-            ease: 'power2.inOut'
+            ease: 'power2.out'
           })
         }
       }
@@ -111,13 +111,20 @@ export default function Home() {
 
   // Handle navigation with GSAP smooth scroll
   const handleSectionChange = (section: string) => {
-    if (typeof window !== 'undefined' && window.smoothScrollToSection) {
-      window.smoothScrollToSection(section)
-    } else {
-      // Fallback to native smooth scroll
-      const element = document.getElementById(section)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
+    // Immediate navigation for better responsiveness
+    const element = document.getElementById(section)
+    if (element) {
+      // Use native smooth scroll for immediate response
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+      
+      // Then enhance with GSAP if available
+      if (typeof window !== 'undefined' && window.smoothScrollToSection) {
+        setTimeout(() => {
+          window.smoothScrollToSection(section)
+        }, 100)
       }
     }
   }
