@@ -282,6 +282,15 @@ const dict: I18nDict = {
   },
 }
 
+// Targeted Turkish fixes for mojibake strings
+const trOverrides: Record<string, string> = {
+  "hero.title.1": "Yapay Zeka Tabanlı",
+  "hero.desc.1": "Üreticiler için kalite yönetiminde yeni bir çağ.",
+  "hero.desc.2": "Ajan tabanlı yapay zeka teknolojileri, ağır düzenlemeli sektörlere özel.",
+  "overview.step4.title": "Sorunları kalıcı olarak çözün",
+  "overview.step4.desc": "Sorunlar ortaya çıktığında CERTI kök neden analizine rehberlik eder ve prosedürlerinize göre net DÖF taslakları oluşturur.",
+}
+
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (key: string) => string }
 
 const LanguageContext = createContext<Ctx | undefined>(undefined)
@@ -301,7 +310,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (typeof document !== 'undefined') document.documentElement.setAttribute('lang', l)
   }
 
-  const t = useMemo(() => (key: string) => dict[lang]?.[key] ?? dict.en[key] ?? key, [lang])
+  const t = useMemo(
+    () => (key: string) => {
+      if (lang === 'tr' && trOverrides[key]) return trOverrides[key]
+      return dict[lang]?.[key] ?? dict.en[key] ?? key
+    },
+    [lang]
+  )
   const value = useMemo(() => ({ lang, setLang, t }), [lang])
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
 }
