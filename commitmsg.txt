@@ -1,1 +1,1 @@
-fix(i18n): remove duplicate " use client\ block appended at EOF
+fix(build): correct meta charset tag and mark sitemap static for Next export
