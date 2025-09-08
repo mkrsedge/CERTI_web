@@ -170,8 +170,8 @@ const dict: I18nDict = {
     // Hero
     'hero.title.1': 'Yapay Zeka Tabanlı',
     'hero.title.2': 'Kalite ve Uyumluluk',
-    'hero.desc.1': 'Üreticiler için kalite ve uyumlukta yeni bir donem.',
-    'hero.desc.2': "CERTI'nin akilli Yapay Zeka ajanlari sayesinde kalite yonetiminde cag atlayin.",
+    'hero.desc.1': 'Üreticiler için kalite ve uyumlukta yeni bir dönem.',
+    'hero.desc.2': "CERTI'nin Yapay Zeka ajanları sayesinde kalite yönetiminde çağ atlayın.",
     'hero.cta.primary': 'Demo Talep Et',
     'hero.cta.secondary': 'Daha Fazla Bilgi',
     'hero.kpi.1': 'Uyumluluk',
