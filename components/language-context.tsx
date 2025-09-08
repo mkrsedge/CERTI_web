@@ -170,8 +170,8 @@ const dict: I18nDict = {
     // Hero
     'hero.title.1': 'Yapay Zeka Tabanlı',
     'hero.title.2': 'Kalite ve Uyumluluk',
-    'hero.desc.1': 'Üreticiler için kalite yönetiminde yeni bir çağ.',
-    'hero.desc.2': 'Ajan tabanlı yapay zeka teknolojileri, ağır düzenlemeli sektörlere özel.',
+    'hero.desc.1': 'Üreticiler için kalite ve uyumlukta yeni bir donem.',
+    'hero.desc.2': "CERTI'nin akilli Yapay Zeka ajanlari sayesinde kalite yonetiminde cag atlayin.",
     'hero.cta.primary': 'Demo Talep Et',
     'hero.cta.secondary': 'Daha Fazla Bilgi',
     'hero.kpi.1': 'Uyumluluk',
@@ -185,7 +185,7 @@ const dict: I18nDict = {
     'overview.step1.title': 'Kalite ekosisteminizi bağlayın',
     'overview.step1.desc': 'Sürücülerinizi ve sistemlerinizi bağlayın; CERTI iş akışınıza sorunsuzca oturur, veriler karmaşık taşımalara gerek kalmadan akar.',
     'overview.step1.tag': 'API‑öncelikli entegrasyon',
-    'overview.step2.title': 'CERTI şirketinizi öğrenir',
+    'overview.step2.title': 'CERTI şirketinizi öğrensin',
     'overview.step2.desc': 'Yapay zeka SOP’larınızı, HACCP planlarınızı ve politikalarınızı okur; bunları uyduğunuz standartlarla eşleştirir.',
     'overview.step2.tag': 'Yapay zeka destekli doküman analizi',
     'overview.step3.title': 'Sürekli denetime hazır kalın',
@@ -311,4 +311,3 @@ export function useLanguage() {
   if (!ctx) throw new Error('useLanguage must be used within LanguageProvider')
   return ctx
 }
-
