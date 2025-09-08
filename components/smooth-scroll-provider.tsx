@@ -21,8 +21,10 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     requestAnimationFrame(raf)
 
     // Disable Lenis when GSAP ScrollTo is active
-    const originalScrollTo = window.scrollTo
-    window.scrollTo = function(...args) {
+    // Use loose typing to satisfy TS DOM overloads while preserving behavior
+    const w = window as unknown as { scrollTo: any }
+    const originalScrollTo = w.scrollTo
+    w.scrollTo = (...args: any[]) => {
       if (args.length === 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
         // This is likely GSAP ScrollToPlugin calling scrollTo
         lenis.stop()
@@ -35,7 +37,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 
     return () => {
       lenis.destroy()
-      window.scrollTo = originalScrollTo
+      w.scrollTo = originalScrollTo
     }
   }, [])
 
