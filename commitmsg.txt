@@ -1,1 +1,1 @@
-fix scrollTo typing for Cloudflare
+fix(i18n): remove duplicate " use client\ block appended at EOF
