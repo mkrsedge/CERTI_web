@@ -54,7 +54,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <head>
         {/* Structured Data: SoftwareApplication */}
-        <meta charSet=" utf-8\ />
+        <meta charSet="utf-8" />
         <Script id="ld-software" type="application/ld+json" strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
