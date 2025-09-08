@@ -8,18 +8,18 @@ import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
-    default: 'CERTI — AI-Native Quality & Compliance',
-    template: '%s · CERTI',
+    default: 'CERTI - AI-Native Quality & Compliance',
+    template: '%s - CERTI',
   },
   description:
-    'CERTI is the AI-native Quality & Compliance platform for manufacturers — document control, audits, CAPA, supplier quality, and training in one system.',
+    'CERTI - AI-Native Quality & Compliance platform for manufacturers - document control, audits, CAPA, supplier quality, and training in one system.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.certi.example.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
-    title: 'CERTI — AI-Native Quality & Compliance',
+    title: 'CERTI - AI-Native Quality & Compliance',
     description:
       'Agentic AI for document control, audits, CAPA, supplier quality, and training. Always audit-ready.',
     url: '/',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CERTI — AI-Native Quality & Compliance',
+    title: 'CERTI - AI-Native Quality & Compliance',
     description:
       'Agentic AI for document control, audits, CAPA, supplier quality, and training. Always audit-ready.',
     images: ['/CERTI_logo.png'],
@@ -54,6 +54,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <head>
         {/* Structured Data: SoftwareApplication */}
+        <meta charSet=" utf-8\ />
         <Script id="ld-software" type="application/ld+json" strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
