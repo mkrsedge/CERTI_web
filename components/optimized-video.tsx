@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
+import { useLanguage } from './language-context'
 
 interface OptimizedVideoProps {
   src: string
@@ -21,6 +22,7 @@ export function OptimizedVideo({
   playsInline = true,
   onLoad
 }: OptimizedVideoProps) {
+  const { t } = useLanguage()
   const [isLoaded, setIsLoaded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -93,7 +95,7 @@ export function OptimizedVideo({
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
           <div className="text-blue-600 text-center">
             <div className="text-2xl mb-2">🎥</div>
-            <div className="text-sm">Video loading...</div>
+            <div className="text-sm">{t('video.loading')}</div>
           </div>
         </div>
       )}

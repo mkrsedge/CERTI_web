@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'overview', 'modules', 'case-studies', 'pricing', 'demo']
-      const scrollPosition = window.scrollY + 100
+      const scrollPosition = window.scrollY + 150 // Increased offset for better detection
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const element = document.getElementById(sections[i])
@@ -30,8 +30,20 @@ export default function Home() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    // Throttle scroll events for better performance
+    let ticking = false
+    const throttledHandleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', throttledHandleScroll)
   }, [])
 
   // GSAP Scroll Animation Setup
@@ -84,20 +96,7 @@ export default function Home() {
           { y: 0, duration: 1, ease: 'power2.out' }
         , 0) // Start at the same time (0)
 
-      // Create smooth scroll behavior for navigation
-      const smoothScrollToSection = (sectionId: string) => {
-        const targetSection = document.getElementById(sectionId)
-        if (targetSection) {
-          gsap.to(window, {
-            duration: 0.8,
-            scrollTo: { y: targetSection, offsetY: 80 },
-            ease: 'power2.out'
-          })
-        }
-      }
-
-      // Expose smooth scroll function globally for button clicks
-      window.smoothScrollToSection = smoothScrollToSection
+      // GSAP ScrollToPlugin is now handled in navigation component
     }
 
     // Wait for DOM to be ready
@@ -109,22 +108,26 @@ export default function Home() {
     }
   }, [])
 
-  // Handle navigation with GSAP smooth scroll
+  // Handle navigation with optimized smooth scroll
   const handleSectionChange = (section: string) => {
-    // Immediate navigation for better responsiveness
+    if (section === 'home') {
+      if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
+        (window as any).gsap.to(window, { duration: 0.6, scrollTo: { y: 0 }, ease: 'power2.out' })
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+      return
+    }
     const element = document.getElementById(section)
     if (element) {
-      // Use native smooth scroll for immediate response
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      })
-      
-      // Then enhance with GSAP if available
-      if (typeof window !== 'undefined' && window.smoothScrollToSection) {
-        setTimeout(() => {
-          window.smoothScrollToSection(section)
-        }, 100)
+      if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
+        (window as any).gsap.to(window, {
+          duration: 0.6,
+          scrollTo: { y: element, offsetY: 80 },
+          ease: 'power2.out'
+        })
+      } else {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     }
   }
@@ -134,18 +137,18 @@ export default function Home() {
       {/* Load GSAP for navigation animations */}
       <Script 
         src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" 
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
       <Script 
         src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" 
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
       <Script 
         src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" 
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
       />
 
-      <main ref={mainRef} className="relative">
+      <main id="main" ref={mainRef} className="relative">
         <Navigation activeSection={activeSection} onSectionChange={handleSectionChange} />
         
         <div id="home" className="section" data-section="home">

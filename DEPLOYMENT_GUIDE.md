@@ -23,9 +23,9 @@
 ### Step 3: Configure Build Settings
 1. **Project name**: `certi-website` (or your preferred name)
 2. **Production branch**: `main` (or your default branch)
-3. **Framework preset**: `Next.js`
+3. **Framework preset**: `None` (static site)
 4. **Build command**: `npm run build`
-5. **Build output directory**: `.next`
+5. **Build output directory**: `out`
 6. **Root directory**: Leave empty (or `/` if your project is in a subdirectory)
 
 ### Step 4: Environment Variables (if needed)
@@ -59,14 +59,14 @@ $env:CLOUDFLARE_API_TOKEN="your-api-token"
 
 ### Step 3: Deploy
 ```bash
-wrangler pages deploy .next --project-name=certi-website
+wrangler pages deploy out --project-name=certi-website
 ```
 
 ## Method 3: Direct Upload (Simplest)
 
 ### Step 1: Build and Prepare
 1. Run `npm run build` (already done)
-2. The build output is in `.next` directory
+2. The static export output is in the `out` directory
 
 ### Step 2: Upload via Dashboard
 1. In Cloudflare Pages, choose "Direct Upload"

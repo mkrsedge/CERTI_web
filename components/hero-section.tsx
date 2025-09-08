@@ -2,10 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
+import { useLanguage } from './language-context'
 
 export function HeroSection() {
+  const { t } = useLanguage()
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20">
       {/* Background Video */}
       <div className="absolute inset-0 w-full h-full">
         <video
@@ -19,36 +21,38 @@ export function HeroSection() {
           <source src="/gitness-spline-test (1).mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Video overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/20"></div>
+        {/* Brand-tinted overlay for better text readability and brand cohesion */}
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(62,39,35,0.35)' }}></div>
+        {/* Smoother bottom fade bridge to white to blend into Overview (starts below KPI area) */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 sm:h-16 md:h-20 bg-gradient-to-b from-white/0 via-white/35 to-white" />
       </div>
 
       {/* Animated Background */}
       <AnimatedBackground />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center hero-content">
+      <div className="relative z-10 content-container text-center hero-content -translate-y-6 md:-translate-y-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl md:text-7xl font-light text-[#afdbf5] mb-6 leading-tight drop-shadow-lg">
-            AI-Native
+          <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
+            {t('hero.title.1')}
             <br />
-            Quality & Compliance
+            {t('hero.title.2')}
           </h1>
           
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-xl md:text-2xl text-[#afdbf5] mb-12 leading-relaxed drop-shadow-md"
+            className="text-xl md:text-2xl text-brand-primary/90 mb-8 leading-relaxed"
           >
-            A new era in Quality Management for manufacturers.
+            {t('hero.desc.1')}
             <br />
-            Agentic AI technologies tailored for heavily regulated industries.
+            {t('hero.desc.2')}
           </motion.p>
 
           <motion.div
@@ -68,9 +72,9 @@ export function HeroSection() {
                   }
                 }
               }}
-              className="border border-[#3e2723] hover:border-[#3e2723]/70 text-[#3e2723] font-medium px-8 py-4 rounded-lg transition-colors duration-200 text-lg bg-[#ffedac] hover:bg-[#f0e0a0] relative z-20"
+              className="btn-primary text-lg relative z-20"
             >
-              Book a Demo
+              {t('hero.cta.primary')}
             </button>
             <button 
               onClick={() => {
@@ -83,9 +87,9 @@ export function HeroSection() {
                   }
                 }
               }}
-              className="border border-[#3e2723] hover:border-[#3e2723]/70 text-[#3e2723] font-medium px-8 py-4 rounded-lg transition-colors duration-200 text-lg bg-[#ffedac] hover:bg-[#f0e0a0]"
+              className="btn-ghost-light text-lg relative z-20"
             >
-              Learn More
+              {t('hero.cta.secondary')}
             </button>
           </motion.div>
         </motion.div>
@@ -95,20 +99,17 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
+          className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
-          <div className="text-center">
-                      <div className="text-3xl font-bold text-[#afdbf5] mb-2 drop-shadow-lg">99%</div>
-          <div className="text-[#afdbf5] drop-shadow-md">Compliance</div>
-          </div>
-          <div className="text-center">
-                      <div className="text-3xl font-bold text-[#afdbf5] mb-2 drop-shadow-lg">80%</div>
-          <div className="text-[#ffedac] drop-shadow-md">Faster Audits</div>
-          </div>
-          <div className="text-center">
-                                              <div className="text-3xl font-bold text-[#afdbf5] mb-2 drop-shadow-lg">50%</div>
-                      <div className="text-[#ffedac] drop-shadow-md">Lower Costs</div>
-          </div>
+          {[{v:'100%',t:t('hero.kpi.1')},{v:'80%',t:t('hero.kpi.2')},{v:'50%',t:t('hero.kpi.3')}].map((kpi, i) => (
+            <div
+              key={i}
+              className="rounded-2xl border border-white/15 bg-white/20 backdrop-blur-md px-6 py-5 text-center shadow-lg"
+            >
+              <div className="text-3xl font-bold text-[#ffedac] mb-1 drop-shadow">{kpi.v}</div>
+              <div className="text-[#afdbf5] text-sm font-medium">{kpi.t}</div>
+            </div>
+          ))}
         </motion.div>
       </div>
 

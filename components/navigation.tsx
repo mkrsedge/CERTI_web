@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useLanguage } from './language-context'
 
 interface NavigationProps {
   activeSection: string
@@ -8,11 +9,9 @@ interface NavigationProps {
 }
 
 export function Navigation({ activeSection, onSectionChange }: NavigationProps) {
-  const [language, setLanguage] = useState('EN')
-
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'EN' ? 'TR' : 'EN')
-  }
+  const { lang, setLang, t } = useLanguage()
+  const [language] = useState('EN')
+  const toggleLanguage = () => setLang(lang === 'en' ? 'tr' : 'en')
 
   useEffect(() => {
     // Initialize navigation immediately for better responsiveness
@@ -31,6 +30,19 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
     }
   }, [])
 
+  // Reduce navbar height and add blur on scroll
+  useEffect(() => {
+    const onScroll = () => {
+      const nav = document.querySelector('nav.full-width-navbar')
+      if (!nav) return
+      if (window.scrollY > 8) nav.classList.add('navbar--scrolled')
+      else nav.classList.remove('navbar--scrolled')
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   const initializeNavigation = () => {
     const { gsap, ScrollTrigger } = window as any
 
@@ -40,12 +52,26 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
     // Select all sections and corresponding nav links
     const sections = document.querySelectorAll(".section[data-section]")
     const navLinks = document.querySelectorAll(".nav-menu__link")
+    const indicator = document.getElementById('nav-indicator') as HTMLSpanElement | null
     
     console.log(`Found ${sections.length} sections and ${navLinks.length} nav links`)
     
     let lastActiveIndex = -1
 
     // Function to set the active navigation link
+    function updateIndicator(activeIndex: number) {
+      if (!indicator) return
+      const center = document.querySelector('.navbar-center') as HTMLElement | null
+      const link = navLinks[activeIndex] as HTMLElement | undefined
+      if (!center || !link) return
+      const cRect = center.getBoundingClientRect()
+      const lRect = link.getBoundingClientRect()
+      const left = lRect.left - cRect.left
+      indicator.style.transform = `translateX(${left}px)`
+      indicator.style.width = `${lRect.width}px`
+      indicator.style.opacity = '1'
+    }
+
     function setActiveLink(activeIndex: number) {
       if (lastActiveIndex !== activeIndex) {
         console.log(`Setting active link: ${activeIndex}`)
@@ -59,6 +85,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           }
         })
         lastActiveIndex = activeIndex
+        updateIndicator(activeIndex)
       }
     }
 
@@ -74,16 +101,20 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
       })
     })
 
+    // Initialize Home as active on first render
+    setActiveLink(0)
+
     // Refresh ScrollTrigger on window resize
     window.addEventListener("resize", () => {
       ScrollTrigger.refresh()
+      if (lastActiveIndex >= 0) updateIndicator(lastActiveIndex)
     })
   }
 
   return (
     <>
       {/* Full-width Navigation Bar */}
-      <nav className="full-width-navbar">
+      <nav className="full-width-navbar" aria-label="Primary">
         {/* Glass effect layers */}
         <div className="navbar-glass-filter"></div>
         <div className="navbar-glass-overlay"></div>
@@ -102,56 +133,57 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
 
           {/* Center - Navigation Menu */}
           <div className="navbar-center">
-            <a href="#home" className="nav-menu__link nav-menu__link--current" data-section="home" onClick={() => onSectionChange('home')}>
+            <span id="nav-indicator" className="nav-indicator" aria-hidden="true" />
+            <a href="#home" className="nav-menu__link nav-menu__link--current" data-section="home" onClick={(e) => { e.preventDefault(); onSectionChange('home'); }}>
               <div className="nav-menu__number">01</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">Home</span>
+                  <span className="nav-menu__word">{t('nav.home')}</span>
                 </div>
               </div>
             </a>
 
-            <a href="#overview" className="nav-menu__link" data-section="overview" onClick={() => onSectionChange('overview')}>
+            <a href="#overview" className="nav-menu__link" data-section="overview" onClick={(e) => { e.preventDefault(); onSectionChange('overview'); }}>
               <div className="nav-menu__number">02</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">Overview</span>
+                  <span className="nav-menu__word">{t('nav.overview')}</span>
                 </div>
               </div>
             </a>
 
-            <a href="#modules" className="nav-menu__link" data-section="modules" onClick={() => onSectionChange('modules')}>
+            <a href="#modules" className="nav-menu__link" data-section="modules" onClick={(e) => { e.preventDefault(); onSectionChange('modules'); }}>
               <div className="nav-menu__number">03</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">Use Cases</span>
+                  <span className="nav-menu__word">{t('nav.modules')}</span>
                 </div>
               </div>
             </a>
 
-            <a href="#case-studies" className="nav-menu__link" data-section="case-studies" onClick={() => onSectionChange('case-studies')}>
+            <a href="#case-studies" className="nav-menu__link" data-section="case-studies" onClick={(e) => { e.preventDefault(); onSectionChange('case-studies'); }}>
               <div className="nav-menu__number">04</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">Modules</span>
+                  <span className="nav-menu__word">{t('nav.caseStudies')}</span>
                 </div>
               </div>
             </a>
 
-            <a href="#pricing" className="nav-menu__link" data-section="pricing" onClick={() => onSectionChange('pricing')}>
+            <a href="#pricing" className="nav-menu__link" data-section="pricing" onClick={(e) => { e.preventDefault(); onSectionChange('pricing'); }}>
               <div className="nav-menu__number">05</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">Pricing</span>
+                  <span className="nav-menu__word">{t('nav.pricing')}</span>
                 </div>
               </div>
             </a>
 
-            <a href="#demo" className="nav-menu__link" data-section="demo" onClick={() => onSectionChange('demo')}>
+            <a href="#demo" className="nav-menu__link" data-section="demo" onClick={(e) => { e.preventDefault(); onSectionChange('demo'); }}>
               <div className="nav-menu__number">06</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">Book a Demo</span>
+                  <span className="nav-menu__word">{t('nav.demo')}</span>
                 </div>
               </div>
             </a>
@@ -162,11 +194,11 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             <button
               onClick={toggleLanguage}
               className="language-toggle"
-              aria-label={`Switch to ${language === 'EN' ? 'Turkish' : 'English'}`}
+              aria-label={lang === 'en' ? 'Switch to Turkish' : 'İngilizceye geç'}
             >
-              <span className={`language-option ${language === 'EN' ? 'active' : ''}`}>EN</span>
-              <span className="language-separator">|</span>
-              <span className={`language-option ${language === 'TR' ? 'active' : ''}`}>TR</span>
+              <span className={`language-option ${lang === 'en' ? 'active' : ''}`}>EN</span>
+              <span className="language-separator">/</span>
+              <span className={`language-option ${lang === 'tr' ? 'active' : ''}`}>TR</span>
             </button>
           </div>
         </div>
@@ -219,7 +251,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           inset: 0;
           border-radius: inherit;
           z-index: 1;
-          background: rgba(187, 187, 190, 0.25);
+          background: rgba(255, 255, 255, 0.85);
         }
 
         .navbar-glass-specular {
@@ -270,28 +302,31 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           text-decoration: none;
           font-family: 'Neue Machina', 'Inter', sans-serif;
           font-size: 0.75rem;
-          color: rgba(0, 0, 0, 0.8);
+          color: #3e2723;
           padding: 8px 12px;
           display: inline-flex;
           align-items: center;
           overflow: hidden;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           border-radius: 8px;
-          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+          text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
           transform: translateY(0);
           white-space: nowrap;
+          font-weight: 500;
         }
 
         .nav-menu__link:hover {
-          color: rgba(0, 0, 0, 1);
+          color: #1a0703;
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.5);
+          background: rgba(255, 255, 255, 0.9);
+          box-shadow: 0 2px 8px rgba(62, 39, 35, 0.15);
         }
 
         .nav-menu__link--current {
-          color: rgba(0, 0, 0, 1);
-          font-weight: 600;
-          background: rgba(255, 255, 255, 0.8);
+          color: #1a0703;
+          font-weight: 700;
+          background: rgba(255, 255, 255, 0.95);
+          box-shadow: 0 2px 8px rgba(62, 39, 35, 0.2);
         }
 
         .nav-menu__number {
@@ -321,40 +356,42 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
 
         /* Language Toggle Styles */
         .language-toggle {
-          background: rgba(255, 255, 255, 0.8);
+          background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          border: 1px solid rgba(62, 39, 35, 0.2);
           border-radius: 8px;
           padding: 7px 12px;
           font-family: 'Inter', sans-serif;
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+          box-shadow: 0 2px 10px rgba(62, 39, 35, 0.15);
+          text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
         }
 
         .language-toggle:hover {
-          background: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.95);
           transform: translateY(-1px);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 15px rgba(62, 39, 35, 0.2);
         }
 
         .language-option {
-          color: rgba(0, 0, 0, 0.6);
+          color: #3e2723;
           transition: all 0.3s ease;
           cursor: pointer;
+          font-weight: 500;
         }
 
         .language-option.active {
-          color: rgba(0, 0, 0, 1);
-          font-weight: 600;
+          color: #1a0703;
+          font-weight: 700;
         }
 
         .language-separator {
           margin: 0 8px;
-          color: rgba(0, 0, 0, 0.3);
+          color: #3e2723;
+          opacity: 0.4;
         }
 
         /* Section minimum heights for proper scroll triggers */
@@ -444,6 +481,29 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             padding: 8px 12px;
           }
         }
+      `}</style>
+      <style jsx global>{`
+        /* Navigation overrides and enhancements */
+        .full-width-navbar {
+          height: 60px;
+          background: rgba(255,255,255,0.6);
+          -webkit-backdrop-filter: saturate(180%) blur(12px);
+          backdrop-filter: saturate(180%) blur(12px);
+          border: 1px solid rgba(17,24,39,0.08);
+          box-shadow: var(--shadow-1);
+          transition: height 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+        }
+        .full-width-navbar.navbar--scrolled { height: 52px; background: rgba(255,255,255,0.7); box-shadow: var(--shadow-2); }
+        .navbar-center { position: relative; justify-content: center; flex: 1; }
+        .nav-indicator {
+          position: absolute; left: 0; bottom: 6px; height: 28px; border-radius: 9999px;
+          background: rgba(255,255,255,0.9); border: 1px solid rgba(17,24,39,0.08);
+          box-shadow: 0 4px 16px rgba(17,24,39,0.12); transform: translateX(0);
+          transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), width 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity 160ms ease;
+          z-index: 0; opacity: 0;
+        }
+        .nav-menu__link { border-radius: 9999px; font-weight: 600; }
+        .nav-menu__link:hover { transform: translateY(-2px); }
       `}</style>
     </>
   )

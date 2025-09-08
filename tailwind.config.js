@@ -13,17 +13,17 @@ module.exports = {
       colors: {
         // Website brand colors
         'brand': {
-          primary: '#ffedaca',    // Light cream/beige
+          primary: '#ffedac',    // Light cream/beige
           secondary: '#3e2723',   // Dark brown
         },
         // Color variants for different use cases
         'cream': {
-          50: '#ffedaca',
+          50: '#ffedac',
           100: '#ffe8b3',
           200: '#ffe3c0',
           300: '#ffdecd',
           400: '#ffd9da',
-          500: '#ffedaca',
+          500: '#ffedac',
           600: '#f5e2a0',
           700: '#ebd794',
           800: '#e1cc88',

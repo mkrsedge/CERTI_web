@@ -5,16 +5,44 @@
 /* Website Color Scheme - CSS Custom Properties */
 :root {
   /* Primary Colors */
-  --color-primary: #ffedaca;
+  --color-primary: #ffedac;
   --color-secondary: #3e2723;
+
+  /* Neutral palette (cooler tech neutrals) */
+  --neutral-0: #ffffff;
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-600: #475569;
+  --neutral-800: #1f2937;
+
+  /* Accent for CTAs/highlights */
+  --accent-500: #6366f1; /* indigo-500 */
+  --accent-600: #4f46e5;
+  --accent-700: #4338ca;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Elevation */
+  --shadow-0: none;
+  --shadow-1: 0 2px 8px rgba(17, 24, 39, 0.08);
+  --shadow-2: 0 8px 24px rgba(17, 24, 39, 0.12);
+
+  /* Spacing */
+  --space-section-y: clamp(4rem, 6vw, 7rem);
   
   /* Color Variants */
-  --color-cream-50: #ffedaca;
+  --color-cream-50: #ffedac;
   --color-cream-100: #ffe8b3;
   --color-cream-200: #ffe3c0;
   --color-cream-300: #ffdecd;
   --color-cream-400: #ffd9da;
-  --color-cream-500: #ffedaca;
+  --color-cream-500: #ffedac;
   --color-cream-600: #f5e2a0;
   --color-cream-700: #ebd794;
   --color-cream-800: #e1cc88;
@@ -55,7 +83,60 @@
 .border-brand-primary { border-color: var(--color-primary); }
 .border-brand-secondary { border-color: var(--color-secondary); }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* Global layout utilities */
+.content-container { max-width: 1200px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+.section-y { padding-top: var(--space-section-y); padding-bottom: var(--space-section-y); }
+
+/* Card surface utilities */
+.app-card {
+  background: var(--neutral-0);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-1);
+  transition: box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+.app-card:hover { box-shadow: var(--shadow-2); }
+
+/* Buttons (optional tokens for consistency) */
+.btn-primary {
+  background: var(--accent-600);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  box-shadow: var(--shadow-1);
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+.btn-primary:hover { background: var(--accent-700); box-shadow: var(--shadow-2); transform: translateY(-1px); }
+.btn-ghost {
+  border: 1px solid rgba(17,24,39,0.12);
+  background: transparent;
+  color: var(--neutral-800);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+.btn-ghost:hover { background: var(--neutral-50); transform: translateY(-1px); }
+
+/* Ghost button variant for dark backgrounds (Hero) */
+.btn-ghost-light {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Focus states */
+:where(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--accent-500);
+  outline-offset: 2px;
+}
+
 
 @font-face {
   font-family: 'Neue Machina';
@@ -76,7 +157,7 @@ html {
 }
 
 body {
-  font-family: 'Neue Machina', 'Inter', sans-serif;
+  font-family: 'Neue Machina', var(--font-inter), sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }

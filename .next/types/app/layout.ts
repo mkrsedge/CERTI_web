@@ -1,4 +1,4 @@
-// File: C:\Users\bttos\Desktop\Certi_website2\CERTI_web\app\layout.tsx
+// File: C:\Users\kaanb\OneDrive\Desktop\Maker's Edge\Development\CERTI Website\CERTI_web\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

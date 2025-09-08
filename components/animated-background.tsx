@@ -7,7 +7,7 @@ export function AnimatedBackground() {
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none z-30"
         style={{
-          background: 'transparent url("http://assets.iceable.com/img/noise-transparent.png") repeat 0 0',
+          background: 'transparent url("https://assets.iceable.com/img/noise-transparent.png") repeat 0 0',
           backgroundSize: '300px 300px',
           animation: 'noise-animation 8s ease-in-out infinite',
           opacity: 0.4,

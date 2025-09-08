@@ -1,18 +1,18 @@
 // Website Color Scheme
 export const websiteColors = {
-  primary: '#ffedaca',    // Light cream/beige
+  primary: '#ffedac',    // Light cream/beige
   secondary: '#3e2723',   // Dark brown
 } as const
 
 // Color variants for different use cases
 export const colorVariants = {
   primary: {
-    50: '#ffedaca',
+    50: '#ffedac',
     100: '#ffe8b3',
     200: '#ffe3c0',
     300: '#ffdecd',
     400: '#ffd9da',
-    500: '#ffedaca', // Base primary
+    500: '#ffedac', // Base primary
     600: '#f5e2a0',
     700: '#ebd794',
     800: '#e1cc88',
