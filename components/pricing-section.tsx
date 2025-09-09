@@ -196,12 +196,12 @@ export function PricingSection() {
 
             {/* CTA Inside Card */}
             <div className="text-center">
-              <h4 className="text-2xl font-bold text-gray-900 mb-4">Ready to Get Started?</h4>
+              <h4 className="text-2xl font-bold text-gray-900 mb-4">{t('pricing.cta.title')}</h4>
               <p className="text-gray-600 mb-8 max-w-lg mx-auto">
-                Get personalized pricing and see which plan is perfect for your organization
+                {t('pricing.cta.desc')}
               </p>
               <button className="bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white font-bold py-4 px-12 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl">
-                Get Pricing
+                {t('pricing.cta.button')}
               </button>
             </div>
           </div>
@@ -264,7 +264,7 @@ export function PricingSection() {
           <p className="text-xl text-brand-secondary/80 text-center mb-12">{t('pricing.compare.sub')}</p>
           
           {/* Comparison Table */}
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden" role="table" aria-label={t('pricing.compare.caption')}>
             {/* Table Header */}
             <div className="grid grid-cols-4 bg-gray-50 border-b border-gray-200">
               <div className="p-4"></div>

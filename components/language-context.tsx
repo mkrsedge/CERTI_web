@@ -96,6 +96,12 @@ const dict: I18nDict = {
     'pricing.sub': 'Start from the basics and add as you grow. All packages include AI-powered core quality features.',
     'pricing.transparent': 'Transparent Pricing',
     'pricing.transparent.sub': 'Get personalized pricing based on your organization’s size and needs',
+    // Pricing CTA
+    'pricing.cta.title': 'Ready to Get Started?',
+    'pricing.cta.desc': 'Get personalized pricing and see which plan is perfect for your organization',
+    'pricing.cta.button': 'Get Pricing',
+    // Pricing comparison accessibility caption
+    'pricing.compare.caption': 'Comparison table for Lite, Standard and Full QMS',
     'pricing.included.title': 'What’s Included in Every Package',
     'pricing.cta.header': 'Ready to get started?',
     'pricing.cta.body': 'Get personalized pricing and see which package fits you best',
@@ -247,6 +253,12 @@ const dict: I18nDict = {
     'pricing.sub': 'Temelden başlayın, büyüdükçe ekleyin. Tüm paketlerde yapay zeka destekli çekirdek kalite özellikleri bulunur.',
     'pricing.transparent': 'Şeffaf Fiyatlandırma',
     'pricing.transparent.sub': 'Organizasyonunuzun boyutuna ve ihtiyaçlarına göre kişiselleştirilmiş fiyat alın',
+    // Pricing CTA
+    'pricing.cta.title': 'Hazır mısınız?',
+    'pricing.cta.desc': 'Kişiselleştirilmiş fiyat alın ve kuruluşunuz için en uygun planı görün',
+    'pricing.cta.button': 'Fiyat Al',
+    // Pricing comparison accessibility caption
+    'pricing.compare.caption': 'Lite, Standard ve Full QMS için karşılaştırma tablosu',
     'pricing.included.title': 'Her Pakette Neler Var',
     'pricing.cta.header': 'Başlamaya hazır mısınız?',
     'pricing.cta.body': 'Kişiselleştirilmiş fiyat alın ve hangi paketin size uygun olduğunu görün',
