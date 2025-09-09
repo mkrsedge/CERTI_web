@@ -112,10 +112,10 @@ export function PricingSection() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.lite')}</h3>
                   <p className="text-gray-600 mb-4">{t('pricing.card.lite.desc')}</p>
-                  {/* Reserved space for pills to avoid height shift */}
-                  <div className="w-full mt-4 min-h-[5rem] max-h-[5rem] overflow-hidden">
+                  {/* Module pills: wrap horizontally within card */}
+                  <div className="w-full mt-4">
                     {selected === 'lite' && (
-                      <div className="flex flex-row flex-wrap justify-center items-center gap-1">
+                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
                         {['DocCore'].map((m) => (
                           <span key={m} className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs border border-blue-100 whitespace-nowrap">
                             {m}
@@ -146,9 +146,9 @@ export function PricingSection() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.standard')}</h3>
                   <p className="text-gray-600 mb-4">{t('pricing.card.standard.desc')}</p>
-                  <div className="w-full mt-4 min-h-[5rem] max-h-[5rem] overflow-hidden">
+                  <div className="w-full mt-4">
                     {selected === 'standard' && (
-                      <div className="flex flex-row flex-wrap justify-center items-center gap-1">
+                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
                         {['DocCore','ResolveCore','AuditCore'].map((m) => (
                           <span key={m} className="px-2.5 py-1 rounded-full bg-orange-50 text-orange-700 text-xs border border-orange-100 whitespace-nowrap">
                             {m}
@@ -179,9 +179,9 @@ export function PricingSection() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.full')}</h3>
                   <p className="text-gray-600 mb-4">{t('pricing.card.full.desc')}</p>
-                  <div className="w-full mt-4 min-h-[5rem] max-h-[5rem] overflow-hidden">
+                  <div className="w-full mt-4">
                     {selected === 'fullqms' && (
-                      <div className="flex flex-row flex-wrap justify-center items-center gap-1">
+                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
                         {['DocCore','ResolveCore','AuditCore','SupplyCore','SkillCore'].map((m) => (
                           <span key={m} className="px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 text-xs border border-gray-200 whitespace-nowrap">
                             {m}
