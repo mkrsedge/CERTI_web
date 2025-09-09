@@ -103,9 +103,6 @@ const dict: I18nDict = {
     // Pricing comparison accessibility caption
     'pricing.compare.caption': 'Comparison table for Lite, Standard and Full QMS',
     'pricing.included.title': 'What’s Included in Every Package',
-    'pricing.cta.header': 'Ready to get started?',
-    'pricing.cta.body': 'Get personalized pricing and see which package fits you best',
-    'pricing.cta.button': 'Get Pricing',
     'pricing.compare': 'Compare Packages',
     'pricing.compare.sub': 'Detailed feature comparison across all CERTI packages',
     'pricing.extra.title': 'Need a Custom Solution?',
@@ -260,9 +257,6 @@ const dict: I18nDict = {
     // Pricing comparison accessibility caption
     'pricing.compare.caption': 'Lite, Standard ve Full QMS için karşılaştırma tablosu',
     'pricing.included.title': 'Her Pakette Neler Var',
-    'pricing.cta.header': 'Başlamaya hazır mısınız?',
-    'pricing.cta.body': 'Kişiselleştirilmiş fiyat alın ve hangi paketin size uygun olduğunu görün',
-    'pricing.cta.button': 'Fiyat Alın',
     'pricing.compare': 'Paketleri Karşılaştırın',
     'pricing.compare.sub': 'Tüm CERTI paketlerinde ayrıntılı özellik karşılaştırması',
     'pricing.extra.title': 'Özel Bir Çözüm mü Lazım?',
