@@ -112,14 +112,18 @@ export function PricingSection() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Lite</h3>
                   <p className="text-gray-600 mb-4">Essential document control and basic audit capabilities</p>
-                  {/* Module pills (only when selected) */}
-                  {selected === 'lite' && (
-                    <div className="w-full flex flex-row gap-3 justify-center items-center mt-4 flex-wrap">
-                      {['DocCore'].map((m) => (
-                        <span key={m} className="px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm border border-blue-100">{m}</span>
-                      ))}
-                    </div>
-                  )}
+                  {/* Reserved space for pills to avoid height shift */}
+                  <div className="w-full mt-4 min-h-[3.5rem] max-h-[3.5rem] overflow-hidden">
+                    {selected === 'lite' && (
+                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
+                        {['DocCore'].map((m) => (
+                          <span key={m} className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs border border-blue-100">
+                            {m}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </button>
 
@@ -142,13 +146,17 @@ export function PricingSection() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Standard</h3>
                   <p className="text-gray-600 mb-4">Advanced audit capabilities with AI‑powered CAPA management</p>
-                  {selected === 'standard' && (
-                    <div className="w-full flex flex-row gap-3 justify-center items-center mt-4 flex-wrap">
-                      {['DocCore','ResolveCore','AuditCore'].map((m) => (
-                        <span key={m} className="px-4 py-2 rounded-full bg-orange-50 text-orange-700 text-sm border border-orange-100">{m}</span>
-                      ))}
-                    </div>
-                  )}
+                  <div className="w-full mt-4 min-h-[3.5rem] max-h-[3.5rem] overflow-hidden">
+                    {selected === 'standard' && (
+                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
+                        {['DocCore','ResolveCore','AuditCore'].map((m) => (
+                          <span key={m} className="px-3 py-1 rounded-full bg-orange-50 text-orange-700 text-xs border border-orange-100">
+                            {m}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </button>
 
@@ -171,13 +179,17 @@ export function PricingSection() {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Full QMS</h3>
                   <p className="text-gray-600 mb-4">End‑to‑end quality management with complete automation</p>
-                  {selected === 'fullqms' && (
-                    <div className="w-full flex flex-row gap-3 justify-center items-center mt-4 flex-wrap">
-                      {['DocCore','ResolveCore','AuditCore','SupplyCore','SkillCore'].map((m) => (
-                        <span key={m} className="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm border border-gray-200">{m}</span>
-                      ))}
-                    </div>
-                  )}
+                  <div className="w-full mt-4 min-h-[3.5rem] max-h-[3.5rem] overflow-hidden">
+                    {selected === 'fullqms' && (
+                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
+                        {['DocCore','ResolveCore','AuditCore','SupplyCore','SkillCore'].map((m) => (
+                          <span key={m} className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs border border-gray-200">
+                            {m}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </button>
             </div>
