@@ -189,6 +189,54 @@ export function PricingSection() {
           </div>
         </motion.div>
 
+        {/* Included in Every Plan */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mt-12"
+        >
+          <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100">
+            <h3 className="text-3xl font-semibold text-center text-gray-900 mb-10">
+              What's Included in Every Plan
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+              {/* Item 1 */}
+              <div className="flex items-start gap-4">
+                <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
+                <div>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">AI‑Powered Insights</div>
+                  <p className="text-gray-600">Smart recommendations and automated analysis</p>
+                </div>
+              </div>
+              {/* Item 2 */}
+              <div className="flex items-start gap-4">
+                <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
+                <div>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">Document Management</div>
+                  <p className="text-gray-600">Centralized control with version tracking</p>
+                </div>
+              </div>
+              {/* Item 3 */}
+              <div className="flex items-start gap-4">
+                <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
+                <div>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">Compliance Tools</div>
+                  <p className="text-gray-600">Built‑in regulatory compliance features</p>
+                </div>
+              </div>
+              {/* Item 4 */}
+              <div className="flex items-start gap-4">
+                <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
+                <div>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">24/7 Support</div>
+                  <p className="text-gray-600">Expert assistance whenever you need it</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Compare Plans Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
