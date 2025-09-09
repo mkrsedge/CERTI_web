@@ -159,7 +159,7 @@ export function OverviewSection() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-brand-secondary text-center mb-8">{t('overview.capabilities')}</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary text-center mb-6">{t('overview.capabilities')}</h2>
           <div className="relative">
             <div className="pointer-events-none absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white to-transparent z-10" />
             <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white to-transparent z-10" />

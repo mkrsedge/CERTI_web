@@ -63,7 +63,7 @@ export function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6"
           >
             {t('pricing.header')}
           </motion.h2>
@@ -71,7 +71,7 @@ export function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-brand-secondary/80 max-w-2xl mx-auto"
           >
             {t('pricing.sub')}
           </motion.p>
@@ -260,8 +260,8 @@ export function PricingSection() {
           transition={{ duration: 0.8 }}
           className="mt-16 mb-20"
         >
-          <h2 className="text-3xl font-normal text-gray-900 mb-4 text-center">{t('pricing.compare')}</h2>
-          <p className="text-gray-600 text-center mb-12">{t('pricing.compare.sub')}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6 text-center">{t('pricing.compare')}</h2>
+          <p className="text-xl text-brand-secondary/80 text-center mb-12">{t('pricing.compare.sub')}</p>
           
           {/* Comparison Table */}
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">

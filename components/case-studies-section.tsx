@@ -91,8 +91,8 @@ export function CaseStudiesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-light text-black mb-6">{lang === 'tr' ? 'ÇEKİRDEK MODÜLLER' : 'CORE MODULES'}</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">{lang === 'tr' ? 'ÇEKİRDEK MODÜLLER' : 'CORE MODULES'}</h2>
+          <p className="text-xl text-brand-secondary/80 max-w-3xl mx-auto">
             {lang === 'tr' ? 'İşletme operasyonlarınızdaki her alanı kapsayacak şekilde tasarlanmış kapsamlı modül paketimizi keşfedin.' : 'Explore our comprehensive suite of modules designed to address every aspect of your business operations and growth.'}
           </p>
         </motion.div>

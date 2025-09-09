@@ -56,8 +56,8 @@ export function ModulesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-light text-gray-900 mb-6">{t('modules.header')}</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">{t('modules.sub')}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">{t('modules.header')}</h2>
+          <p className="text-xl text-brand-secondary/80 max-w-3xl mx-auto">{t('modules.sub')}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
