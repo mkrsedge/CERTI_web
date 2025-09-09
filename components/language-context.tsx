@@ -110,6 +110,20 @@ const dict: I18nDict = {
     'pricing.table.standard': 'Standard',
     'pricing.table.full': 'Full QMS',
     'pricing.includes': 'Includes',
+    // Pricing card descriptions
+    'pricing.card.lite.desc': 'Essential document control and basic audit capabilities',
+    'pricing.card.standard.desc': 'Advanced audit capabilities with AI-powered CAPA management',
+    'pricing.card.full.desc': 'End-to-end quality management with complete automation',
+    // Included in every plan section
+    'pricing.includedEvery.title': "What's Included in Every Plan",
+    'pricing.includedEvery.ai': 'AI-Powered Insights',
+    'pricing.includedEvery.ai.sub': 'Smart recommendations and automated analysis',
+    'pricing.includedEvery.docs': 'Document Management',
+    'pricing.includedEvery.docs.sub': 'Centralized control with version tracking',
+    'pricing.includedEvery.compliance': 'Compliance Tools',
+    'pricing.includedEvery.compliance.sub': 'Built-in regulatory compliance features',
+    'pricing.includedEvery.support': '24/7 Support',
+    'pricing.includedEvery.support.sub': 'Expert assistance whenever you need it',
 
     // Footer
     'footer.company': 'Company',
@@ -247,6 +261,20 @@ const dict: I18nDict = {
     'pricing.table.standard': 'Standard',
     'pricing.table.full': 'Full QMS',
     'pricing.includes': 'İçerir',
+    // Pricing card descriptions (TR)
+    'pricing.card.lite.desc': 'Temel doküman kontrolü ve temel denetim yetenekleri',
+    'pricing.card.standard.desc': 'Yapay zeka destekli DÖF ile gelişmiş denetim yetenekleri',
+    'pricing.card.full.desc': 'Tam otomasyonla uçtan uca kalite yönetimi',
+    // Included in every plan (TR)
+    'pricing.includedEvery.title': 'Her Planda Neler Var',
+    'pricing.includedEvery.ai': 'Yapay Zeka İçgörüleri',
+    'pricing.includedEvery.ai.sub': 'Akıllı öneriler ve otomatik analiz',
+    'pricing.includedEvery.docs': 'Doküman Yönetimi',
+    'pricing.includedEvery.docs.sub': 'Sürüm takibi ile merkezi kontrol',
+    'pricing.includedEvery.compliance': 'Uyumluluk Araçları',
+    'pricing.includedEvery.compliance.sub': 'Yerleşik mevzuat uyumluluğu özellikleri',
+    'pricing.includedEvery.support': '7/24 Destek',
+    'pricing.includedEvery.support.sub': 'İhtiyacınız olduğunda uzman desteği',
 
     // Footer
     'footer.company': 'Şirket',

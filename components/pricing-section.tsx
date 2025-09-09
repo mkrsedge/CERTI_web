@@ -2,8 +2,10 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useLanguage } from './language-context'
 
 export function PricingSection() {
+  const { t } = useLanguage()
   const [selected, setSelected] = useState<null | 'lite' | 'standard' | 'fullqms'>(null)
   const comparisonFeatures = [
     {
@@ -63,7 +65,7 @@ export function PricingSection() {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            Choose Your CERTI Plan
+            {t('pricing.header')}
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -71,7 +73,7 @@ export function PricingSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xl text-gray-600 max-w-2xl mx-auto"
           >
-            Start with the essentials and scale up as you grow. All plans include our core AI-powered quality management features.
+            {t('pricing.sub')}
           </motion.p>
         </div>
 
@@ -84,10 +86,8 @@ export function PricingSection() {
         >
           {/* Card Header */}
           <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-12 text-center">
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">Transparent Pricing</h3>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Get personalized pricing based on your organization's size and requirements
-            </p>
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">{t('pricing.transparent')}</h3>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">{t('pricing.transparent.sub')}</p>
           </div>
 
           {/* Plans Overview (click to select) */}
@@ -110,8 +110,8 @@ export function PricingSection() {
                       <path d="M9 13h6M9 17h6M9 9h3"/>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Lite</h3>
-                  <p className="text-gray-600 mb-4">Essential document control and basic audit capabilities</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.lite')}</h3>
+                  <p className="text-gray-600 mb-4">{t('pricing.card.lite.desc')}</p>
                   {/* Reserved space for pills to avoid height shift */}
                   <div className="w-full mt-4 min-h-[3.5rem] max-h-[3.5rem] overflow-hidden">
                     {selected === 'lite' && (
@@ -144,8 +144,8 @@ export function PricingSection() {
                       <path d="M9 12l2 2 4-4"/>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Standard</h3>
-                  <p className="text-gray-600 mb-4">Advanced audit capabilities with AI‑powered CAPA management</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.standard')}</h3>
+                  <p className="text-gray-600 mb-4">{t('pricing.card.standard.desc')}</p>
                   <div className="w-full mt-4 min-h-[3.5rem] max-h-[3.5rem] overflow-hidden">
                     {selected === 'standard' && (
                       <div className="flex flex-row flex-wrap justify-center items-center gap-2">
@@ -177,8 +177,8 @@ export function PricingSection() {
                       <path d="M7 11h2M11 11h2M15 11h2M7 15h2M11 15h2M15 15h2M12 21v-4"/>
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Full QMS</h3>
-                  <p className="text-gray-600 mb-4">End‑to‑end quality management with complete automation</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.full')}</h3>
+                  <p className="text-gray-600 mb-4">{t('pricing.card.full.desc')}</p>
                   <div className="w-full mt-4 min-h-[3.5rem] max-h-[3.5rem] overflow-hidden">
                     {selected === 'fullqms' && (
                       <div className="flex flex-row flex-wrap justify-center items-center gap-2">
@@ -215,40 +215,38 @@ export function PricingSection() {
           className="mt-12"
         >
           <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100">
-            <h3 className="text-3xl font-semibold text-center text-gray-900 mb-10">
-              What's Included in Every Plan
-            </h3>
+            <h3 className="text-3xl font-semibold text-center text-gray-900 mb-10">{t('pricing.includedEvery.title')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
               {/* Item 1 */}
               <div className="flex items-start gap-4">
                 <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
                 <div>
-                  <div className="text-xl font-semibold text-gray-900 mb-1">AI‑Powered Insights</div>
-                  <p className="text-gray-600">Smart recommendations and automated analysis</p>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">{t('pricing.includedEvery.ai')}</div>
+                  <p className="text-gray-600">{t('pricing.includedEvery.ai.sub')}</p>
                 </div>
               </div>
               {/* Item 2 */}
               <div className="flex items-start gap-4">
                 <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
                 <div>
-                  <div className="text-xl font-semibold text-gray-900 mb-1">Document Management</div>
-                  <p className="text-gray-600">Centralized control with version tracking</p>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">{t('pricing.includedEvery.docs')}</div>
+                  <p className="text-gray-600">{t('pricing.includedEvery.docs.sub')}</p>
                 </div>
               </div>
               {/* Item 3 */}
               <div className="flex items-start gap-4">
                 <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
                 <div>
-                  <div className="text-xl font-semibold text-gray-900 mb-1">Compliance Tools</div>
-                  <p className="text-gray-600">Built‑in regulatory compliance features</p>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">{t('pricing.includedEvery.compliance')}</div>
+                  <p className="text-gray-600">{t('pricing.includedEvery.compliance.sub')}</p>
                 </div>
               </div>
               {/* Item 4 */}
               <div className="flex items-start gap-4">
                 <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
                 <div>
-                  <div className="text-xl font-semibold text-gray-900 mb-1">24/7 Support</div>
-                  <p className="text-gray-600">Expert assistance whenever you need it</p>
+                  <div className="text-xl font-semibold text-gray-900 mb-1">{t('pricing.includedEvery.support')}</div>
+                  <p className="text-gray-600">{t('pricing.includedEvery.support.sub')}</p>
                 </div>
               </div>
             </div>
@@ -262,8 +260,8 @@ export function PricingSection() {
           transition={{ duration: 0.8 }}
           className="mt-16 mb-20"
         >
-          <h2 className="text-3xl font-normal text-gray-900 mb-4 text-center">Compare Plans</h2>
-          <p className="text-gray-600 text-center mb-12">Detailed feature comparison across all CERTI bundles</p>
+          <h2 className="text-3xl font-normal text-gray-900 mb-4 text-center">{t('pricing.compare')}</h2>
+          <p className="text-gray-600 text-center mb-12">{t('pricing.compare.sub')}</p>
           
           {/* Comparison Table */}
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
