@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 export function PricingSection() {
+  const [selected, setSelected] = useState<null | 'lite' | 'standard' | 'fullqms'>(null)
   const comparisonFeatures = [
     {
       category: "Document Management (DocCore)",
@@ -88,11 +90,17 @@ export function PricingSection() {
             </p>
           </div>
 
-          {/* Plans Overview */}
+          {/* Plans Overview (click to select) */}
           <div className="p-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {/* Lite Plan */}
-              <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
+              <button
+                type="button"
+                onClick={() => setSelected('lite')}
+                className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group ${
+                  selected === 'lite' ? 'border-blue-300 ring-2 ring-blue-200' : 'border-gray-100'
+                }`}
+              >
                 <div className="text-center">
                 <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
                   <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,35 +108,74 @@ export function PricingSection() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Lite</h3>
-                <p className="text-gray-600">Core document control</p>
+                <p className="text-gray-600">Essential document control and basic audit capabilities</p>
+                <div className="mt-6 rounded-2xl bg-gray-50 text-gray-700 px-4 py-3 text-center">
+                  <div className="opacity-90">Perfect for small</div>
+                  <div className="opacity-90">teams and startups</div>
                 </div>
-              </div>
+                <div className="mt-4 rounded-2xl bg-blue-50 text-blue-700 px-4 py-3 text-center border border-blue-100">
+                  <div className="font-medium">Includes: DocCore</div>
+                  <div>Module</div>
+                </div>
+                </div>
+              </button>
 
               {/* Standard Plan */}
-              <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
+              <button
+                type="button"
+                onClick={() => setSelected('standard')}
+                className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group ${
+                  selected === 'standard' ? 'border-amber-300 ring-2 ring-amber-200' : 'border-gray-100'
+                }`}
+              >
                 <div className="text-center">
                 <div className="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
-                  <svg className="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Standard</h3>
-                <p className="text-gray-600">Audits + CAPA</p>
+                <p className="text-gray-600">Advanced audit capabilities with AI‑powered CAPA management</p>
+                <div className="mt-6 rounded-2xl bg-gray-50 text-gray-700 px-4 py-3 text-center">
+                  <div className="opacity-90">Ideal for growing</div>
+                  <div className="opacity-90">organizations</div>
                 </div>
-              </div>
+                <div className="mt-4 rounded-2xl bg-orange-50 text-orange-700 px-4 py-3 text-center border border-orange-100">
+                  <div className="font-medium">Includes: DocCore,</div>
+                  <div>ResolveCore & AuditCore</div>
+                  <div>Modules</div>
+                </div>
+                </div>
+              </button>
 
               {/* Full QMS Plan */}
-              <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
+              <button
+                type="button"
+                onClick={() => setSelected('fullqms')}
+                className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group ${
+                  selected === 'fullqms' ? 'border-gray-400 ring-2 ring-gray-300' : 'border-gray-100'
+                }`}
+              >
                 <div className="text-center">
                 <div className="w-20 h-20 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
-                  <svg className="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-10 h-10 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Full QMS</h3>
-                <p className="text-gray-600">End-to-end quality</p>
+                <p className="text-gray-600">End‑to‑end quality management with complete automation</p>
+                <div className="mt-6 rounded-2xl bg-gray-50 text-gray-700 px-4 py-3 text-center">
+                  <div className="opacity-90">Built for large</div>
+                  <div className="opacity-90">enterprises</div>
                 </div>
-              </div>
+                <div className="mt-4 rounded-2xl bg-gray-50 text-gray-700 px-4 py-3 text-center border border-gray-200">
+                  <div className="font-medium">Includes: All 5 Modules</div>
+                  <div>(DocCore, ResolveCore,</div>
+                  <div>AuditCore, SupplyCore &</div>
+                  <div>SkillCore)</div>
+                </div>
+                </div>
+              </button>
             </div>
 
             {/* CTA Inside Card */}
@@ -235,4 +282,3 @@ export function PricingSection() {
     </section>
   )
 }
-
