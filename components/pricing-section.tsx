@@ -1,145 +1,232 @@
 'use client'
 
-import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useLanguage } from './language-context'
-
-const Check = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
 
 export function PricingSection() {
-  const { t, lang } = useLanguage()
-  const [selectedPlan, setSelectedPlan] = useState<null | 'lite' | 'standard' | 'fullqms'>(null)
-
-  // Localized module labels and plan mapping
-  const moduleLabels = [
-    t('modules.1.title'),
-    t('modules.2.title'),
-    t('modules.3.title'),
-    t('modules.4.title'),
+  const comparisonFeatures = [
+    {
+      category: "Document Management (DocCore)",
+      subtitle: "Core document control and management capabilities",
+      features: [
+        { text: "Centralized Document Management", lite: true, standard: true, fullqms: true },
+        { text: "Version Control & Approval Workflow Management", lite: true, standard: true, fullqms: true },
+        { text: "Document Change Management & Impact Analysis", lite: true, standard: true, fullqms: true },
+        { text: "AI-Based Document Change Recommendations", lite: true, standard: true, fullqms: true },
+        { text: "Document Validity Management", lite: true, standard: true, fullqms: true },
+        { text: "Document-Standard Compliance Management", lite: true, standard: true, fullqms: true },
+        { text: "Business Intelligence & Analytics (Dashboard)", lite: true, standard: true, fullqms: true },
+        { text: "Automatic Alerts & Notifications", lite: true, standard: true, fullqms: true }
+      ]
+    },
+    {
+      category: "Audit & CAPA Management",
+      subtitle: "Advanced audit and corrective action capabilities",
+      features: [
+        { text: "Internal and External Audit Management", standard: true, fullqms: true },
+        { text: "Real-Time Mobile Audit Interface", standard: true, fullqms: true },
+        { text: "Production Line Error Management", standard: true, fullqms: true },
+        { text: "AI-Based Audit Gap Detection and Management", standard: true, fullqms: true },
+        { text: "AI-Based Pre-Audits", standard: true, fullqms: true },
+        { text: "AI-Based Audit Reporting", standard: true, fullqms: true },
+        { text: "AI-Based Root Cause Analysis", standard: true, fullqms: true },
+        { text: "AI-Based Corrective and Preventive Action (CAPA) Recommendations", standard: true, fullqms: true },
+        { text: "Customer Complaint Management", standard: true, fullqms: true },
+        { text: "AI-Assisted Customer Complaint CAPA Reports", standard: true, fullqms: true }
+      ]
+    },
+    {
+      category: "Supplier & Training Management",
+      subtitle: "Comprehensive supplier quality and workforce management",
+      features: [
+        { text: "Centralized Supplier Quality & Certificate Management", fullqms: true },
+        { text: "AI-Based Supplier Scoring System", fullqms: true },
+        { text: "Supplier Performance Analysis & Dashboard", fullqms: true },
+        { text: "AI-Based Supplier Risk Assessment", fullqms: true },
+        { text: "Employee Training & Certification Management", fullqms: true },
+        { text: "AI-Based Training Recommendations", fullqms: true },
+        { text: "Regulation-Focused Certificate Validity Tracking", fullqms: true }
+      ]
+    }
   ]
-  const planToModules: Record<'lite'|'standard'|'fullqms', number[]> = {
-    lite: [0],
-    standard: [0,1,2],
-    fullqms: [0,1,2,3],
-  }
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-      <div className="content-container">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.h2
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
           >
-            {t('pricing.header')}
+            Choose Your CERTI Plan
           </motion.h2>
-          <motion.p
+          <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xl text-gray-600 max-w-2xl mx-auto"
           >
-            {t('pricing.sub')}
+            Start with the essentials and scale up as you grow. All plans include our core AI-powered quality management features.
           </motion.p>
         </div>
 
-        {/* Packages (no extra descriptions) */}
+        {/* Unified Pricing Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden"
+        >
+          {/* Card Header */}
+          <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white p-12 text-center">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">Transparent Pricing</h3>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Get personalized pricing based on your organization's size and requirements
+            </p>
+          </div>
+
+          {/* Plans Overview */}
+          <div className="p-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              {/* Lite Plan */}
+              <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div className="text-center">
+                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                  <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Lite</h3>
+                <p className="text-gray-600">Core document control</p>
+                </div>
+              </div>
+
+              {/* Standard Plan */}
+              <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div className="text-center">
+                <div className="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-200 transition-colors">
+                  <svg className="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Standard</h3>
+                <p className="text-gray-600">Audits + CAPA</p>
+                </div>
+              </div>
+
+              {/* Full QMS Plan */}
+              <div className="bg-white rounded-2xl border-2 border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div className="text-center">
+                <div className="w-20 h-20 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
+                  <svg className="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Full QMS</h3>
+                <p className="text-gray-600">End-to-end quality</p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Inside Card */}
+            <div className="text-center">
+              <h4 className="text-2xl font-bold text-gray-900 mb-4">Ready to Get Started?</h4>
+              <p className="text-gray-600 mb-8 max-w-lg mx-auto">
+                Get personalized pricing and see which plan is perfect for your organization
+              </p>
+              <button className="bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white font-bold py-4 px-12 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl">
+                Get Pricing
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Compare Plans Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="mt-16 mb-20"
         >
-          {[{ key: 'lite' as const, title: t('pricing.table.lite') },
-            { key: 'standard' as const, title: t('pricing.table.standard') },
-            { key: 'fullqms' as const, title: t('pricing.table.full') }
-          ].map((plan, idx) => (
-            <button
-              key={plan.key}
-              type="button"
-              onClick={() => setSelectedPlan(plan.key)}
-              className={`rounded-2xl border bg-white p-6 text-left transition-all ${
-                selectedPlan === plan.key ? 'border-gray-900 shadow-lg' : 'border-gray-200 shadow-sm hover:border-gray-300'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900">{plan.title}</h3>
-                {selectedPlan === plan.key && (
-                  <span className="text-xs px-2 py-1 rounded-full bg-gray-900 text-white">
-                    {lang === 'tr' ? 'Seçildi' : 'Selected'}
-                  </span>
-                )}
-              </div>
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Modules included in selected package (pills) */}
-        {selectedPlan && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-10"
-          >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4 text-center">
-              {lang === 'tr' ? 'Paketin kapsadığı modüller' : 'Modules included in this package'}
-            </h3>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {planToModules[selectedPlan].map((m) => (
-                <span key={m} className="px-4 py-2 rounded-full bg-gray-100 text-gray-900 text-sm border border-gray-200">
-                  {moduleLabels[m]}
-                </span>
-              ))}
+          <h2 className="text-3xl font-normal text-gray-900 mb-4 text-center">Compare Plans</h2>
+          <p className="text-gray-600 text-center mb-12">Detailed feature comparison across all CERTI bundles</p>
+          
+          {/* Comparison Table */}
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            {/* Table Header */}
+            <div className="grid grid-cols-4 bg-gray-50 border-b border-gray-200">
+              <div className="p-4"></div>
+              <div className="p-4 text-center font-medium text-gray-900">Lite</div>
+              <div className="p-4 text-center font-medium text-gray-900">Standard</div>
+              <div className="p-4 text-center font-medium text-gray-900">Full QMS</div>
             </div>
-          </motion.div>
-        )}
 
-        {/* Included in every package */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-16"
-        >
-          <h3 className="text-2xl font-normal text-gray-900 mb-4 text-center">{t('pricing.included.title')}</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
-            {[
-              (lang==='tr' ? 'Yapay zeka çekirdek özellikleri' : 'AI core features'),
-              (lang==='tr' ? 'Güvenli barındırma ve yedekleme' : 'Secure hosting & backups'),
-              (lang==='tr' ? 'Rol tabanlı erişim kontrolü' : 'Role-based access control'),
-              (lang==='tr' ? 'Denetim kayıtları ve izlenebilirlik' : 'Audit logs & traceability'),
-              (lang==='tr' ? 'E-posta destek' : 'Email support'),
-              (lang==='tr' ? 'Dışa aktarma ve raporlama' : 'Export & reporting'),
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-gray-700">
-                <span className="inline-flex text-green-600"><Check /></span>
-                {item}
+            {/* Feature Categories */}
+            {comparisonFeatures.map((category, categoryIndex) => (
+              <div key={categoryIndex}>
+                {/* Category Header */}
+                <div className="bg-gray-50 border-b border-gray-200 p-4">
+                  <h4 className="font-semibold text-gray-900">{category.category}</h4>
+                  {category.subtitle && (
+                    <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
+                  )}
+                </div>
+
+                {/* Category Features */}
+                {category.features.map((feature, featureIndex) => {
+                  const featureText = typeof feature === 'string' ? feature : feature.text
+                  const isIncluded = (plan: string) => {
+                    if (typeof feature === 'string') return true
+                    if (plan === 'lite' && 'lite' in feature) return feature.lite
+                    if (plan === 'standard' && 'standard' in feature) return feature.standard
+                    if (plan === 'fullqms' && 'fullqms' in feature) return feature.fullqms
+                    return false
+                  }
+
+                  return (
+                    <div key={featureIndex} className="grid grid-cols-4 border-b border-gray-100 text-sm">
+                      <div className="p-4 text-gray-700">{featureText}</div>
+                      <div className="p-4 text-center">
+                        {isIncluded('lite') === true ? '✓' : 
+                         typeof isIncluded('lite') === 'string' ? isIncluded('lite') : ''}
+                      </div>
+                      <div className="p-4 text-center">
+                        {isIncluded('standard') === true ? '✓' : 
+                         typeof isIncluded('standard') === 'string' ? isIncluded('standard') : ''}
+                      </div>
+                      <div className="p-4 text-center">
+                        {isIncluded('fullqms') === true ? '✓' : 
+                         typeof isIncluded('standard') === 'string' ? isIncluded('fullqms') : ''}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
+        {/* Additional Info */}
+        <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-16"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center mt-16"
         >
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-10 text-center text-white shadow-xl">
-            <div className="max-w-2xl mx-auto">
-              <h4 className="text-3xl font-bold mb-4">{t('pricing.cta.header')}</h4>
-              <p className="text-gray-200 mb-8">{t('pricing.cta.body')}</p>
-              <button className="bg-white text-gray-900 font-semibold py-3 px-8 rounded-xl hover:bg-gray-100 transition-colors">
-                {t('pricing.cta.button')}
+          <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Need a Custom Solution?</h3>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              We can tailor a plan specifically for your organization's unique requirements and scale.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-gray-900 text-white font-semibold py-3 px-8 rounded-xl hover:bg-gray-800 transition-colors">
+                Contact Sales
+              </button>
+              <button className="border-2 border-gray-900 text-gray-900 font-semibold py-3 px-8 rounded-xl hover:bg-gray-900 hover:text-white transition-colors">
+                Schedule Demo
               </button>
             </div>
           </div>
