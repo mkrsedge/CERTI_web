@@ -110,6 +110,15 @@ export default function Home() {
 
   // Handle navigation with optimized smooth scroll
   const handleSectionChange = (section: string) => {
+    const getHeaderOffset = () => {
+      const nav = document.querySelector('nav.full-width-navbar') as HTMLElement | null
+      if (!nav) return 60
+      const styles = getComputedStyle(nav)
+      const varVal = styles.getPropertyValue('--header-height').trim()
+      const parsed = parseFloat(varVal.replace('px', ''))
+      const h = Number.isFinite(parsed) ? parsed : nav.offsetHeight || 60
+      return h + 8 // small breathing room
+    }
     if (section === 'home') {
       if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
         (window as any).gsap.to(window, { duration: 0.6, scrollTo: { y: 0 }, ease: 'power2.out' })
@@ -123,11 +132,12 @@ export default function Home() {
       if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
         (window as any).gsap.to(window, {
           duration: 0.6,
-          scrollTo: { y: element, offsetY: 80 },
+          scrollTo: { y: element, offsetY: getHeaderOffset() },
           ease: 'power2.out'
         })
       } else {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        const top = element.getBoundingClientRect().top + window.scrollY - getHeaderOffset()
+        window.scrollTo({ top, behavior: 'smooth' })
       }
     }
   }
