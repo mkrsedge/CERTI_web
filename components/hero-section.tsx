@@ -39,7 +39,7 @@ export function HeroSection() {
           className="max-w-4xl mx-auto"
         >
           <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
-            {t('hero.title.1')}
+            {`CERTI: ${t('hero.title.1')}`}
             <br />
             {t('hero.title.2')}
           </h1>

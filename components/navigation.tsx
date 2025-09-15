@@ -174,9 +174,6 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               alt="CERTI Logo" 
               className="navbar-logo"
             />
-            <span className="navbar-title" aria-label={lang === 'tr' ? 'CERTI: Yapay Zeka Tabanlı Kalite ve Uyumluluk' : 'CERTI: AI-Native Quality and Compliance'}>
-              {lang === 'tr' ? 'CERTI: Yapay Zeka Tabanlı Kalite ve Uyumluluk' : 'CERTI: AI-Native Quality and Compliance'}
-            </span>
           </div>
 
           {/* Center - Navigation Menu */}
@@ -396,9 +393,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           width: auto;
           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
-        .navbar-title { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-weight: 600; color: #1f2937; white-space: nowrap; }
-        @media (max-width: 1024px) { .navbar-title { font-size: 0.875rem; } }
-        @media (max-width: 768px) { .navbar-title { font-size: 0.8rem; max-width: 58vw; overflow: hidden; text-overflow: ellipsis; } }
+        
 
         /* Navigation Menu Styles */
         .nav-menu__link {
