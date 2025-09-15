@@ -110,7 +110,6 @@ export function ModulesSection() {
                 }`}
                 onClick={() => setActiveModule(index)}
               >
-                <div className="shrink-0 mt-1">{icons[index]}</div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
                   <p className="text-gray-600 text-sm">{module.subtitle}</p>

@@ -8,6 +8,47 @@ export function CaseStudiesSection() {
   const { t, lang } = useLanguage()
   const [expandedModule, setExpandedModule] = useState<number | null>(null)
 
+  // Icons for Core Modules (aligned by index)
+  const moduleIcons = [
+    // DOCCORE
+    (
+      <svg viewBox="0 0 24 24" className="w-7 h-7 text-indigo-700" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="16" rx="2"/>
+        <path d="M7 8h10"/>
+        <path d="M7 12h6"/>
+        <path d="M7 16h4"/>
+      </svg>
+    ),
+    // AUDITCORE
+    (
+      <svg viewBox="0 0 24 24" className="w-7 h-7 text-purple-700" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M8 13l3 3 5-7"/>
+      </svg>
+    ),
+    // RESOLVECORE
+    (
+      <svg viewBox="0 0 24 24" className="w-7 h-7 text-emerald-700" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    ),
+    // SUPPLYCORE
+    (
+      <svg viewBox="0 0 24 24" className="w-7 h-7 text-amber-700" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <path d="M3.27 6.96L12 12l8.73-5.04"/>
+        <path d="M12 22V12"/>
+      </svg>
+    ),
+    // SKILLCORE
+    (
+      <svg viewBox="0 0 24 24" className="w-7 h-7 text-sky-700" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M22 12l-10 6L2 12l10-6 10 6z"/>
+        <path d="M6 12v5c0 .7 4 2 6 2s6-1.3 6-2v-5"/>
+      </svg>
+    ),
+  ]
+
   const modules = [
     {
       number: '01',
@@ -110,9 +151,14 @@ export function CaseStudiesSection() {
               <div className="bg-white rounded-3xl border-4 p-8 md:p-12 relative overflow-hidden" style={{borderColor: '#3e2723'}}>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                   <div className="lg:col-span-8">
-                    <h3 className="text-3xl md:text-5xl font-bold leading-tight mb-4 uppercase tracking-wide" style={{color: '#3e2723'}}>
-                      {module.title}
-                    </h3>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner" style={{ backgroundColor: '#ffedac' }}>
+                        {moduleIcons[index]}
+                      </div>
+                      <h3 className="text-3xl md:text-5xl font-bold leading-tight uppercase tracking-wide" style={{color: '#3e2723'}}>
+                        {module.title}
+                      </h3>
+                    </div>
                     <p className="text-lg md:text-xl leading-relaxed max-w-3xl" style={{color: '#3e2723'}}>
                       {module.description}
                     </p>
