@@ -80,12 +80,18 @@ export function DemoSection() {
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        throw new Error(data?.error || 'Request failed')
+        const msg = typeof data?.error === 'string' ? data.error : 'Request failed'
+        throw new Error(msg)
       }
       setStatus({ ok: true, message: lang === 'tr' ? 'Talebiniz alındı. Yakında sizinle iletişime geçeceğiz.' : 'Your request has been received. We will contact you shortly.' })
       setFormData({ name: '', email: '', company: '', phone: '', employees: '', message: '' })
     } catch (err: any) {
-      setStatus({ ok: false, message: lang === 'tr' ? 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.' : 'Something went wrong. Please try again later.' })
+      const msg = String(err?.message || err)
+      const friendly = lang === 'tr'
+        ? 'Gönderim şu anda yapılamıyor. Lütfen daha sonra tekrar deneyin veya info@makers-edge.com adresine e‑posta gönderin.'
+        : 'Submission is temporarily unavailable. Please try again later or email info@makers-edge.com.'
+      setStatus({ ok: false, message: friendly })
+      if (typeof window !== 'undefined') console.warn('Schedule demo failed:', msg)
     } finally {
       setIsSubmitting(false)
     }
