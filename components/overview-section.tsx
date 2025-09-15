@@ -297,6 +297,32 @@ export function OverviewSection() {
           `}</style>
         </motion.div>
 
+        {/* Portrait-only swipeable Journey Cards */}
+        <div className="block md:hidden">
+          <h3 className="text-2xl font-semibold text-brand-secondary mb-4 px-2">{t('overview.header')}</h3>
+          <div
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-2 pb-2 scrollbar-hide"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+            aria-label={t('overview.header')}
+          >
+            {steps.map((step, i) => (
+              <div
+                key={i}
+                className="snap-start min-w-[85%] max-w-[85%] bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+              >
+                {step.imageSrc && (
+                  <img src={step.imageSrc} alt={step.imageAlt || step.title} className="w-full h-40 object-cover" loading="lazy" />
+                )}
+                <div className="p-4">
+                  <div className="text-xs uppercase tracking-wider text-brand-secondary/70 mb-2">{step.tag}</div>
+                  <div className="text-lg font-semibold text-brand-secondary mb-1">{step.title}</div>
+                  <div className="text-brand-secondary/70 text-sm leading-relaxed">{step.description}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

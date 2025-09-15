@@ -8,6 +8,39 @@ export function ModulesSection() {
   const { t, lang } = useLanguage()
   const [activeModule, setActiveModule] = useState(0)
   const origin = typeof window !== 'undefined' ? window.location.origin : ''
+  const icons = [
+    // DocCore
+    (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="16" rx="2"/>
+        <path d="M7 8h10"/>
+        <path d="M7 12h6"/>
+        <path d="M7 16h4"/>
+      </svg>
+    ),
+    // Audit
+    (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <path d="M7 10l5 5 5-5"/>
+        <path d="M12 15V3"/>
+      </svg>
+    ),
+    // Resolve
+    (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    ),
+    // Complaints/Slate
+    (
+      <svg viewBox="0 0 24 24" className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 12h8"/>
+        <path d="M12 8v8"/>
+      </svg>
+    ),
+  ]
 
   const modules = [
     {
@@ -70,19 +103,18 @@ export function ModulesSection() {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 ${
+                className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 flex items-start gap-3 ${
                   activeModule === index
                     ? 'bg-white shadow-lg border-l-4 border-[#a9aecf]'
                     : 'bg-transparent hover:bg-white hover:shadow-md'
                 }`}
                 onClick={() => setActiveModule(index)}
               >
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {module.title}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {module.subtitle}
-                </p>
+                <div className="shrink-0 mt-1">{icons[index]}</div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
+                  <p className="text-gray-600 text-sm">{module.subtitle}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -138,9 +170,12 @@ export function ModulesSection() {
               </div>
             )}
             
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-              {modules[activeModule].title}
-            </h3>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center">
+                {icons[activeModule]}
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900">{modules[activeModule].title}</h3>
+            </div>
             
             <p className="text-[#a9aecf] font-medium mb-4">
               {modules[activeModule].subtitle}
