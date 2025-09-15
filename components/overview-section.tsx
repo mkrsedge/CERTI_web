@@ -128,25 +128,47 @@ export function OverviewSection() {
     }
   }, [steps.length, stackHeight, activeStep])
 
-  // Auto-scroll capabilities carousel continuously to the right
+  // Auto-scroll capabilities carousel (mobile + desktop). Pauses on touch/hover and when offscreen.
   useEffect(() => {
     const el = capsRef.current
     if (!el) return
     let raf = 0
-    const SPEED = 0.6 // px per frame
-    const loop = () => {
+    let last = performance.now()
+    const baseSpeed = 20 // px per second
+
+    // Pause while user interacts
+    const pause = () => setCapsPaused(true)
+    const resume = () => setCapsPaused(false)
+    el.addEventListener('pointerdown', pause, { passive: true })
+    window.addEventListener('pointerup', resume, { passive: true })
+
+    // Only run when visible
+    let visible = true
+    const io = new IntersectionObserver((entries) => {
+      visible = entries[0]?.isIntersecting ?? true
+    }, { threshold: 0.05 })
+    io.observe(el)
+
+    const tick = (now: number) => {
       const target = capsRef.current
-      if (target && !capsPausedRef.current) {
-        target.scrollLeft += SPEED
+      const dt = Math.min(64, now - last) / 1000 // clamp delta
+      last = now
+      if (target && visible && !capsPausedRef.current) {
+        const speed = baseSpeed // px/sec
+        target.scrollLeft += speed * dt
         const half = target.scrollWidth / 2
-        if (half > 0 && target.scrollLeft >= half) {
-          target.scrollLeft -= half
-        }
+        if (half > 0 && target.scrollLeft >= half) target.scrollLeft -= half
       }
-      raf = requestAnimationFrame(loop)
+      raf = requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(loop)
-    return () => cancelAnimationFrame(raf)
+    raf = requestAnimationFrame(tick)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      io.disconnect()
+      el.removeEventListener('pointerdown', pause)
+      window.removeEventListener('pointerup', resume)
+    }
   }, [])
 
   return (

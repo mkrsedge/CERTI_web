@@ -7,7 +7,7 @@ import { useLanguage } from './language-context'
 export function HeroSection() {
   const { t } = useLanguage()
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
       {/* Background Video */}
       <div className="absolute inset-0 w-full h-full">
         <video
@@ -117,3 +117,11 @@ export function HeroSection() {
     </section>
   )
 }
+
+// Portrait-only extra spacing to avoid overlap with sticky header
+// and iOS Safari dynamic bars
+<style jsx global>{`
+  @media (max-width: 768px) and (orientation: portrait) {
+    .hero-portrait-offset { padding-top: 7rem !important; }
+  }
+`}</style>

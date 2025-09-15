@@ -7,6 +7,7 @@ import { useLanguage } from './language-context'
 export function ModulesSection() {
   const { t, lang } = useLanguage()
   const [activeModule, setActiveModule] = useState(0)
+  const origin = typeof window !== 'undefined' ? window.location.origin : ''
 
   const modules = [
     {
@@ -103,14 +104,20 @@ export function ModulesSection() {
                   <iframe
                     width="100%"
                     height="100%"
-                    src={`https://www.youtube.com/embed/${modules[activeModule].videoId}?rel=0&modestbranding=1`}
+                    src={`https://www.youtube-nocookie.com/embed/${modules[activeModule].videoId}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1${origin ? `&origin=${encodeURIComponent(origin)}` : ''}`}
                     title={modules[activeModule].title}
                     frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     loading="lazy"
-                    referrerPolicy="no-referrer"
+                    referrerPolicy="origin-when-cross-origin"
                     allowFullScreen
                     className="w-full h-full"
+                    onError={(e) => {
+                      const iframe = e.currentTarget as HTMLIFrameElement
+                      // Fallback to standard domain if nocookie domain encounters restrictions
+                      const id = modules[activeModule].videoId
+                      iframe.src = `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1${origin ? `&origin=${encodeURIComponent(origin)}` : ''}`
+                    }}
                   ></iframe>
                   </div>
                 </div>
