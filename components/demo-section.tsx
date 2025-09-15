@@ -6,6 +6,54 @@ import { useLanguage } from './language-context'
 
 export function DemoSection() {
   const { lang, t } = useLanguage()
+  const fb = {
+    en: {
+      fullName: 'Full Name *',
+      fullNamePh: 'John Doe',
+      workEmail: 'Work Email *',
+      workEmailPh: 'john@company.com',
+      company: 'Company *',
+      companyPh: 'Company Name',
+      phone: 'Phone',
+      phonePhEN: '+1 (555) 123-4567',
+      phonePhTR: '+90 5xx xxx xx xx',
+      companySize: 'Company Size',
+      companySizePh: 'Select company size',
+      s1: '1-10 employees',
+      s2: '11-50 employees',
+      s3: '51-200 employees',
+      s4: '201-1000 employees',
+      s5: '1000+ employees',
+      message: 'Tell us about your needs',
+      messagePh: "Briefly describe your current challenges and what you're looking to achieve...",
+      submit: 'Schedule Demo',
+    },
+    tr: {
+      fullName: 'Ad Soyad *',
+      fullNamePh: 'Adınız Soyadınız',
+      workEmail: 'İş E‑postası *',
+      workEmailPh: 'ad@firma.com',
+      company: 'Firma *',
+      companyPh: 'Firma Adı',
+      phone: 'Telefon',
+      phonePhEN: '+1 (555) 123-4567',
+      phonePhTR: '+90 5xx xxx xx xx',
+      companySize: 'Firma Büyüklüğü',
+      companySizePh: 'Büyüklük seçin',
+      s1: '1-10 çalışan',
+      s2: '11-50 çalışan',
+      s3: '51-200 çalışan',
+      s4: '201-1000 çalışan',
+      s5: '1000+ çalışan',
+      message: 'İhtiyaçlarınızı anlatın',
+      messagePh: 'Mevcut zorlukları ve hedeflerinizi kısaca paylaşın…',
+      submit: 'Demoyu Planla',
+    },
+  } as const
+  const tt = (key: string, fallback: string) => {
+    const val = t(key)
+    return !val || val === key || key.startsWith('form.') && val.startsWith('form.') ? fallback : val
+  }
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -69,7 +117,7 @@ export function DemoSection() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="demo-name" className="block text-sm font-medium text-gray-700 mb-2">{t('form.fullName')}</label>
+                  <label htmlFor="demo-name" className="block text-sm font-medium text-gray-700 mb-2">{tt('form.fullName', fb[lang].fullName)}</label>
                   <input
                     type="text"
                     required
@@ -77,11 +125,11 @@ export function DemoSection() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     id="demo-name"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
-                    placeholder={t('form.fullName.placeholder')}
+                    placeholder={tt('form.fullName.placeholder', fb[lang].fullNamePh)}
                   />
                 </div>
                 <div>
-                  <label htmlFor="demo-email" className="block text-sm font-medium text-gray-700 mb-2">{t('form.workEmail')}</label>
+                  <label htmlFor="demo-email" className="block text-sm font-medium text-gray-700 mb-2">{tt('form.workEmail', fb[lang].workEmail)}</label>
                   <input
                     type="email"
                     required
@@ -89,14 +137,14 @@ export function DemoSection() {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     id="demo-email"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
-                    placeholder={t('form.workEmail.placeholder')}
+                    placeholder={tt('form.workEmail.placeholder', fb[lang].workEmailPh)}
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="demo-company" className="block text-sm font-medium text-gray-700 mb-2">{t('form.company')}</label>
+                  <label htmlFor="demo-company" className="block text-sm font-medium text-gray-700 mb-2">{tt('form.company', fb[lang].company)}</label>
                   <input
                     type="text"
                     required
@@ -104,48 +152,48 @@ export function DemoSection() {
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     id="demo-company"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
-                    placeholder={t('form.company.placeholder')}
+                    placeholder={tt('form.company.placeholder', fb[lang].companyPh)}
                   />
                 </div>
                 <div>
-                  <label htmlFor="demo-phone" className="block text-sm font-medium text-gray-700 mb-2">{t('form.phone')}</label>
+                  <label htmlFor="demo-phone" className="block text-sm font-medium text-gray-700 mb-2">{tt('form.phone', fb[lang].phone)}</label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     id="demo-phone"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
-                    placeholder={lang === 'tr' ? t('form.phone.placeholder.tr') : t('form.phone.placeholder.en')}
+                    placeholder={lang === 'tr' ? tt('form.phone.placeholder.tr', fb[lang].phonePhTR) : tt('form.phone.placeholder.en', fb[lang].phonePhEN)}
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="demo-employees" className="block text-sm font-medium text-gray-700 mb-2">{t('form.companySize')}</label>
+                <label htmlFor="demo-employees" className="block text-sm font-medium text-gray-700 mb-2">{tt('form.companySize', fb[lang].companySize)}</label>
                 <select
                   value={formData.employees}
                   onChange={(e) => setFormData({ ...formData, employees: e.target.value })}
                   id="demo-employees"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
                 >
-                  <option value="">{t('form.companySize.placeholder')}</option>
-                  <option value="1-10">{t('form.companySize.1-10')}</option>
-                  <option value="11-50">{t('form.companySize.11-50')}</option>
-                  <option value="51-200">{t('form.companySize.51-200')}</option>
-                  <option value="201-1000">{t('form.companySize.201-1000')}</option>
-                  <option value="1000+">{t('form.companySize.1000+')}</option>
+                  <option value="">{tt('form.companySize.placeholder', fb[lang].companySizePh)}</option>
+                  <option value="1-10">{tt('form.companySize.1-10', fb[lang].s1)}</option>
+                  <option value="11-50">{tt('form.companySize.11-50', fb[lang].s2)}</option>
+                  <option value="51-200">{tt('form.companySize.51-200', fb[lang].s3)}</option>
+                  <option value="201-1000">{tt('form.companySize.201-1000', fb[lang].s4)}</option>
+                  <option value="1000+">{tt('form.companySize.1000+', fb[lang].s5)}</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="demo-message" className="block text-sm font-medium text-gray-700 mb-2">{t('form.message')}</label>
+                <label htmlFor="demo-message" className="block text-sm font-medium text-gray-700 mb-2">{tt('form.message', fb[lang].message)}</label>
                 <textarea
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
                   id="demo-message"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors resize-none"
-                  placeholder={t('form.message.placeholder')}
+                  placeholder={tt('form.message.placeholder', fb[lang].messagePh)}
                 ></textarea>
               </div>
 
@@ -161,7 +209,7 @@ export function DemoSection() {
                   isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#a9aecf] hover:bg-[#9299c4]'
                 }`}
               >
-                {isSubmitting ? (lang === 'tr' ? 'Gönderiliyor…' : 'Sending…') : t('form.scheduleDemo')}
+                {isSubmitting ? (lang === 'tr' ? 'Gönderiliyor…' : 'Sending…') : tt('form.scheduleDemo', fb[lang].submit)}
               </button>
             </form>
           </motion.div>
