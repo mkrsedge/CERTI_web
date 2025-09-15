@@ -48,8 +48,7 @@ export async function POST(req: Request) {
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY
     const MAIL_TO = process.env.DEMO_MAIL_TO || 'kaan@makers-edge.com'
-    // Use Resend onboarding sender by default to avoid domain verification blocking
-    const MAIL_FROM = process.env.DEMO_MAIL_FROM || 'onboarding@resend.dev'
+    const MAIL_FROM = process.env.DEMO_MAIL_FROM || 'demo@makers-edge.com'
 
     if (!RESEND_API_KEY) {
       return new Response(
@@ -72,7 +71,6 @@ export async function POST(req: Request) {
         to: [MAIL_TO],
         subject,
         text,
-        reply_to: data.email,
       }),
     })
 
@@ -95,3 +93,4 @@ export async function POST(req: Request) {
     })
   }
 }
+
