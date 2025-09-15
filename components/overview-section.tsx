@@ -275,8 +275,8 @@ export function OverviewSection() {
           <p className="text-xl text-brand-secondary/80 max-w-3xl mx-auto leading-relaxed">{t('overview.sub')}</p>
         </motion.div>
 
-        {/* Stacked Cards - scroll pinned */}
-        <div ref={containerRef} className="relative max-w-5xl mx-auto px-2" style={{ height: (stackHeight + 120) * steps.length }}>
+        {/* Stacked Cards - scroll pinned (hidden on portrait mobile) */}
+        <div ref={containerRef} className="relative max-w-5xl mx-auto px-2 journey-stack" style={{ height: (stackHeight + 120) * steps.length }}>
           <div className="sticky top-20">
             {/* Fade masks for cleaner readability */}
             <div className="pointer-events-none absolute -top-6 left-0 right-0 h-16 bg-gradient-to-b from-white to-transparent z-50" />
@@ -335,7 +335,11 @@ export function OverviewSection() {
             })}
             </div>
           </div>
-          <style jsx>{``}</style>
+          <style jsx>{`
+            @media (max-width: 768px) and (orientation: portrait) {
+              .journey-stack { display: none; }
+            }
+          `}</style>
 
           </div>
       </div>

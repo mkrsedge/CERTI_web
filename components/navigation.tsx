@@ -638,10 +638,10 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
         .no-scroll { overflow: hidden !important; }
 
         @media (max-width: 768px) {
-          .header-cta { display: inline-flex; }
-          .hamburger-btn { display: inline-flex; }
-          .language-toggle { display: inline-flex; padding: 8px 10px; font-size: 0.85rem; }
-          .navbar-right { gap: 0.25rem; }
+          .header-cta { display: inline-flex; order: 2; }
+          .language-toggle { display: inline-flex; padding: 8px 10px; font-size: 0.85rem; order: 1; }
+          .hamburger-btn { display: inline-flex; order: 3; }
+          .navbar-right { gap: 0.25rem; align-items: center; }
           .navbar-logo { height: 28px; }
           .full-width-navbar { padding-left: calc(0.5rem + env(safe-area-inset-left)); padding-right: calc(0.5rem + env(safe-area-inset-right)); }
         }
@@ -649,6 +649,8 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
         /* Portrait-only: convert top sheet to left drawer */
         @media (max-width: 768px) and (orientation: portrait) {
           .full-width-navbar { top: calc(1.25rem + env(safe-area-inset-top)); }
+          /* Push page content below sticky header to avoid overlap */
+          body { padding-top: calc(84px + env(safe-area-inset-top)); }
           .mobile-menu-panel {
             position: fixed; top: 0; bottom: 0; left: 0; right: auto;
             height: 100svh; width: min(86vw, 420px);
