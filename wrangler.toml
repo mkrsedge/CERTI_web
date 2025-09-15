@@ -1,7 +1,5 @@
 name = "certi-website"
-compatibility_date = "2025-01-15"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-08-01"
 
 [pages]
-# Next on Pages outputs to .vercel/output/static
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = "out"
