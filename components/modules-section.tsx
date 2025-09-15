@@ -112,8 +112,8 @@ export function ModulesSection() {
               >
                 <div className="shrink-0 mt-1">{icons[index]}</div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
-                  <p className="text-gray-600 text-sm">{module.subtitle}</p>
+                  <div className="text-gray-600 text-sm">{module.title}</div>
+                  <h3 className="text-lg font-semibold text-gray-900">{module.subtitle}</h3>
                 </div>
               </motion.div>
             ))}
@@ -174,12 +174,10 @@ export function ModulesSection() {
               <div className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center">
                 {icons[activeModule]}
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900">{modules[activeModule].title}</h3>
+              <h3 className="text-2xl font-semibold text-gray-900">{modules[activeModule].subtitle}</h3>
             </div>
-            
-            <p className="text-[#a9aecf] font-medium mb-4">
-              {modules[activeModule].subtitle}
-            </p>
+
+            <p className="text-[#a9aecf] font-medium mb-4">{modules[activeModule].title}</p>
 
             <p className="text-gray-600 mb-6 leading-relaxed">
               {modules[activeModule].description}
