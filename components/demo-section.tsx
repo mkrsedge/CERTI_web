@@ -70,7 +70,11 @@ export function DemoSection() {
             ? 'Gönderim başarısız. Lütfen daha sonra tekrar deneyin.'
             : 'Submission failed. Please try again later.',
       })
-      if (typeof window !== 'undefined') console.warn('EmailJS error:', err)
+      if (typeof window !== 'undefined') {
+        const status = (err && (err.status || err.code)) || 'unknown'
+        const text = (err && (err.text || err.message)) || err
+        console.warn('EmailJS error:', status, text)
+      }
     } finally {
       setIsSubmitting(false)
     }
