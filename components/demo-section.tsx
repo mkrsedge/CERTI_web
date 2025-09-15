@@ -17,10 +17,63 @@ export function DemoSection() {
   const phoneNumber = useMemo(() => (lang === 'tr' ? '+90 542 599 18 84' : '+1 917 689 34 36'), [lang])
   const telHref = useMemo(() => phoneNumber.replace(/[^\d+]/g, ''), [phoneNumber])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [status, setStatus] = useState<null | { ok: boolean; message: string }>(null)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Demo request submitted:', formData)
+    setStatus(null)
+    setIsSubmitting(true)
+
+    const serviceId = 'service_g2ylsbj'
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || ''
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
+
+    if (!templateId || !publicKey) {
+      setStatus({
+        ok: false,
+        message:
+          lang === 'tr'
+            ? 'E-posta yapılandırması eksik. Lütfen EmailJS public key ve template ID ekleyin.'
+            : 'Email configuration missing. Please add EmailJS public key and template ID.',
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    const params = {
+      to_email: 'kaan@makers-edge.com',
+      name: formData.name,
+      email: formData.email,
+      company: formData.company,
+      phone: formData.phone,
+      employees: formData.employees,
+      message: formData.message,
+      submitted_at: new Date().toISOString(),
+    }
+
+    try {
+      const ej: any = (globalThis as any).emailjs
+      if (!ej?.send) throw new Error('EmailJS SDK not loaded')
+      const res = await ej.send(serviceId, templateId, params, publicKey)
+      if (res?.status !== 200) throw new Error('EmailJS send failed')
+      setStatus({
+        ok: true,
+        message: lang === 'tr' ? 'Talebiniz alındı. Teşekkürler!' : 'Your request has been sent. Thank you!',
+      })
+      setFormData({ name: '', email: '', company: '', phone: '', employees: '', message: '' })
+    } catch (err: any) {
+      setStatus({
+        ok: false,
+        message:
+          lang === 'tr'
+            ? 'Gönderim başarısız. Lütfen daha sonra tekrar deneyin.'
+            : 'Submission failed. Please try again later.',
+      })
+      if (typeof window !== 'undefined') console.warn('EmailJS error:', err)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -129,11 +182,17 @@ export function DemoSection() {
                 ></textarea>
               </div>
 
+              {status && (
+                <div className={`text-sm ${status.ok ? 'text-green-600' : 'text-red-600'}`}>{status.message}</div>
+              )}
               <button
                 type="submit"
-                className="w-full bg-[#a9aecf] hover:bg-[#9299c4] text-white font-medium py-4 px-6 rounded-lg transition-colors duration-200 text-lg"
+                disabled={isSubmitting}
+                className={`w-full text-white font-medium py-4 px-6 rounded-lg transition-colors duration-200 text-lg ${
+                  isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#a9aecf] hover:bg-[#9299c4]'
+                }`}
               >
-                {lang === 'tr' ? 'Demoyu Planla' : 'Schedule Demo'}
+                {isSubmitting ? (lang === 'tr' ? 'Gönderiliyor…' : 'Sending…') : lang === 'tr' ? 'Demoyu Planla' : 'Schedule Demo'}
               </button>
             </form>
           </motion.div>
