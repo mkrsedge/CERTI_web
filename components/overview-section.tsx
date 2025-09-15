@@ -189,84 +189,87 @@ export function OverviewSection() {
               ref={capsRef}
               onMouseEnter={() => setCapsPaused(true)}
               onMouseLeave={() => setCapsPaused(false)}
-              className="flex gap-4 pr-4 overflow-x-auto scrollbar-hide"
-              style={{ WebkitOverflowScrolling: 'touch' }}
+              onTouchStart={() => setCapsPaused(true)}
+              onTouchEnd={() => setCapsPaused(false)}
+              className={`carousel-shell ${capsPaused ? 'paused' : ''}`}
             >
-              {(() => {
-                const titles = [
-                  t('overview.cap.1.title'),
-                  t('overview.cap.2.title'),
-                  t('overview.cap.3.title'),
-                  t('overview.cap.4.title'),
-                  t('overview.cap.5.title'),
-                ]
-                const descs = [
-                  t('overview.cap.1.desc'),
-                  t('overview.cap.2.desc'),
-                  t('overview.cap.3.desc'),
-                  t('overview.cap.4.desc'),
-                  t('overview.cap.5.desc'),
-                ]
-                const colors = [
-                  'from-blue-400 to-blue-600',
-                  'from-orange-400 to-orange-600',
-                  'from-emerald-400 to-emerald-600',
-                  'from-purple-400 to-purple-600',
-                  'from-rose-400 to-rose-600',
-                ]
-                const icons = [
-                  (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                      <path d="M14 2v6h6"/>
-                      <path d="M8 13h8M8 17h5"/>
-                    </svg>
-                  ),
-                  (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <rect x="3" y="4" width="18" height="16" rx="2"/>
-                      <path d="M7 8h10"/>
-                      <path d="M7 12h6"/>
-                      <path d="M7 16h4"/>
-                    </svg>
-                  ),
-                  (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                      <path d="M12 8v4"/>
-                      <path d="M12 16h.01"/>
-                    </svg>
-                  ),
-                  (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M22 10l-10-5-10 5 10 5 10-5z" />
-                      <path d="M6 12v5a4 4 0 0 0 8 0v-5" />
-                    </svg>
-                  ),
-                  (
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M3 7h13l5 5v5a2 2 0 0 1-2 2H3z"/>
-                      <path d="M8 7V5a2 2 0 0 1 2-2h3"/>
-                    </svg>
-                  ),
-                ]
-                const base = titles.map((_, i) => ({
-                  title: titles[i] || 'Reporting Dashboard',
-                  description: descs[i] || t('overview.cap.6.desc'),
-                  color: colors[i] || 'from-slate-400 to-slate-600',
-                  icon: icons[i],
-                }))
-                const all = [...base, ...base]
-                return all.map((f, idx) => (
-                  <div key={idx} className="min-w-[240px] max-w-[240px] bg-white/80 backdrop-blur border border-brand-secondary/10 rounded-2xl p-5 shadow-sm">
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${f.color} mb-4 flex items-center justify-center`}>
-                      {f.icon}
+              <div className="carousel-track">
+                {(() => {
+                  const titles = [
+                    t('overview.cap.1.title'),
+                    t('overview.cap.2.title'),
+                    t('overview.cap.3.title'),
+                    t('overview.cap.4.title'),
+                    t('overview.cap.5.title'),
+                  ]
+                  const descs = [
+                    t('overview.cap.1.desc'),
+                    t('overview.cap.2.desc'),
+                    t('overview.cap.3.desc'),
+                    t('overview.cap.4.desc'),
+                    t('overview.cap.5.desc'),
+                  ]
+                  const colors = [
+                    'from-blue-400 to-blue-600',
+                    'from-orange-400 to-orange-600',
+                    'from-emerald-400 to-emerald-600',
+                    'from-purple-400 to-purple-600',
+                    'from-rose-400 to-rose-600',
+                  ]
+                  const icons = [
+                    (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <path d="M14 2v6h6"/>
+                        <path d="M8 13h8M8 17h5"/>
+                      </svg>
+                    ),
+                    (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2"/>
+                        <path d="M7 8h10"/>
+                        <path d="M7 12h6"/>
+                        <path d="M7 16h4"/>
+                      </svg>
+                    ),
+                    (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M12 8v4"/>
+                        <path d="M12 16h.01"/>
+                      </svg>
+                    ),
+                    (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M22 10l-10-5-10 5 10 5 10-5z" />
+                        <path d="M6 12v5a4 4 0 0 0 8 0v-5" />
+                      </svg>
+                    ),
+                    (
+                      <svg viewBox="0 0 24 24" className="w-6 h-6 text-brand-secondary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M3 7h13l5 5v5a2 2 0 0 1-2 2H3z"/>
+                        <path d="M8 7V5a2 2 0 0 1 2-2h3"/>
+                      </svg>
+                    ),
+                  ]
+                  const base = titles.map((_, i) => ({
+                    title: titles[i] || 'Reporting Dashboard',
+                    description: descs[i] || t('overview.cap.6.desc'),
+                    color: colors[i] || 'from-slate-400 to-slate-600',
+                    icon: icons[i],
+                  }))
+                  const all = [...base, ...base]
+                  return all.map((f, idx) => (
+                    <div key={idx} className="min-w-[240px] max-w-[240px] bg-white/80 backdrop-blur border border-brand-secondary/10 rounded-2xl p-5 shadow-sm">
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${f.color} mb-4 flex items-center justify-center`}>
+                        {f.icon}
+                      </div>
+                      <div className="text-brand-secondary font-semibold mb-1">{f.title}</div>
+                      <div className="text-brand-secondary/70 text-sm leading-relaxed">{f.description}</div>
                     </div>
-                    <div className="text-brand-secondary font-semibold mb-1">{f.title}</div>
-                    <div className="text-brand-secondary/70 text-sm leading-relaxed">{f.description}</div>
-                  </div>
-                ))
-              })()}
+                  ))
+                })()}
+              </div>
             </div>
             {/* Side rail progress (desktop only) */}
             <div className="hidden lg:flex flex-col items-center gap-2 absolute -right-14 top-1/2 -translate-y-1/2">
@@ -281,8 +284,16 @@ export function OverviewSection() {
             </div>
           </div>
           <style jsx>{`
-            .scrollbar-hide { scrollbar-width: none; }
-            .scrollbar-hide::-webkit-scrollbar { display: none; }
+            .carousel-shell { overflow: hidden; }
+            .carousel-track { display: inline-flex; gap: 1rem; padding-right: 1rem; will-change: transform; animation: marquee 28s linear infinite; }
+            .carousel-shell.paused .carousel-track { animation-play-state: paused; }
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .carousel-track { animation: none; }
+            }
           `}</style>
         </motion.div>
 
