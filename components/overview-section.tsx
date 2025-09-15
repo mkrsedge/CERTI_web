@@ -299,7 +299,6 @@ export function OverviewSection() {
 
         {/* Portrait-only swipeable Journey Cards */}
         <div className="block md:hidden">
-          <h3 className="text-2xl font-semibold text-brand-secondary mb-4 px-2">{t('overview.header')}</h3>
           <div
             className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-2 pb-2 scrollbar-hide"
             style={{ WebkitOverflowScrolling: 'touch' }}
