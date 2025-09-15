@@ -1,4 +1,5 @@
-export const runtime = 'edge'
+export const runtime = 'nodejs'
+import { Resend } from 'resend'
 
 type DemoRequest = {
   name: string
@@ -48,7 +49,6 @@ export async function POST(req: Request) {
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY
     const MAIL_TO = process.env.DEMO_MAIL_TO || 'kaan@makers-edge.com'
-    // Use Resend onboarding sender by default to avoid domain verification blocking
     const MAIL_FROM = process.env.DEMO_MAIL_FROM || 'onboarding@resend.dev'
 
     if (!RESEND_API_KEY) {
@@ -59,27 +59,18 @@ export async function POST(req: Request) {
     }
 
     const subject = `New Demo Request from ${data.name} (${data.company})`
-    const text = renderText(data)
-
-    const resp = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: MAIL_FROM,
-        to: [MAIL_TO],
-        subject,
-        text,
-        reply_to: data.email,
-      }),
+    const resend = new Resend(RESEND_API_KEY)
+    const result = await resend.emails.send({
+      from: MAIL_FROM,
+      to: MAIL_TO,
+      subject,
+      text: renderText(data),
+      reply_to: data.email,
     })
 
-    if (!resp.ok) {
-      const errText = await resp.text()
+    if (result.error) {
       return new Response(
-        JSON.stringify({ error: 'Failed to send email', details: errText }),
+        JSON.stringify({ error: 'Failed to send email', details: result.error }),
         { status: 502, headers: { 'content-type': 'application/json' } }
       )
     }
