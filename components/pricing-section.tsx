@@ -299,10 +299,26 @@ export function PricingSection() {
               {t('pricing.customSolution.desc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gray-900 text-white font-semibold py-3 px-8 rounded-xl hover:bg-gray-800 transition-colors">
+              <button 
+                onClick={() => {
+                  const demoSection = document.getElementById('demo')
+                  if (demoSection) {
+                    demoSection.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className="bg-gray-900 text-white font-semibold py-3 px-8 rounded-xl hover:bg-gray-800 transition-colors"
+              >
                 {t('pricing.customSolution.contactSales')}
               </button>
-              <button className="border-2 border-gray-900 text-gray-900 font-semibold py-3 px-8 rounded-xl hover:bg-gray-900 hover:text-white transition-colors">
+              <button 
+                onClick={() => {
+                  const demoSection = document.getElementById('demo')
+                  if (demoSection) {
+                    demoSection.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+                className="border-2 border-gray-900 text-gray-900 font-semibold py-3 px-8 rounded-xl hover:bg-gray-900 hover:text-white transition-colors"
+              >
                 {t('pricing.customSolution.scheduleDemo')}
               </button>
             </div>
