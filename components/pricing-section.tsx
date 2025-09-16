@@ -24,7 +24,6 @@ export function PricingSection() {
     },
     {
       category: "Audit & CAPA Management",
-      subtitle: "Advanced audit and corrective action capabilities",
       features: [
         { text: "Internal and External Audit Management", standard: true, fullqms: true },
         { text: "Real-Time Mobile Audit Interface", standard: true, fullqms: true },
@@ -40,7 +39,6 @@ export function PricingSection() {
     },
     {
       category: "Supplier & Training Management",
-      subtitle: "Comprehensive supplier quality and workforce management",
       features: [
         { text: "Centralized Supplier Quality & Certificate Management", fullqms: true },
         { text: "AI-Based Supplier Scoring System", fullqms: true },
@@ -54,7 +52,7 @@ export function PricingSection() {
   ]
 
   const [expandedCategories, setExpandedCategories] = useState<boolean[]>(() =>
-    comparisonFeatures.map((_, index) => index !== 0)
+    comparisonFeatures.map(() => false)
   )
 
   const checkMark = '\u2713'
@@ -62,6 +60,21 @@ export function PricingSection() {
   const toggleCategory = (index: number) => {
     setExpandedCategories(prev => prev.map((value, i) => (i === index ? !value : value)))
   }
+
+  const ChevronIcon = ({ expanded }: { expanded: boolean }) => (
+    <span className={`text-gray-500 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}>
+      <svg
+        className="w-4 h-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        aria-hidden="true"
+      >
+        <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  )
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -212,8 +225,7 @@ export function PricingSection() {
 
             {/* Feature Categories */}
             {comparisonFeatures.map((category, categoryIndex) => {
-              const isCollapsible = categoryIndex === 0
-              const isExpanded = !isCollapsible || expandedCategories[categoryIndex]
+              const isExpanded = expandedCategories[categoryIndex]
 
               return (
                 <div key={categoryIndex}>
@@ -221,21 +233,14 @@ export function PricingSection() {
                   <div className="grid grid-cols-4 bg-gray-50 border-b border-gray-200 items-stretch">
                     <button
                       type="button"
-                      onClick={() => isCollapsible && toggleCategory(categoryIndex)}
-                      className={`p-4 text-left flex items-start justify-between gap-4 ${isCollapsible ? 'cursor-pointer' : ''}`}
-                      aria-expanded={isCollapsible ? isExpanded : undefined}
+                      onClick={() => toggleCategory(categoryIndex)}
+                      className="p-4 text-left flex items-start justify-between gap-4 cursor-pointer"
+                      aria-expanded={isExpanded}
                     >
                       <div>
                         <h4 className="font-semibold text-gray-900">{category.category}</h4>
-                        {category.subtitle && (
-                          <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
-                        )}
                       </div>
-                      {isCollapsible && (
-                        <span className="text-gray-500 text-xl leading-none">
-                          {isExpanded ? '-' : '+'}
-                        </span>
-                      )}
+                      <ChevronIcon expanded={isExpanded} />
                     </button>
                     {(['lite', 'standard', 'fullqms'] as const).map(plan => (
                       <div key={plan} className="p-4 text-center font-medium text-gray-900 flex items-center justify-center">
