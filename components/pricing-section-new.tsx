@@ -23,6 +23,7 @@ export function PricingSection() {
     },
     {
       category: "Audit & CAPA Management",
+      categoryChecks: { standard: true, fullqms: true },
       features: [
         { text: "Internal and External Audit Management", standard: true, fullqms: true },
         { text: "Real-Time Mobile Audit Interface", standard: true, fullqms: true },
@@ -38,6 +39,7 @@ export function PricingSection() {
     },
     {
       category: "Supplier & Training Management",
+      categoryChecks: { fullqms: true },
       features: [
         { text: "Centralized Supplier Quality & Certificate Management", fullqms: true },
         { text: "AI-Based Supplier Scoring System", fullqms: true },
