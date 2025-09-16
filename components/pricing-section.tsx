@@ -64,7 +64,7 @@ export function PricingSection() {
   }
 
   const ChevronIcon = ({ expanded }: { expanded: boolean }) => (
-    <span className={`text-gray-500 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}>
+    <span className={`text-gray-500 transition-transform duration-200 hidden sm:block ${expanded ? 'rotate-180' : ''}`}>
       <svg
         className="w-4 h-4"
         viewBox="0 0 24 24"
@@ -220,7 +220,7 @@ export function PricingSection() {
             {/* Table Header */}
             <div className="grid grid-cols-4 bg-gray-50 border-b border-gray-200">
               <div className="p-4"></div>
-              <div className="p-4 text-center font-medium text-gray-900 pl-12 sm:pl-4">Lite</div>
+              <div className="p-4 text-center font-medium text-gray-900">Lite</div>
               <div className="p-4 text-center font-medium text-gray-900">Standard</div>
               <div className="p-4 text-center font-medium text-gray-900">Full QMS</div>
             </div>
@@ -244,8 +244,8 @@ export function PricingSection() {
                       </div>
                       <ChevronIcon expanded={isExpanded} />
                     </button>
-                    {(['lite', 'standard', 'fullqms'] as const).map((plan, planIndex) => (
-                      <div key={plan} className={`p-4 text-center font-medium text-gray-900 flex items-center justify-center ${planIndex === 0 ? 'pl-12 sm:pl-4' : ''}`}>
+                    {(['lite', 'standard', 'fullqms'] as const).map(plan => (
+                      <div key={plan} className="p-4 text-center font-medium text-gray-900 flex items-center justify-center">
                         {category.categoryChecks && category.categoryChecks[plan] ? checkMark : ''}
                       </div>
                     ))}
@@ -265,7 +265,7 @@ export function PricingSection() {
                     return (
                       <div key={featureIndex} className="grid grid-cols-4 border-b border-gray-100 text-sm">
                         <div className="p-4 text-gray-700">{featureText}</div>
-                        <div className="p-4 text-center pl-12 sm:pl-4">
+                        <div className="p-4 text-center">
                           {isIncluded('lite') === true ? checkMark :
                            typeof isIncluded('lite') === 'string' ? (isIncluded('lite') as any) : ''}
                         </div>
