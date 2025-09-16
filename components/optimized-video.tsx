@@ -94,7 +94,6 @@ export function OptimizedVideo({
       {isLoaded && !videoRef.current?.readyState && (
         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
           <div className="text-blue-600 text-center">
-            <div className="text-2xl mb-2">🎥</div>
             <div className="text-sm">{t('video.loading')}</div>
           </div>
         </div>
@@ -102,3 +101,4 @@ export function OptimizedVideo({
     </div>
   )
 }
+

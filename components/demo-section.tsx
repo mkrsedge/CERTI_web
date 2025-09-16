@@ -12,10 +12,29 @@ export function DemoSection() {
     company: '',
     phone: '',
     employees: '',
+    preferredDate: '',
+    preferredTime: '',
     message: ''
   })
   const phoneNumber = useMemo(() => (lang === 'tr' ? '+90 542 599 18 84' : '+1 917 689 34 36'), [lang])
   const telHref = useMemo(() => phoneNumber.replace(/[^\d+]/g, ''), [phoneNumber])
+
+  const timeOptions = useMemo(() => {
+    if (lang === 'tr') {
+      const hours = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+      return hours.map((hour) => {
+        const nextHour = String(parseInt(hour.split(':')[0], 10) + 1).padStart(2, '0')
+        return { value: hour, label: `${hour} - ${nextHour}:00` }
+      })
+    }
+    const hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00']
+    return hours.map((hour) => {
+      const nextHour = String(parseInt(hour.split(':')[0], 10) + 1).padStart(2, '0')
+      return { value: hour, label: `${hour} - ${nextHour}:00` }
+    })
+  }, [lang])
+
+  const minDate = useMemo(() => new Date().toISOString().split('T')[0], [])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<null | { ok: boolean; message: string }>(null)
@@ -48,6 +67,8 @@ export function DemoSection() {
       company: formData.company,
       phone: formData.phone,
       employees: formData.employees,
+      preferred_date: formData.preferredDate,
+      preferred_time: formData.preferredTime,
       message: formData.message,
       submitted_at: new Date().toISOString(),
     }
@@ -61,7 +82,7 @@ export function DemoSection() {
         ok: true,
         message: lang === 'tr' ? 'Talebiniz alındı. Teşekkürler!' : 'Your request has been sent. Thank you!',
       })
-      setFormData({ name: '', email: '', company: '', phone: '', employees: '', message: '' })
+      setFormData({ name: '', email: '', company: '', phone: '', employees: '', preferredDate: '', preferredTime: '', message: '' })
     } catch (err: any) {
       setStatus({
         ok: false,
@@ -172,6 +193,38 @@ export function DemoSection() {
                   <option value="201-1000">{lang === 'tr' ? '201-1000 çalışan' : '201-1000 employees'}</option>
                   <option value="1000+">{lang === 'tr' ? '1000+ çalışan' : '1000+ employees'}</option>
                 </select>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="demo-preferred-date" className="block text-sm font-medium text-gray-700 mb-2">{t('form.preferredDate')}</label>
+                  <input
+                    type="date"
+                    required
+                    min={minDate}
+                    value={formData.preferredDate}
+                    onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                    id="demo-preferred-date"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="demo-preferred-time" className="block text-sm font-medium text-gray-700 mb-2">{t('form.preferredTime')}</label>
+                  <select
+                    required
+                    value={formData.preferredTime}
+                    onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                    id="demo-preferred-time"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                  >
+                    <option value="">{t('form.preferredTime.placeholder')}</option>
+                    {timeOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {lang === 'tr' ? `${option.label} (TR)` : `${option.label} (ET)`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <div>
