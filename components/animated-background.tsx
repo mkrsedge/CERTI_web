@@ -3,9 +3,9 @@
 export function AnimatedBackground() {
   return (
     <>
-      {/* Grainy animated noise overlay */}
+      {/* Grainy animated noise overlay - disabled on mobile for performance */}
       <div 
-        className="fixed inset-0 w-full h-full pointer-events-none z-30"
+        className="fixed inset-0 w-full h-full pointer-events-none z-30 hidden sm:block"
         style={{
           background: 'transparent url("https://assets.iceable.com/img/noise-transparent.png") repeat 0 0',
           backgroundSize: '300px 300px',
@@ -15,7 +15,7 @@ export function AnimatedBackground() {
         }}
       />
       
-      {/* Subtle gradient overlay for depth */}
+      {/* Subtle gradient overlay for depth - simplified on mobile */}
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none z-20"
         style={{

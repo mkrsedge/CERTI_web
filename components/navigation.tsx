@@ -468,6 +468,15 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           box-shadow: 0 2px 10px rgba(62, 39, 35, 0.15);
           text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
         }
+        
+        /* Remove backdrop filter on mobile for better performance */
+        @media (max-width: 768px) {
+          .language-toggle {
+            backdrop-filter: none;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(62, 39, 35, 0.1);
+          }
+        }
 
         .language-toggle:hover {
           background: rgba(255, 255, 255, 0.95);
@@ -551,7 +560,10 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             border-radius: 12px;
             background: #ffffff;
             border: 1px solid rgba(17,24,39,0.08);
-            box-shadow: 0 6px 20px rgba(17,24,39,0.08);
+            box-shadow: 0 2px 8px rgba(17,24,39,0.06);
+            /* Remove all backdrop filters on mobile for better performance */
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
           }
         }
       `}</style>
@@ -566,7 +578,24 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           box-shadow: var(--shadow-1);
           transition: height 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
         }
+        
+        /* Remove backdrop filters on mobile for better performance */
+        @media (max-width: 768px) {
+          .full-width-navbar {
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(17,24,39,0.06);
+          }
+        }
         .full-width-navbar.navbar--scrolled { height: 52px; background: rgba(255,255,255,0.7); box-shadow: var(--shadow-2); }
+        
+        @media (max-width: 768px) {
+          .full-width-navbar.navbar--scrolled { 
+            background: #ffffff; 
+            box-shadow: 0 2px 8px rgba(17,24,39,0.06);
+          }
+        }
         .navbar-center { position: relative; justify-content: center; flex: 1; }
         .nav-indicator {
           position: absolute; left: 0; bottom: 6px; height: 28px; border-radius: 9999px;
