@@ -9,8 +9,8 @@ export function PricingSection() {
   const [selected, setSelected] = useState<null | 'lite' | 'standard' | 'fullqms'>(null)
   const comparisonFeatures = [
     {
-      category: "Document Management (DocCore)",
-      subtitle: "Core document control and management capabilities",
+      category: "Smart Doc Management",
+      categoryChecks: { lite: true, standard: true, fullqms: true },
       features: [
         { text: "Centralized Document Management", lite: true, standard: true, fullqms: true },
         { text: "Version Control & Approval Workflow Management", lite: true, standard: true, fullqms: true },
@@ -52,6 +52,16 @@ export function PricingSection() {
       ]
     }
   ]
+
+  const [expandedCategories, setExpandedCategories] = useState<boolean[]>(() =>
+    comparisonFeatures.map((_, index) => index !== 0)
+  )
+
+  const checkMark = '\u2713'
+
+  const toggleCategory = (index: number) => {
+    setExpandedCategories(prev => prev.map((value, i) => (i === index ? !value : value)))
+  }
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -101,28 +111,10 @@ export function PricingSection() {
                   selected === 'lite' ? 'border-blue-300 ring-2 ring-blue-200' : 'border-gray-100'
                 }`}
               >
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
-                    {/* Document icon */}
-                    <svg className="w-10 h-10 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/>
-                      <path d="M14 2v5h5"/>
-                      <path d="M9 13h6M9 17h6M9 9h3"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.lite')}</h3>
-                  <p className="text-gray-600 mb-4">{t('pricing.card.lite.desc')}</p>
-                  {/* Module pills: wrap horizontally within card */}
-                  <div className="w-full mt-4">
-                    {selected === 'lite' && (
-                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
-                        {['DocCore'].map((m) => (
-                          <span key={m} className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs border border-blue-100 whitespace-nowrap">
-                            {m}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-lg font-semibold text-gray-900">Lite</div>
+                    <div className="text-gray-500 text-sm">Entry-level document control</div>
                   </div>
                 </div>
               </button>
@@ -132,30 +124,13 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('standard')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'standard' ? 'border-amber-300 ring-2 ring-amber-200' : 'border-gray-100'
+                  selected === 'standard' ? 'border-blue-300 ring-2 ring-blue-200' : 'border-gray-100'
                 }`}
               >
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-200 transition-colors">
-                    {/* Clipboard check icon */}
-                    <svg className="w-10 h-10 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9 5h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>
-                      <path d="M9 3h6v4H9z"/>
-                      <path d="M9 12l2 2 4-4"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.standard')}</h3>
-                  <p className="text-gray-600 mb-4">{t('pricing.card.standard.desc')}</p>
-                  <div className="w-full mt-4">
-                    {selected === 'standard' && (
-                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
-                        {['DocCore','ResolveCore','AuditCore'].map((m) => (
-                          <span key={m} className="px-2.5 py-1 rounded-full bg-orange-50 text-orange-700 text-xs border border-orange-100 whitespace-nowrap">
-                            {m}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-lg font-semibold text-gray-900">Standard</div>
+                    <div className="text-gray-500 text-sm">Advanced audit + CAPA</div>
                   </div>
                 </div>
               </button>
@@ -165,58 +140,20 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('fullqms')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'fullqms' ? 'border-gray-400 ring-2 ring-gray-300' : 'border-gray-100'
+                  selected === 'fullqms' ? 'border-blue-300 ring-2 ring-blue-200' : 'border-gray-100'
                 }`}
               >
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 bg-gray-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-gray-200 transition-colors">
-                    {/* Office building icon */}
-                    <svg className="w-10 h-10 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="7" width="18" height="14" rx="2"/>
-                      <path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/>
-                      <path d="M7 11h2M11 11h2M15 11h2M7 15h2M11 15h2M15 15h2M12 21v-4"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('pricing.table.full')}</h3>
-                  <p className="text-gray-600 mb-4">{t('pricing.card.full.desc')}</p>
-                  <div className="w-full mt-4">
-                    {selected === 'fullqms' && (
-                      <div className="flex flex-row flex-wrap justify-center items-center gap-2">
-                        {['DocCore','ResolveCore','AuditCore','SupplyCore','SkillCore'].map((m) => (
-                          <span key={m} className="px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 text-xs border border-gray-200 whitespace-nowrap">
-                            {m}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-lg font-semibold text-gray-900">Full QMS</div>
+                    <div className="text-gray-500 text-sm">End-to-end automation</div>
                   </div>
                 </div>
               </button>
             </div>
 
-            {/* CTA Inside Card */}
-            <div className="text-center">
-              <h4 className="text-2xl font-bold text-gray-900 mb-4">{t('pricing.cta.title')}</h4>
-              <p className="text-gray-600 mb-8 max-w-lg mx-auto">
-                {t('pricing.cta.desc')}
-              </p>
-              <button className="bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white font-bold py-4 px-12 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl">
-                {t('pricing.cta.button')}
-              </button>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Included in Every Plan */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mt-12"
-        >
-          <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-100">
-            <h3 className="text-3xl font-semibold text-center text-gray-900 mb-10">{t('pricing.includedEvery.title')}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+            {/* Included in every plan */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Item 1 */}
               <div className="flex items-start gap-4">
                 <span className="text-green-600 text-2xl leading-none" aria-hidden="true">✓</span>
@@ -274,47 +211,71 @@ export function PricingSection() {
             </div>
 
             {/* Feature Categories */}
-            {comparisonFeatures.map((category, categoryIndex) => (
-              <div key={categoryIndex}>
-                {/* Category Header */}
-                <div className="bg-gray-50 border-b border-gray-200 p-4">
-                  <h4 className="font-semibold text-gray-900">{category.category}</h4>
-                  {category.subtitle && (
-                    <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
-                  )}
+            {comparisonFeatures.map((category, categoryIndex) => {
+              const isCollapsible = categoryIndex === 0
+              const isExpanded = !isCollapsible || expandedCategories[categoryIndex]
+
+              return (
+                <div key={categoryIndex}>
+                  {/* Category Header */}
+                  <div className="grid grid-cols-4 bg-gray-50 border-b border-gray-200 items-stretch">
+                    <button
+                      type="button"
+                      onClick={() => isCollapsible && toggleCategory(categoryIndex)}
+                      className={`p-4 text-left flex items-start justify-between gap-4 ${isCollapsible ? 'cursor-pointer' : ''}`}
+                      aria-expanded={isCollapsible ? isExpanded : undefined}
+                    >
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{category.category}</h4>
+                        {category.subtitle && (
+                          <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
+                        )}
+                      </div>
+                      {isCollapsible && (
+                        <span className="text-gray-500 text-xl leading-none">
+                          {isExpanded ? '-' : '+'}
+                        </span>
+                      )}
+                    </button>
+                    {(['lite', 'standard', 'fullqms'] as const).map(plan => (
+                      <div key={plan} className="p-4 text-center font-medium text-gray-900 flex items-center justify-center">
+                        {category.categoryChecks && category.categoryChecks[plan] ? checkMark : ''}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Category Features */}
+                  {isExpanded && category.features.map((feature, featureIndex) => {
+                    const featureText = typeof feature === 'string' ? feature : feature.text
+                    const isIncluded = (plan: string) => {
+                      if (typeof feature === 'string') return true
+                      if (plan === 'lite' && 'lite' in feature) return (feature as any).lite
+                      if (plan === 'standard' && 'standard' in feature) return (feature as any).standard
+                      if (plan === 'fullqms' && 'fullqms' in feature) return (feature as any).fullqms
+                      return false
+                    }
+
+                    return (
+                      <div key={featureIndex} className="grid grid-cols-4 border-b border-gray-100 text-sm">
+                        <div className="p-4 text-gray-700">{featureText}</div>
+                        <div className="p-4 text-center">
+                          {isIncluded('lite') === true ? checkMark :
+                           typeof isIncluded('lite') === 'string' ? (isIncluded('lite') as any) : ''}
+                        </div>
+                        <div className="p-4 text-center">
+                          {isIncluded('standard') === true ? checkMark :
+                           typeof isIncluded('standard') === 'string' ? (isIncluded('standard') as any) : ''}
+                        </div>
+                        <div className="p-4 text-center">
+                          {isIncluded('fullqms') === true ? checkMark :
+                           typeof isIncluded('fullqms') === 'string' ? (isIncluded('fullqms') as any) : ''}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-
-                {/* Category Features */}
-                {category.features.map((feature, featureIndex) => {
-                  const featureText = typeof feature === 'string' ? feature : feature.text
-                  const isIncluded = (plan: string) => {
-                    if (typeof feature === 'string') return true
-                    if (plan === 'lite' && 'lite' in feature) return feature.lite
-                    if (plan === 'standard' && 'standard' in feature) return feature.standard
-                    if (plan === 'fullqms' && 'fullqms' in feature) return feature.fullqms
-                    return false
-                  }
-
-                  return (
-                    <div key={featureIndex} className="grid grid-cols-4 border-b border-gray-100 text-sm">
-                      <div className="p-4 text-gray-700">{featureText}</div>
-                      <div className="p-4 text-center">
-                        {isIncluded('lite') === true ? '✓' : 
-                         typeof isIncluded('lite') === 'string' ? isIncluded('lite') : ''}
-                      </div>
-                      <div className="p-4 text-center">
-                        {isIncluded('standard') === true ? '✓' : 
-                         typeof isIncluded('standard') === 'string' ? isIncluded('standard') : ''}
-                      </div>
-                      <div className="p-4 text-center">
-                        {isIncluded('fullqms') === true ? '✓' : 
-                         typeof isIncluded('standard') === 'string' ? isIncluded('fullqms') : ''}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            ))}
+              )
+            })}
           </div>
         </motion.div>
 
@@ -344,3 +305,4 @@ export function PricingSection() {
     </section>
   )
 }
+
