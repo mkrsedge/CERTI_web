@@ -8,8 +8,8 @@ export function PricingSection() {
 
   const comparisonFeatures = [
     {
-      category: "Document Management (DocCore)",
-      subtitle: "Core document control and management capabilities",
+      category: "Smart Doc Management",
+      categoryChecks: { lite: true, standard: true, fullqms: true },
       features: [
         { text: "Centralized Document Management", lite: true, standard: true, fullqms: true },
         { text: "Version Control & Approval Workflow Management", lite: true, standard: true, fullqms: true },
@@ -51,6 +51,16 @@ export function PricingSection() {
       ]
     }
   ]
+
+  const [expandedCategories, setExpandedCategories] = useState<boolean[]>(() =>
+    comparisonFeatures.map((_, index) => index !== 0)
+  )
+
+  const checkMark = '\u2713'
+
+  const toggleCategory = (index: number) => {
+    setExpandedCategories(prev => prev.map((value, i) => (i === index ? !value : value)))
+  }
 
   return (
     <section className="min-h-screen bg-white px-6 py-20">
@@ -149,47 +159,71 @@ export function PricingSection() {
             </div>
 
             {/* Feature Categories */}
-            {comparisonFeatures.map((category, categoryIndex) => (
-              <div key={categoryIndex}>
-                {/* Category Header */}
-                <div className="bg-gray-50 border-b border-gray-200 p-4">
-                  <h4 className="font-semibold text-gray-900">{category.category}</h4>
-                  {category.subtitle && (
-                    <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
-                  )}
+            {comparisonFeatures.map((category, categoryIndex) => {
+              const isCollapsible = categoryIndex === 0
+              const isExpanded = !isCollapsible || expandedCategories[categoryIndex]
+
+              return (
+                <div key={categoryIndex}>
+                  {/* Category Header */}
+                  <div className="grid grid-cols-4 bg-gray-50 border-b border-gray-200 items-stretch">
+                    <button
+                      type="button"
+                      onClick={() => isCollapsible && toggleCategory(categoryIndex)}
+                      className={`p-4 text-left flex items-start justify-between gap-4 ${isCollapsible ? 'cursor-pointer' : ''}`}
+                      aria-expanded={isExpanded}
+                    >
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{category.category}</h4>
+                        {category.subtitle && (
+                          <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
+                        )}
+                      </div>
+                      {isCollapsible && (
+                        <span className="text-gray-500 text-xl leading-none">
+                          {isExpanded ? '-' : '+'}
+                        </span>
+                      )}
+                    </button>
+                    {(['lite', 'standard', 'fullqms'] as const).map(plan => (
+                      <div key={plan} className="p-4 text-center font-medium text-gray-900 flex items-center justify-center">
+                        {category.categoryChecks && category.categoryChecks[plan] ? checkMark : ''}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Category Features */}
+                  {isExpanded && category.features.map((feature, featureIndex) => {
+                    const featureText = typeof feature === 'string' ? feature : feature.text
+                    const isIncluded = (plan: string) => {
+                      if (typeof feature === 'string') return true
+                      if (plan === 'lite' && 'lite' in feature) return feature.lite
+                      if (plan === 'standard' && 'standard' in feature) return feature.standard
+                      if (plan === 'fullqms' && 'fullqms' in feature) return feature.fullqms
+                      return false
+                    }
+
+                    return (
+                      <div key={featureIndex} className="grid grid-cols-4 border-b border-gray-100 text-sm">
+                        <div className="p-4 text-gray-700">{featureText}</div>
+                        <div className="p-4 text-center">
+                          {isIncluded('lite') === true ? checkMark :
+                           typeof isIncluded('lite') === 'string' ? isIncluded('lite') : ''}
+                        </div>
+                        <div className="p-4 text-center">
+                          {isIncluded('standard') === true ? checkMark :
+                           typeof isIncluded('standard') === 'string' ? isIncluded('standard') : ''}
+                        </div>
+                        <div className="p-4 text-center">
+                          {isIncluded('fullqms') === true ? checkMark :
+                           typeof isIncluded('fullqms') === 'string' ? isIncluded('fullqms') : ''}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-
-                {/* Category Features */}
-                {category.features.map((feature, featureIndex) => {
-                  const featureText = typeof feature === 'string' ? feature : feature.text
-                  const isIncluded = (plan: string) => {
-                    if (typeof feature === 'string') return true
-                    if (plan === 'lite' && 'lite' in feature) return feature.lite
-                    if (plan === 'standard' && 'standard' in feature) return feature.standard
-                    if (plan === 'fullqms' && 'fullqms' in feature) return feature.fullqms
-                    return false
-                  }
-
-                  return (
-                    <div key={featureIndex} className="grid grid-cols-4 border-b border-gray-100 text-sm">
-                      <div className="p-4 text-gray-700">{featureText}</div>
-                      <div className="p-4 text-center">
-                        {isIncluded('lite') === true ? '✓' : 
-                         typeof isIncluded('lite') === 'string' ? isIncluded('lite') : ''}
-                      </div>
-                      <div className="p-4 text-center">
-                        {isIncluded('standard') === true ? '✓' : 
-                         typeof isIncluded('standard') === 'string' ? isIncluded('standard') : ''}
-                      </div>
-                      <div className="p-4 text-center">
-                        {isIncluded('fullqms') === true ? '✓' : 
-                         typeof isIncluded('fullqms') === 'string' ? isIncluded('fullqms') : ''}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            ))}
+              )
+            })}
           </div>
         </motion.div>
 
