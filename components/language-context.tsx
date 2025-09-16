@@ -117,6 +117,10 @@ const dict: I18nDict = {
     'form.message': 'Tell us about your needs',
     'form.message.placeholder': "Briefly describe your current challenges and what you're looking to achieve...",
     'form.scheduleDemo': 'Schedule Demo',
+    'pricing.customSolution.title': 'Need a Custom Solution?',
+    'pricing.customSolution.desc': 'We can tailor a plan specifically for your organization\'s unique requirements and scale.',
+    'pricing.customSolution.contactSales': 'Contact Sales',
+    'pricing.customSolution.scheduleDemo': 'Schedule Demo',
 
     // Pricing (headings and shared labels)
     'pricing.header': 'Pricing',
@@ -279,6 +283,10 @@ const dict: I18nDict = {
     'form.message': 'İhtiyaçlarınızı anlatın',
     'form.message.placeholder': 'Mevcut zorlukları ve hedeflerinizi kısaca paylaşın…',
     'form.scheduleDemo': 'Demoyu Planla',
+    'pricing.customSolution.title': 'Özel Çözüm Gerekiyor mu?',
+    'pricing.customSolution.desc': 'Kuruluşunuzun benzersiz gereksinimleri ve ölçeğine özel bir plan hazırlayabiliriz.',
+    'pricing.customSolution.contactSales': 'Satış ile İletişim',
+    'pricing.customSolution.scheduleDemo': 'Demo Planla',
 
     // Pricing (headings and shared labels)
     'pricing.header': 'Fiyatlandırma',

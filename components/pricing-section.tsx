@@ -294,16 +294,16 @@ export function PricingSection() {
           className="text-center mt-16"
         >
           <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Need a Custom Solution?</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('pricing.customSolution.title')}</h3>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              We can tailor a plan specifically for your organization's unique requirements and scale.
+              {t('pricing.customSolution.desc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-gray-900 text-white font-semibold py-3 px-8 rounded-xl hover:bg-gray-800 transition-colors">
-                Contact Sales
+                {t('pricing.customSolution.contactSales')}
               </button>
               <button className="border-2 border-gray-900 text-gray-900 font-semibold py-3 px-8 rounded-xl hover:bg-gray-900 hover:text-white transition-colors">
-                Schedule Demo
+                {t('pricing.customSolution.scheduleDemo')}
               </button>
             </div>
           </div>
