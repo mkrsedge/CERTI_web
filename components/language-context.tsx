@@ -316,7 +316,7 @@ const dict: I18nDict = {
     'footer.contact': 'İletişim',
     'footer.careers': 'Kariyer',
     'footer.news': 'Haberler',
-    'footer.coreModules': 'Modüller',
+    'footer.coreModules': 'Ana Modüller',
     'footer.pricing': 'Fiyatlandırma',
     'footer.bookDemo': 'Demo Talep Et',
     'footer.documentation': 'Dokümantasyon',
