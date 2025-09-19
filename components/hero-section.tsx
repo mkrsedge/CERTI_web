@@ -3,9 +3,23 @@
 import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
 import { useLanguage } from './language-context'
+import { useEffect, useState } from 'react'
 
 export function HeroSection() {
   const { t } = useLanguage()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Check if mobile
+    setIsMobile(window.innerWidth <= 768)
+    
+    // Listen for resize changes
+    const handleResize = () => setIsMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', handleResize)
+    
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
       {/* Background Video */}
@@ -32,85 +46,149 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 content-container text-center hero-content -translate-y-6 md:-translate-y-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
-          <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
-            {`CERTI: ${t('hero.title.1')}`}
-            <br />
-            {t('hero.title.2')}
-          </h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-xl md:text-2xl text-brand-primary/90 mb-8 leading-relaxed"
-          >
-            {t('hero.desc.1')}
-            <br />
-            {t('hero.desc.2')}
-          </motion.p>
+        {isMobile ? (
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
+              {`CERTI: ${t('hero.title.1')}`}
+              <br />
+              {t('hero.title.2')}
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-brand-primary/90 mb-8 leading-relaxed">
+              {t('hero.desc.1')}
+              <br />
+              {t('hero.desc.2')}
+            </p>
 
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button 
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.smoothScrollToSection) {
+                    window.smoothScrollToSection('demo')
+                  } else {
+                    const demoSection = document.getElementById('demo');
+                    if (demoSection) {
+                      demoSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
+                className="btn-primary text-lg relative z-20"
+              >
+                {t('hero.cta.primary')}
+              </button>
+              <button 
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.smoothScrollToSection) {
+                    window.smoothScrollToSection('overview')
+                  } else {
+                    const overviewSection = document.getElementById('overview');
+                    if (overviewSection) {
+                      overviewSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
+                className="btn-ghost-light text-lg relative z-20"
+              >
+                {t('hero.cta.secondary')}
+              </button>
+            </div>
+          </div>
+        ) : (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="max-w-4xl mx-auto"
           >
-            <button 
-              onClick={() => {
-                if (typeof window !== 'undefined' && window.smoothScrollToSection) {
-                  window.smoothScrollToSection('demo')
-                } else {
-                  const demoSection = document.getElementById('demo');
-                  if (demoSection) {
-                    demoSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }
-              }}
-              className="btn-primary text-lg relative z-20"
+            <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
+              {`CERTI: ${t('hero.title.1')}`}
+              <br />
+              {t('hero.title.2')}
+            </h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="text-xl md:text-2xl text-brand-primary/90 mb-8 leading-relaxed"
             >
-              {t('hero.cta.primary')}
-            </button>
-            <button 
-              onClick={() => {
-                if (typeof window !== 'undefined' && window.smoothScrollToSection) {
-                  window.smoothScrollToSection('overview')
-                } else {
-                  const overviewSection = document.getElementById('overview');
-                  if (overviewSection) {
-                    overviewSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }
-              }}
-              className="btn-ghost-light text-lg relative z-20"
+              {t('hero.desc.1')}
+              <br />
+              {t('hero.desc.2')}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              {t('hero.cta.secondary')}
-            </button>
+              <button 
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.smoothScrollToSection) {
+                    window.smoothScrollToSection('demo')
+                  } else {
+                    const demoSection = document.getElementById('demo');
+                    if (demoSection) {
+                      demoSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
+                className="btn-primary text-lg relative z-20"
+              >
+                {t('hero.cta.primary')}
+              </button>
+              <button 
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.smoothScrollToSection) {
+                    window.smoothScrollToSection('overview')
+                  } else {
+                    const overviewSection = document.getElementById('overview');
+                    if (overviewSection) {
+                      overviewSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
+                className="btn-ghost-light text-lg relative z-20"
+              >
+                {t('hero.cta.secondary')}
+              </button>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        )}
 
         {/* Quality & Compliance Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-        >
-          {[{v:'100%',t:t('hero.kpi.1')},{v:'80%',t:t('hero.kpi.2')},{v:'50%',t:t('hero.kpi.3')}].map((kpi, i) => (
-            <div
-              key={i}
-              className="rounded-2xl border border-white/15 bg-white/20 backdrop-blur-md px-6 py-5 text-center shadow-lg"
-            >
-              <div className="text-3xl font-bold text-[#ffedac] mb-1 drop-shadow">{kpi.v}</div>
-              <div className="text-[#afdbf5] text-sm font-medium">{kpi.t}</div>
-            </div>
-          ))}
-        </motion.div>
+        {isMobile ? (
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {[{v:'100%',t:t('hero.kpi.1')},{v:'80%',t:t('hero.kpi.2')},{v:'50%',t:t('hero.kpi.3')}].map((kpi, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-white/15 bg-white/20 backdrop-blur-md px-6 py-5 text-center shadow-lg"
+                style={{ '--i': i } as React.CSSProperties}
+              >
+                <div className="text-3xl font-bold text-[#ffedac] mb-1 drop-shadow">{kpi.v}</div>
+                <div className="text-[#afdbf5] text-sm font-medium">{kpi.t}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          >
+            {[{v:'100%',t:t('hero.kpi.1')},{v:'80%',t:t('hero.kpi.2')},{v:'50%',t:t('hero.kpi.3')}].map((kpi, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-white/15 bg-white/20 backdrop-blur-md px-6 py-5 text-center shadow-lg"
+              >
+                <div className="text-3xl font-bold text-[#ffedac] mb-1 drop-shadow">{kpi.v}</div>
+                <div className="text-[#afdbf5] text-sm font-medium">{kpi.t}</div>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
 

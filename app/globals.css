@@ -192,6 +192,59 @@ body {
   }
 }
 
+/* Mobile-optimized animations - lightweight and smooth */
+@media (max-width: 768px) {
+  /* Disable heavy animations on mobile */
+  .gsap-timeline,
+  .gsap-tween,
+  [data-gsap] {
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  /* Simple fade-in animations for mobile */
+  .hero-content {
+    animation: mobileFadeIn 0.8s ease-out forwards;
+  }
+  
+  .hero-content h1 {
+    animation: mobileSlideUp 0.6s ease-out 0.2s both;
+  }
+  
+  .hero-content p {
+    animation: mobileSlideUp 0.6s ease-out 0.4s both;
+  }
+  
+  .hero-content button {
+    animation: mobileSlideUp 0.6s ease-out 0.6s both;
+  }
+  
+  /* KPI cards animation */
+  .hero-content .grid > div {
+    animation: mobileSlideUp 0.6s ease-out calc(0.8s + var(--i, 0) * 0.1s) both;
+  }
+}
+
+@keyframes mobileFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobileSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Loading placeholder animation */
 .video-loading {
   background: linear-gradient(90deg, #f0f9ff 25%, #e0f2fe 50%, #f0f9ff 75%);

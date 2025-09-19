@@ -49,6 +49,10 @@ export default function Home() {
   // GSAP Scroll Animation Setup
   useEffect(() => {
     if (typeof window === 'undefined' || !window.gsap) return
+    
+    // Disable heavy animations on mobile for better performance
+    const isMobile = window.innerWidth <= 768
+    if (isMobile) return
 
     const gsap = window.gsap
     const ScrollTrigger = window.ScrollTrigger
@@ -110,6 +114,8 @@ export default function Home() {
 
   // Handle navigation with optimized smooth scroll
   const handleSectionChange = (section: string) => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+    
     const getHeaderOffset = () => {
       const nav = document.querySelector('nav.full-width-navbar') as HTMLElement | null
       if (!nav) return 60
@@ -119,17 +125,26 @@ export default function Home() {
       const h = Number.isFinite(parsed) ? parsed : nav.offsetHeight || 60
       return h + 8 // small breathing room
     }
+    
     if (section === 'home') {
-      if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
+      if (isMobile) {
+        // Use native scrolling on mobile for better performance
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
         (window as any).gsap.to(window, { duration: 0.6, scrollTo: { y: 0 }, ease: 'power2.out' })
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }
       return
     }
+    
     const element = document.getElementById(section)
     if (element) {
-      if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
+      if (isMobile) {
+        // Use native scrolling on mobile for better performance
+        const top = element.getBoundingClientRect().top + window.scrollY - getHeaderOffset()
+        window.scrollTo({ top, behavior: 'smooth' })
+      } else if (typeof window !== 'undefined' && (window as any).gsap && (window as any).ScrollToPlugin) {
         (window as any).gsap.to(window, {
           duration: 0.6,
           scrollTo: { y: element, offsetY: getHeaderOffset() },
