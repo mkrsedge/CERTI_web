@@ -211,7 +211,7 @@ const dict: I18nDict = {
     'overview.step4.desc': 'Sorunlar ortaya çıktığında CERTI kök neden analizini yönlendirir ve prosedürlerinize dayalı doğru DÖF/CAPA taslakları oluşturur.',
     'overview.step4.tag': 'YZ destekli CAPA iş akışı',
     'overview.step5.title': 'Güvenilirliği kanıtlayın, geliri koruyun',
-    'overview.step5.desc': 'Her zaman hazır kanıtlar ve detaylı DÖF'ler ile bulguları azaltır, müşteri güvenini korur, yüksek değerli sözleşmeleri güvence altına alır.',
+    'overview.step5.desc': 'Her zaman hazır kanıtlar ve detaylı DÖF\'ler ile bulguları azaltır, müşteri güvenini korur, yüksek değerli sözleşmeleri güvence altına alır.',
     'overview.step5.tag': 'İş etkisi',
     'overview.goto': 'Adıma git',
 
