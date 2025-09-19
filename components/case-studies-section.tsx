@@ -88,7 +88,7 @@ export function CaseStudiesSection() {
         ? 'Sorunları ve müşteri şikayetlerini kalıcı çözümlere dönüştürün. ResolveCore kök neden analizine rehberlik eder, prosedürlerinize dayanarak DÖF taslakları üretir ve etkililik doğrulamalarını takip eder; sorunların tekrarlamasını engeller.'
         : "Turn issues and customer complaints into lasting fixes. ResolveCore guides root cause analysis, drafts corrective and preventive actions from your procedures, and verifies effectiveness—so problems don’t return.",
       features: (lang === 'tr'
-        ? ['Kök Neden Analizi rehberliği (örn. 5 Neden)', 'Dokümanlarınızla (örn. prosedürleriniz, risk planlarınız) bağlantılı Yapay Zeka destekli DÖF taslakları', 'Vade hatırlatmalarıyla etkililik kontrolleri', 'Tekrarlayan riskleri izlemek için eğilim analizi']
+        ? ['Kök Neden Analizi rehberliği (örn. 5 Neden)', 'Dokümanlarınızla (örn. prosedürleriniz, risk planlarınız) bağlantılı Yapay Zeka destekli DÖF taslakları', 'Etkililik kontrolleri ve otomatik hatırlatmalar', 'Tekrarlayan riskleri izlemek için eğilim analizi']
         : ['Root cause analysis guidance (e.g., 5 Whys)', 'AI-assisted CAPAs linked to SOPs and forms', 'Effectiveness checks with due date reminders', 'Trend analysis to track repeat risks']),
       outcome: lang === 'tr' ? 'Tekrarlayan bulgularda ölçülebilir azalma, daha hızlı çözüm.' : 'Measurably fewer repeat findings and faster resolutions.'
     },
