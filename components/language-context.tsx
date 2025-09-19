@@ -187,7 +187,7 @@ const dict: I18nDict = {
     'hero.title.1': 'Yapay Zeka Tabanlı',
     'hero.title.2': 'Kalite ve Uyum',
     'hero.desc.1': 'Üreticiler için yeni nesil Kalite Yönetimi.',
-    'hero.desc.2': 'Düzenlemeye tabi sektörler için tasarlanmış yapay zeka destekli çözümler.',
+    'hero.desc.2': 'Regülasyon odaklı sektörler için uçtan uca yapay zekâ çözümleri.',
     'hero.cta.primary': 'Demo Talep Et',
     'hero.cta.secondary': 'Daha Fazla Bilgi',
     'hero.kpi.1': 'Uyumluluk',
