@@ -71,7 +71,7 @@ export function CaseStudiesSection() {
       description: lang === 'tr' ? 'Mobil denetimler, Yapay Zeka ön kontrolleri, anlık hazırlık durumu.' : 'Mobile audits, AI pre-checks, real-time readiness.',
       published: 'SEP 2024',
       fullDescription: lang === 'tr'
-        ? 'Kendi şablonlarınızla mobil denetimler yürütün, bulguları gerçek zamanlı oluşturun ve hangi maddelerin hazır olup olmadığını denetçiden önce gösteren canlı kapsama görünümünü izleyin.'
+        ? 'Kendi şablonlarınızla mobil denetimler gerçekleştirin, bulguları anında kaydedin ve denetçiden önce hangi maddelerin hazır olduğunu gösteren gerçek zamanlı uyum haritasını takip edin.'
         : "Run mobile audits with your own templates, generate findings in real time, and see live clause coverage that tells you exactly what's ready and what's not—before the auditor does.",
       features: (lang === 'tr'
         ? ['Özelleştirilebilir kontrol listeleri ve mobil veri toplama', 'Olası uygunsuzlukları işaretleyen Yapay Zeka ön kontrolleri', 'Maddelere göre canlı kapsama paneli', 'Denetçiye sunulacak tek tık kanıt paketleri']
