@@ -249,7 +249,7 @@ export function DemoSection() {
                   isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#a9aecf] hover:bg-[#9299c4]'
                 }`}
               >
-                {isSubmitting ? (lang === 'tr' ? 'Gönderiliyor…' : 'Sending…') : lang === 'tr' ? 'Demoyu Planla' : 'Schedule Demo'}
+                {isSubmitting ? (lang === 'tr' ? 'Gönderiliyor…' : 'Sending…') : t('form.scheduleDemo')}
               </button>
             </form>
           </motion.div>
