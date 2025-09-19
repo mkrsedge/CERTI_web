@@ -116,7 +116,7 @@ export function CaseStudiesSection() {
         ? 'Sertifika ve eğitim gerekliliklerini merkezileştirin. Rol ve lokasyona göre doğru aksiyonları önerin; tamamlamayı teşvik edin ve dışa aktarılabilir kayıtlarla işgücü uyumluluğunu her zaman güvence altına alın.'
         : 'When a certification or training is required, SkillCore auto-suggests the right actions by role and site, encourages completion, and maintains a clean, exportable trail—so workforce compliance never falls behind.',
       features: (lang === 'tr'
-        ? ['Merkezi yetkinlik belgeleri, eğitim kayıtları ve beyanlar (hızlı arama ile)', 'Son tarih takibi ve yenilemeler (çalışan ve yöneticilere bildirimlerle)', 'SOP değişiklikleri ve DÖF aksiyonlarından otomatik atamalar (vade kurallarıyla)', 'Rol/lokasyon kapsam matrisi, boşluk uyarıları ve artan hatırlatmalar']
+        ? ['Yetkinlik belgeleri, eğitim kayıtları ve beyanlarda merkezi arşiv', 'Son tarih takibi ve yenileme bildirimleri', 'SOP değişiklikleri ve DÖF aksiyonlarından otomatik atamalar', 'Rol/lokasyon matrisleri, boşluk uyarıları ve artan hatırlatmalar']
         : ['Centralized credentials, training records, and attestations with fast search', 'Expiry tracking and renewals with notifications to employees & supervisors', 'Auto-assignments from SOP changes and CAPA actions with due date rules', 'Role/site coverage matrix with gap alerts and escalating reminders']),
       outcome: lang === 'tr' ? 'Eğitime bağlı bulgularda azalma, sürpriz son tarihler yok, denetime hazır kayıtlar.' : 'Fewer training-related findings, zero-surprise expiries, audit-ready records.'
     }
