@@ -179,7 +179,7 @@ const dict: I18nDict = {
     'nav.modules': 'Kullanım Senaryoları',
     'nav.caseStudies': 'Modüller',
     'nav.pricing': 'Fiyatlandırma',
-    'nav.demo': 'Demo Al',
+    'nav.demo': 'Demo Talep Et',
     'nav.toggle.toTR': 'Türkçe’ye geç',
     'nav.toggle.toEN': 'İngilizceye geç',
 
@@ -188,7 +188,7 @@ const dict: I18nDict = {
     'hero.title.2': 'Kalite ve Uyum',
     'hero.desc.1': 'Üreticiler için yeni nesil Kalite Yönetimi.',
     'hero.desc.2': 'Düzenlemeye tabi sektörler için tasarlanmış yapay zeka destekli çözümler.',
-    'hero.cta.primary': 'Demo Al',
+    'hero.cta.primary': 'Demo Talep Et',
     'hero.cta.secondary': 'Daha Fazla Bilgi',
     'hero.kpi.1': 'Uyumluluk',
     'hero.kpi.2': 'Daha Hızlı Denetimler',
@@ -211,7 +211,7 @@ const dict: I18nDict = {
     'overview.step4.desc': 'Sorunlar ortaya çıktığında CERTI kök neden analizini yönlendirir ve prosedürlerinize dayalı doğru DÖF/CAPA taslakları oluşturur.',
     'overview.step4.tag': 'YZ destekli CAPA iş akışı',
     'overview.step5.title': 'Güvenilirliği kanıtlayın, geliri koruyun',
-    'overview.step5.desc': 'Her zaman hazır kanıtlar ve kapalı devre CAPA ile bulguları azaltır, müşteri güvenini korur, yüksek değerli sözleşmeleri güvence altına alırsınız.',
+    'overview.step5.desc': 'Her zaman hazır kanıtlar ve detaylı DÖF'ler ile bulguları azaltır, müşteri güvenini korur, yüksek değerli sözleşmeleri güvence altına alır.',
     'overview.step5.tag': 'İş etkisi',
     'overview.goto': 'Adıma git',
 
@@ -237,7 +237,7 @@ const dict: I18nDict = {
     'modules.1.desc': 'Tüm uyum dokümanlarını merkezileştirin, ilgili standartlara akıllıca eşleyin ve YZ destekli güncellemeler yapın (örn. yeni ürün devreye alma).',
     'modules.2.title': 'Denetime Hazırlık',
     'modules.2.sub': 'Entegre Denetim Yönetimi',
-    'modules.2.desc': 'Tüm denetimlerinizi—iç, müşteri veya belgelendirme—tek platformda bulgular, kanıtlar ve atamalarla dijitalleştirin.',
+    'modules.2.desc': 'Tüm denetimlerinizi (iç, müşteri veya belgelendirme) tek platformda bulgular, kanıtlar ve atamalarla dijitalleştirin.',
     'modules.3.title': 'Üretim Hattı Sorun Giderme',
     'modules.3.sub': 'Saha Çözümleri',
     'modules.3.desc': 'Rehberli kök neden analizi ve görev bazlı takip ile hat sorunlarını daha hızlı çözün.',
@@ -246,7 +246,7 @@ const dict: I18nDict = {
     'modules.4.desc': 'Şikayetleri SOP\'lara bağlı CAPA ve etkinlik kontrolleriyle kalıcı çözümlere dönüştürün.',
 
     // Contact/Demo
-    'demo.title': 'Demo Al',
+    'demo.title': 'Demo Talep Et',
     'demo.request': 'Demoyu Talep Edin',
     'demo.lead': 'CERTI’yi canlı görün. Uzmanlarımızla kişiselleştirilmiş bir demo planlayın ve kalite operasyonlarınızı nasıl dönüştürebileceğimizi keşfedin.',
     'demo.expect.title': 'Ne Beklemelisiniz',
@@ -286,7 +286,7 @@ const dict: I18nDict = {
     'pricing.customSolution.title': 'Özel Çözüm Gerekiyor mu?',
     'pricing.customSolution.desc': 'Kuruluşunuzun benzersiz gereksinimleri ve ölçeğine özel bir plan hazırlayabiliriz.',
     'pricing.customSolution.contactSales': 'Satış Ekibi ile İletişim',
-    'pricing.customSolution.scheduleDemo': 'Demo Planla',
+    'pricing.customSolution.scheduleDemo': 'Demo Talep Et',
 
     // Pricing (headings and shared labels)
     'pricing.header': 'Fiyatlandırma',
