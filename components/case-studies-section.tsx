@@ -99,7 +99,7 @@ export function CaseStudiesSection() {
       description: lang === 'tr' ? 'Tedarikçi devreye alma, dokümanlar, uygunsuzluklar.' : 'Supplier onboarding, documentation, and non-conformances.',
       published: 'NOV 2024',
       fullDescription: lang === 'tr'
-        ? 'Onayları, spesifikasyonları ve sertifikaları merkezileştirin. Son kullanımlardan önce uyarılar alın, uygunsuzlukları kaydedin ve sorunları doğrudan DÖF akışına yönlendirin; üretim hattı tedarikçi sorununu en zor yoldan öğrenmesin.'
+        ? 'Onayları, spesifikasyonları ve sertifikaları tek merkezde yönetin. Geçerlilik tarihleri yaklaşmadan uyarılar alın; uygunsuzlukları kaydedip sorunları doğrudan DÖF akışına yönlendirin—tedarikçi kaynaklı problemleri üretim hattına yansımadan önleyin.'
         : 'Centralize approvals, specs, and certificates. Receive reminders before expiries, log non-conformances, and route issues straight into CAPA—so production never learns about a supplier problem the hard way.',
       features: (lang === 'tr'
         ? ['Sertifika ve spesifikasyonlarda son tarih takibi', 'Zamanında doküman, olay ve eğilimlerle tedarikçi puanlama/panelleri', 'Tedarikçi olaylarının DÖF’e aktarımı', 'Devreye alma iş akışları ve doküman toplama']
