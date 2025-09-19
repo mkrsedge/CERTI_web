@@ -113,7 +113,7 @@ export function CaseStudiesSection() {
       description: lang === 'tr' ? 'Eğitim, yetkinlik ve sertifikasyonlar otomatik pilotta.' : 'Workforce training, skills & certifications on autopilot.',
       published: 'DEC 2024',
       fullDescription: lang === 'tr'
-        ? 'Bir sertifika veya eğitim gerektiğinde, SkillCore rol ve lokasyona göre doğru aksiyonları önerir, tamamlamayı teşvik eder ve temiz, dışa aktarılabilir bir iz bırakır; işgücü uyumluluğu geri kalmaz.'
+        ? 'Sertifika ve eğitim gerekliliklerini merkezileştirin. Rol ve lokasyona göre doğru aksiyonları önerin; tamamlamayı teşvik edin ve dışa aktarılabilir kayıtlarla işgücü uyumluluğunu her zaman güvence altına alın.'
         : 'When a certification or training is required, SkillCore auto-suggests the right actions by role and site, encourages completion, and maintains a clean, exportable trail—so workforce compliance never falls behind.',
       features: (lang === 'tr'
         ? ['Merkezi yetkinlik belgeleri, eğitim kayıtları ve beyanlar (hızlı arama ile)', 'Son tarih takibi ve yenilemeler (çalışan ve yöneticilere bildirimlerle)', 'SOP değişiklikleri ve DÖF aksiyonlarından otomatik atamalar (vade kurallarıyla)', 'Rol/lokasyon kapsam matrisi, boşluk uyarıları ve artan hatırlatmalar']
