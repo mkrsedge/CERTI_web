@@ -57,7 +57,7 @@ export function CaseStudiesSection() {
       description: lang === 'tr' ? 'Akıllı doküman kontrolü ve değişiklik yönetimi.' : 'Intelligent document control & change management.',
       published: 'AUG 2024',
       fullDescription: lang === 'tr'
-        ? 'Her değişikliğin neyi etkilediğini tahmin etmeye son verin. DocCore her kalite dokümanını desteklediği madde ile ilişkilendirir; sürümleri, onayları ve uyumluluk etkisini tek bir iz üzerinde takip eder.'
+        ? 'Dokümanlarınızı her değişiklikle güncel tuttuğunuzdan emin olun. DocCore, her kalite dokümanını ilgili standart maddeleriyle ilişkilendirir; sürümleri, onay süreçlerini ve uyumluluk etkilerini tek bir ekran üzerinde uçtan uca takip etmenizi sağlar.'
         : 'Stop guessing what each change touches. DocCore links every quality document to the clause it supports, then tracks versions, approvals, and compliance impact in a single audit trail.',
       features: (lang === 'tr'
         ? ['Madde bazlı doküman eşleştirme ve açıkların görünür kılınması', 'Etkisini belirten akıllı değişiklik talepleri (ilişkili prosedür ve eğitimlerle)', 'Rol bazlı onay akışları ve temiz denetim izleri', 'Revizyonlarla senkron kanıt ekleri']
