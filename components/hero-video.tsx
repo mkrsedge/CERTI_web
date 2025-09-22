@@ -21,7 +21,7 @@ export function HeroVideo({
   const [videoError, setVideoError] = useState(false)
   const [showFallback, setShowFallback] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const fallbackTimeoutRef = useRef<NodeJS.Timeout>()
+  const fallbackTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
   // Handle video loading states
   useEffect(() => {
