@@ -1,43 +1,24 @@
 'use client'
 
 import { useEffect } from 'react'
-import Lenis from 'lenis'
 
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 0.8,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    })
+    // Simple mobile scroll fix - disable smooth scroll on mobile for better performance
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     window.innerWidth <= 768
 
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
+    if (!isMobile) {
+      // Only apply smooth scroll on desktop
+      const style = document.createElement('style')
+      style.textContent = `
+        html { scroll-behavior: smooth; }
+      `
+      document.head.appendChild(style)
 
-    requestAnimationFrame(raf)
-
-    // Disable Lenis when GSAP ScrollTo is active
-    // Use loose typing to satisfy TS DOM overloads while preserving behavior
-    const w = window as unknown as { scrollTo: any }
-    const originalScrollTo = w.scrollTo
-    w.scrollTo = (...args: any[]) => {
-      if (args.length === 2 && typeof args[0] === 'number' && typeof args[1] === 'number') {
-        // This is likely GSAP ScrollToPlugin calling scrollTo
-        lenis.stop()
-        originalScrollTo.apply(window, args)
-        setTimeout(() => lenis.start(), 100)
-      } else {
-        originalScrollTo.apply(window, args)
+      return () => {
+        document.head.removeChild(style)
       }
-    }
-
-    return () => {
-      lenis.destroy()
-      w.scrollTo = originalScrollTo
     }
   }, [])
 

@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
-import { SmartMobileVideo } from './smart-mobile-video'
-import { VideoDiagnostics } from './video-diagnostics'
+import { SimpleVideo } from './simple-video'
 import { useLanguage } from './language-context'
 
 export function HeroSection() {
@@ -11,10 +10,9 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
-      {/* Background Video with Smart Mobile Optimization */}
-      <SmartMobileVideo 
+      {/* Background Video */}
+      <SimpleVideo 
         src="/gitness-spline-test (1).mp4"
-        fallbackClassName="animate-pulse"
       />
       
       {/* Brand-tinted overlay for better text readability and brand cohesion */}
@@ -108,11 +106,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Video Diagnostics - Enable for testing */}
-      <VideoDiagnostics 
-        src="/gitness-spline-test (1).mp4" 
-        enabled={process.env.NODE_ENV === 'development'}
-      />
 
     </section>
   )
