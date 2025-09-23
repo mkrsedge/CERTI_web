@@ -31,7 +31,7 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-heading-1 text-brand-primary mb-4 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
             {`CERTI: ${t('hero.title.1')}`}
             <br />
             {t('hero.title.2')}
@@ -41,7 +41,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-body-large text-brand-primary/90 mb-8 leading-relaxed"
+            className="text-xl md:text-2xl text-brand-primary/90 mb-8 leading-relaxed"
           >
             {t('hero.desc.1')}
             <br />
@@ -65,7 +65,7 @@ export function HeroSection() {
                   }
                 }
               }}
-              className="btn-primary text-lg relative z-20"
+              className="btn-primary-hero text-lg relative z-20"
             >
               {t('hero.cta.primary')}
             </button>

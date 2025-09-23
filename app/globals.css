@@ -146,6 +146,26 @@
   transform: translateY(-1px);
 }
 
+/* Primary button variant for hero section with better visibility */
+.btn-primary-hero {
+  background: #ffffff;
+  color: var(--color-secondary);
+  border: 1px solid #ffffff;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-1);
+  transition: all 160ms ease;
+}
+.btn-primary-hero:hover { 
+  background: var(--color-primary); 
+  border-color: var(--color-primary);
+  color: var(--color-secondary);
+  box-shadow: var(--shadow-2); 
+  transform: translateY(-1px); 
+}
+
 /* Focus states */
 :where(button, a, input, select, textarea):focus-visible {
   outline: 2px solid var(--color-secondary);

@@ -92,7 +92,7 @@ export function SimpleVideo({ src, className = '' }: SimpleVideoProps) {
     <div className={`absolute inset-0 w-full h-full ${className}`}>
       {/* Fallback background */}
       {(hasError || !isLoaded) && (
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 animate-shimmer" />
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-brand-primary/20 via-brand-primary/10 to-brand-secondary/10 animate-shimmer" />
       )}
 
       {/* Loading indicator */}

@@ -210,11 +210,11 @@ export function OverviewSection() {
                     t('overview.cap.5.desc'),
                   ]
                   const colors = [
-                    'from-blue-400 to-blue-600',
-                    'from-orange-400 to-orange-600',
-                    'from-emerald-400 to-emerald-600',
-                    'from-purple-400 to-purple-600',
-                    'from-rose-400 to-rose-600',
+                    'from-brand-secondary/80 to-brand-secondary',
+                    'from-brand-secondary/60 to-brand-secondary/80',
+                    'from-brand-secondary/40 to-brand-secondary/60',
+                    'from-brand-secondary/20 to-brand-secondary/40',
+                    'from-brand-primary/60 to-brand-secondary/20',
                   ]
                   const icons = [
                     (

@@ -48,7 +48,7 @@ export function ModulesSection() {
       subtitle: t('modules.1.sub'),
       description: t('modules.1.desc'),
       features: ['Intelligent standards mapping', 'AI-assisted document updates', 'Centralized document control', 'Compliance tracking'],
-      color: 'from-blue-500 to-blue-600',
+      color: 'from-brand-secondary/80 to-brand-secondary',
       videoId: lang === 'tr' ? 'gzlBOoJhP4o' : 'IcV9a3_bZVY',
       videoTitle: lang === 'tr' ? 'Akıllı Doküman Yönetimi (TR)' : 'Smart Document Management (EN)'
     },
@@ -57,7 +57,7 @@ export function ModulesSection() {
       subtitle: t('modules.2.sub'),
       description: t('modules.2.desc'),
       features: ['Digital audit logging', 'Evidence management', 'Task assignment', 'Multi-standard support'],
-      color: 'from-purple-500 to-purple-600',
+      color: 'from-brand-secondary/60 to-brand-secondary/80',
       videoId: lang === 'tr' ? 'BB2pqvCokDQ' : '6-ug5Wme6qQ',
       videoTitle: lang === 'tr' ? 'Denetime Hazırlık (TR)' : 'Audit Readiness (EN)'
     },
@@ -66,7 +66,7 @@ export function ModulesSection() {
       subtitle: t('modules.3.sub'),
       description: t('modules.3.desc'),
       features: ['Guided root cause analysis', 'Task-based tracking', 'Downtime reduction', 'Real-time issue resolution'],
-      color: 'from-green-500 to-green-600',
+      color: 'from-brand-secondary/40 to-brand-secondary/60',
       videoId: lang === 'tr' ? 'lO1Zllt9vqs' : 'zTuzGvD0TZc',
       videoTitle: lang === 'tr' ? 'Üretim Hattı Sorun Giderme (TR)' : 'Production Issue Resolution (EN)'
     },
@@ -75,7 +75,7 @@ export function ModulesSection() {
       subtitle: t('modules.4.sub'),
       description: t('modules.4.desc'),
       features: ['Structured case management', 'AI-suggested corrections', 'Automated report generation', 'Customer communication'],
-      color: 'from-slate-400 to-slate-500',
+      color: 'from-brand-secondary/20 to-brand-secondary/40',
       videoId: lang === 'tr' ? 'X6jP6FoM8Tc' : 'kl5RDH5F4VQ',
       videoTitle: lang === 'tr' ? 'Müşteri Şikayeti Yönetimi (TR)' : 'Customer Complaint Resolution (EN)'
     }

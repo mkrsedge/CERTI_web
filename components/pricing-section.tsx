@@ -130,16 +130,16 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('lite')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'lite' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
+                  selected === 'lite' ? 'border-brand-secondary ring-2 ring-brand-secondary/20 bg-brand-primary/10' : 'border-gray-100 hover:border-brand-secondary/30'
                 }`}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <div className={`text-lg font-semibold ${selected === 'lite' ? 'text-blue-900' : 'text-gray-900'}`}>Lite</div>
+                    <div className={`text-lg font-semibold ${selected === 'lite' ? 'text-brand-secondary' : 'text-gray-900'}`}>Lite</div>
                     <div className="text-gray-500 text-sm">{t('pricing.bundle.lite.sub')}</div>
                   </div>
                   {selected === 'lite' && (
-                    <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-brand-secondary rounded-full flex items-center justify-center">
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
@@ -151,7 +151,7 @@ export function PricingSection() {
                     {bundleModules.lite.map((module, index) => (
                       <span
                         key={index}
-                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-brand-secondary border border-brand-secondary/30 shadow-sm"
                       >
                         {module}
                       </span>
@@ -165,16 +165,16 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('standard')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'standard' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
+                  selected === 'standard' ? 'border-brand-secondary ring-2 ring-brand-secondary/20 bg-brand-primary/10' : 'border-gray-100 hover:border-brand-secondary/30'
                 }`}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <div className={`text-lg font-semibold ${selected === 'standard' ? 'text-blue-900' : 'text-gray-900'}`}>Standard</div>
+                    <div className={`text-lg font-semibold ${selected === 'standard' ? 'text-brand-secondary' : 'text-gray-900'}`}>Standard</div>
                     <div className="text-gray-500 text-sm">{t('pricing.bundle.standard.sub')}</div>
                   </div>
                   {selected === 'standard' && (
-                    <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-brand-secondary rounded-full flex items-center justify-center">
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
@@ -186,7 +186,7 @@ export function PricingSection() {
                     {bundleModules.standard.map((module, index) => (
                       <span
                         key={index}
-                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-brand-secondary border border-brand-secondary/30 shadow-sm"
                       >
                         {module}
                       </span>
@@ -200,16 +200,16 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('fullqms')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'fullqms' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
+                  selected === 'fullqms' ? 'border-brand-secondary ring-2 ring-brand-secondary/20 bg-brand-primary/10' : 'border-gray-100 hover:border-brand-secondary/30'
                 }`}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <div className={`text-lg font-semibold ${selected === 'fullqms' ? 'text-blue-900' : 'text-gray-900'}`}>Full QMS</div>
+                    <div className={`text-lg font-semibold ${selected === 'fullqms' ? 'text-brand-secondary' : 'text-gray-900'}`}>Full QMS</div>
                     <div className="text-gray-500 text-sm">{t('pricing.bundle.fullqms.sub')}</div>
                   </div>
                   {selected === 'fullqms' && (
-                    <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                    <div className="w-5 h-5 bg-brand-secondary rounded-full flex items-center justify-center">
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
@@ -221,7 +221,7 @@ export function PricingSection() {
                     {bundleModules.fullqms.map((module, index) => (
                       <span
                         key={index}
-                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-brand-secondary border border-brand-secondary/30 shadow-sm"
                       >
                         {module}
                       </span>
