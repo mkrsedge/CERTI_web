@@ -133,10 +133,10 @@ export function PricingSection() {
                   selected === 'lite' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
                 }`}
               >
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between mb-3">
                   <div>
                     <div className={`text-lg font-semibold ${selected === 'lite' ? 'text-blue-900' : 'text-gray-900'}`}>Lite</div>
-                    <div className="text-gray-500 text-sm">Entry-level document control</div>
+                    <div className="text-gray-500 text-sm">{t('pricing.bundle.lite.sub')}</div>
                   </div>
                   {selected === 'lite' && (
                     <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
@@ -146,6 +146,18 @@ export function PricingSection() {
                     </div>
                   )}
                 </div>
+                {selected === 'lite' && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {bundleModules.lite.map((module, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
+                      >
+                        {module}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </button>
 
               {/* Standard Plan */}
@@ -156,10 +168,10 @@ export function PricingSection() {
                   selected === 'standard' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
                 }`}
               >
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between mb-3">
                   <div>
                     <div className={`text-lg font-semibold ${selected === 'standard' ? 'text-blue-900' : 'text-gray-900'}`}>Standard</div>
-                    <div className="text-gray-500 text-sm">Advanced audit + CAPA</div>
+                    <div className="text-gray-500 text-sm">{t('pricing.bundle.standard.sub')}</div>
                   </div>
                   {selected === 'standard' && (
                     <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
@@ -169,6 +181,18 @@ export function PricingSection() {
                     </div>
                   )}
                 </div>
+                {selected === 'standard' && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {bundleModules.standard.map((module, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
+                      >
+                        {module}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </button>
 
               {/* Full QMS Plan */}
@@ -179,10 +203,10 @@ export function PricingSection() {
                   selected === 'fullqms' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
                 }`}
               >
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between mb-3">
                   <div>
                     <div className={`text-lg font-semibold ${selected === 'fullqms' ? 'text-blue-900' : 'text-gray-900'}`}>Full QMS</div>
-                    <div className="text-gray-500 text-sm">End-to-end automation</div>
+                    <div className="text-gray-500 text-sm">{t('pricing.bundle.fullqms.sub')}</div>
                   </div>
                   {selected === 'fullqms' && (
                     <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
@@ -192,45 +216,20 @@ export function PricingSection() {
                     </div>
                   )}
                 </div>
+                {selected === 'fullqms' && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {bundleModules.fullqms.map((module, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
+                      >
+                        {module}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </button>
             </div>
-
-            {/* Module Display for Selected Bundle */}
-            {selected && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-200"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-lg font-semibold text-gray-900">
-                    {selected === 'lite' && 'Lite Bundle Modules:'}
-                    {selected === 'standard' && 'Standard Bundle Modules:'}
-                    {selected === 'fullqms' && 'Full QMS Bundle Modules:'}
-                  </h4>
-                  <button
-                    onClick={() => setSelected(null)}
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
-                    aria-label="Clear selection"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-                <div className="flex flex-wrap justify-center gap-1.5">
-                  {bundleModules[selected].map((module, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
-                    >
-                      {module}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            )}
 
             {/* Included in every plan */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -140,6 +140,11 @@ const dict: I18nDict = {
     'pricing.includedEvery.support': '24/7 Support',
     'pricing.includedEvery.support.sub': 'Expert help when you need it',
 
+    // Bundle descriptions
+    'pricing.bundle.lite.sub': 'Entry-level document control',
+    'pricing.bundle.standard.sub': 'Advanced audit + CAPA',
+    'pricing.bundle.fullqms.sub': 'End-to-end automation',
+
     // Footer
     'footer.company': 'Company',
     'footer.products': 'Products',
@@ -199,7 +204,7 @@ const dict: I18nDict = {
     'overview.header': 'CERTI Yolculuğunuza Başlayın',
     'overview.sub': 'Entegrasyondan sonuca kesintisiz bir yol izleyin—kaostan kontrollü mükemmelliğe geçin.',
     'overview.step1.title': 'Kalite ekosisteminizi bağlayın',
-    'overview.step1.desc': 'Sistemlerinizi ve süreçlerinizi bağlayın. CERTI iş akışınıza uyum sağlar; veri, karmaşık entegrasyonlar olmadan akışkan bir şekilde akar.',
+    'overview.step1.desc': 'Sistem ve süreçlerinizi zahmetsizce CERTI\'ye bağlayın. CERTI iş akışınıza uyum sağlar; verileriniz karmaşık entegrasyonlara ihtiyaç duymadan sorunsuzca işlenir.',
     'overview.step1.tag': 'API-öncelikli entegrasyon',
     'overview.step2.title': 'CERTI kurumunuzu öğrenir',
     'overview.step2.desc': 'Yapay zekâ dokümanlarınızı standartlarla eşleştirir, eksikleri ve güncellemeleri otomatik saptayarak sürekli uyumluluk sağlar.',
@@ -305,6 +310,11 @@ const dict: I18nDict = {
     'pricing.includedEvery.compliance.sub': 'Yerleşik mevzuat uyumluluğu özellikleri',
     'pricing.includedEvery.support': '7/24 Destek',
     'pricing.includedEvery.support.sub': 'İhtiyacınız olduğunda uzman desteği',
+
+    // Bundle descriptions
+    'pricing.bundle.lite.sub': 'Temel doküman kontrolü',
+    'pricing.bundle.standard.sub': 'Gelişmiş denetim + CAPA',
+    'pricing.bundle.fullqms.sub': 'Uçtan uca otomasyon',
 
     // Footer
     'footer.company': 'Şirket',
