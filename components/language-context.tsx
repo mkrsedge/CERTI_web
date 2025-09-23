@@ -120,7 +120,7 @@ const dict: I18nDict = {
     'pricing.customSolution.title': 'Need a Custom Solution?',
     'pricing.customSolution.desc': 'We can tailor a plan specifically for your organization\'s unique requirements and scale.',
     'pricing.customSolution.contactSales': 'Contact Sales',
-    'pricing.customSolution.scheduleDemo': 'Schedule Demo',
+    'pricing.customSolution.scheduleDemo': 'Contact Us',
 
     // Pricing (headings and shared labels)
     'pricing.header': 'Pricing',
