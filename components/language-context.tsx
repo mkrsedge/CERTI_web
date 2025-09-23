@@ -313,7 +313,7 @@ const dict: I18nDict = {
 
     // Bundle descriptions
     'pricing.bundle.lite.sub': 'Temel doküman kontrolü',
-    'pricing.bundle.standard.sub': 'Gelişmiş denetim + CAPA',
+    'pricing.bundle.standard.sub': 'Gelişmiş denetim + DÖF Yönetimi',
     'pricing.bundle.fullqms.sub': 'Uçtan uca otomasyon',
 
     // Footer
