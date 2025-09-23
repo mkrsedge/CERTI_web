@@ -53,7 +53,7 @@ export function DemoSection() {
         ok: false,
         message:
           lang === 'tr'
-            ? 'E-posta yapılandırması eksik. Lütfen EmailJS public key ve template ID ekleyin.'
+            ? 'E-posta yapılandırması eksik. Lütfen EmailJS public key ve template ID ekleyin'
             : 'Email configuration missing. Please add EmailJS public key and template ID.',
       })
       setIsSubmitting(false)
@@ -88,7 +88,7 @@ export function DemoSection() {
         ok: false,
         message:
           lang === 'tr'
-            ? 'Gönderim başarısız. Lütfen daha sonra tekrar deneyin.'
+            ? 'Gönderim başarısız. Lütfen daha sonra tekrar deneyin'
             : 'Submission failed. Please try again later.',
       })
       if (typeof window !== 'undefined') {

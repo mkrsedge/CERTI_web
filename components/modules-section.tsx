@@ -57,12 +57,12 @@ export function ModulesSection() {
       description: lang === 'tr' ? 'Akıllı doküman kontrolü ve değişiklik yönetimi.' : 'Intelligent document control & change management.',
       published: 'AUG 2024',
       fullDescription: lang === 'tr'
-        ? 'Dokümanlarınızı her değişiklikle güncel tuttuğunuzdan emin olun. DocCore, her kalite dokümanını ilgili standart maddeleriyle ilişkilendirir; sürümleri, onay süreçlerini ve uyumluluk etkilerini tek bir ekran üzerinde uçtan uca takip etmenizi sağlar.'
+        ? 'Dokümanlarınızı her değişiklikle güncel tuttuğunuzdan emin olun. DocCore, her kalite dokümanını ilgili standart maddeleriyle ilişkilendirir; sürümleri, onay süreçlerini ve uyumluluk etkilerini tek bir ekran üzerinde uçtan uca takip etmenizi sağlar'
         : 'Stop guessing what each change touches. DocCore links every quality document to the clause it supports, then tracks versions, approvals, and compliance impact in a single audit trail.',
       features: (lang === 'tr'
         ? ['Madde bazlı doküman eşleştirme ve açıkların görünür kılınması', 'Etkisini belirten akıllı değişiklik talepleri (ilişkili prosedür ve eğitimlerle)', 'Rol bazlı onay akışları ve temiz denetim izleri', 'Revizyonlarla senkron kanıt ekleri']
         : ['Clause-aware document mapping & gap detection', 'Smart change requests with impact guidance (linked procedures, training)', 'Role-based approvals and clean audit trails', 'Evidence attachments that stay in sync with revisions']),
-      outcome: lang === 'tr' ? 'Daha hızlı revizyonlar, daha az kör nokta, temiz kanıtlar.' : 'Faster revisions, fewer blind spots, clean evidence.'
+      outcome: lang === 'tr' ? 'Daha hızlı revizyonlar, daha az kör nokta, temiz kanıtlar' : 'Faster revisions, fewer blind spots, clean evidence'
     },
     {
       number: '02',
@@ -71,12 +71,12 @@ export function ModulesSection() {
       description: lang === 'tr' ? 'Mobil denetimler, Yapay Zeka ön kontrolleri, anlık hazırlık durumu.' : 'Mobile audits, AI pre-checks, real-time readiness.',
       published: 'SEP 2024',
       fullDescription: lang === 'tr'
-        ? 'Kendi şablonlarınızla mobil denetimler gerçekleştirin, bulguları anında kaydedin ve denetçiden önce hangi maddelerin hazır olduğunu gösteren gerçek zamanlı uyum haritasını takip edin.'
+        ? 'Kendi şablonlarınızla mobil denetimler gerçekleştirin, bulguları anında kaydedin ve denetçiden önce hangi maddelerin hazır olduğunu gösteren gerçek zamanlı uyum haritasını takip edin'
         : "Run mobile audits with your own templates, generate findings in real time, and see live clause coverage that tells you exactly what's ready and what's not—before the auditor does.",
       features: (lang === 'tr'
         ? ['Özelleştirilebilir kontrol listeleri ve mobil veri toplama', 'Olası uygunsuzlukları işaretleyen Yapay Zeka ön kontrolleri', 'Maddelere göre canlı kapsama paneli', 'Denetçiye sunulacak tek tık kanıt paketleri']
         : ['Customizable checklists and mobile capture', 'AI pre-checks that flag likely non-conformances', 'Live clause coverage dashboard', 'One-click evidence packets ready for auditors']),
-      outcome: lang === 'tr' ? 'Hazırlık süresi haftalardan saatlere iner.' : 'Preparation in hours, not weeks.'
+      outcome: lang === 'tr' ? 'Hazırlık süresi haftalardan saatlere iner' : 'Preparation in hours, not weeks'
     },
     {
       number: '03',
@@ -85,12 +85,12 @@ export function ModulesSection() {
       description: lang === 'tr' ? 'Yapay Zeka taslaklı DÖF’ler, Kök Neden Analizi, doğrulama.' : 'AI-drafted CAPAs, RCA, and verification.',
       published: 'OCT 2024',
       fullDescription: lang === 'tr'
-        ? 'Sorunları ve müşteri şikayetlerini kalıcı çözümlere dönüştürün. ResolveCore kök neden analizine rehberlik eder, prosedürlerinize dayanarak DÖF taslakları üretir ve etkililik doğrulamalarını takip eder; sorunların tekrarlamasını engeller.'
+        ? 'Sorunları ve müşteri şikayetlerini kalıcı çözümlere dönüştürün. ResolveCore kök neden analizine rehberlik eder, prosedürlerinize dayanarak DÖF taslakları üretir ve etkililik doğrulamalarını takip eder; sorunların tekrarlamasını engeller'
         : "Turn issues and customer complaints into lasting fixes. ResolveCore guides root cause analysis, drafts corrective and preventive actions from your procedures, and verifies effectiveness—so problems don’t return.",
       features: (lang === 'tr'
         ? ['Kök Neden Analizi rehberliği (örn. 5 Neden)', 'Dokümanlarınızla (örn. prosedürleriniz, risk planlarınız) bağlantılı Yapay Zeka destekli DÖF taslakları', 'Etkililik kontrolleri ve otomatik hatırlatmalar', 'Tekrarlayan riskleri izlemek için eğilim analizi']
         : ['Root cause analysis guidance (e.g., 5 Whys)', 'AI-assisted CAPAs linked to SOPs and forms', 'Effectiveness checks with due date reminders', 'Trend analysis to track repeat risks']),
-      outcome: lang === 'tr' ? 'Tekrarlayan bulgularda ölçülebilir azalma, daha hızlı çözüm.' : 'Measurably fewer repeat findings and faster resolutions.'
+      outcome: lang === 'tr' ? 'Tekrarlayan bulgularda ölçülebilir azalma, daha hızlı çözüm' : 'Measurably fewer repeat findings and faster resolutions'
     },
     {
       number: '04',
@@ -99,12 +99,12 @@ export function ModulesSection() {
       description: lang === 'tr' ? 'Tedarikçi devreye alma, dokümanlar, uygunsuzluklar.' : 'Supplier onboarding, documentation, and non-conformances.',
       published: 'NOV 2024',
       fullDescription: lang === 'tr'
-        ? 'Onayları, spesifikasyonları ve sertifikaları tek merkezde yönetin. Geçerlilik tarihleri yaklaşmadan uyarılar alın; uygunsuzlukları kaydedip sorunları doğrudan DÖF akışına yönlendirin—tedarikçi kaynaklı problemleri üretim hattına yansımadan önleyin.'
+        ? 'Onayları, spesifikasyonları ve sertifikaları tek merkezde yönetin. Geçerlilik tarihleri yaklaşmadan uyarılar alın; uygunsuzlukları kaydedip sorunları doğrudan DÖF akışına yönlendirin—tedarikçi kaynaklı problemleri üretim hattına yansımadan önleyin'
         : 'Centralize approvals, specs, and certificates. Receive reminders before expiries, log non-conformances, and route issues straight into CAPA—so production never learns about a supplier problem the hard way.',
       features: (lang === 'tr'
         ? ['Sertifika ve spesifikasyonlarda son tarih takibi', 'Zamanında doküman, olay ve eğilimlerle tedarikçi puanlama/panelleri', 'Tedarikçi olaylarının DÖF’e aktarımı', 'Devreye alma iş akışları ve doküman toplama']
         : ['Expiry tracking for certs & specs', 'Supplier scoring and performance dashboards (on-time docs, incidents, trend lines)', 'Supplier incidents to CAPA handoff', 'Onboarding workflows and doc collection']),
-      outcome: lang === 'tr' ? 'Güvenilir tedarik zinciri, daha güçlü denetimler.' : 'A more reliable supply chain and stronger audits.'
+      outcome: lang === 'tr' ? 'Güvenilir tedarik zinciri, daha güçlü denetimler' : 'A more reliable supply chain and stronger audits'
     },
     {
       number: '05',
@@ -113,12 +113,12 @@ export function ModulesSection() {
       description: lang === 'tr' ? 'Eğitim, yetkinlik ve sertifikasyonlar otomatik pilotta.' : 'Workforce training, skills & certifications on autopilot.',
       published: 'DEC 2024',
       fullDescription: lang === 'tr'
-        ? 'Sertifika ve eğitim gerekliliklerini merkezileştirin. Rol ve lokasyona göre doğru aksiyonları önerin; tamamlamayı teşvik edin ve dışa aktarılabilir kayıtlarla işgücü uyumluluğunu her zaman güvence altına alın.'
+        ? 'Sertifika ve eğitim gerekliliklerini merkezileştirin. Rol ve lokasyona göre doğru aksiyonları önerin; tamamlamayı teşvik edin ve dışa aktarılabilir kayıtlarla işgücü uyumluluğunu her zaman güvence altına alın'
         : 'When a certification or training is required, SkillCore auto-suggests the right actions by role and site, encourages completion, and maintains a clean, exportable trail—so workforce compliance never falls behind.',
       features: (lang === 'tr'
         ? ['Yetkinlik belgeleri, eğitim kayıtları ve beyanlarda merkezi arşiv', 'Son tarih takibi ve yenileme bildirimleri', 'SOP değişiklikleri ve DÖF aksiyonlarından otomatik atamalar', 'Rol/lokasyon matrisleri, boşluk uyarıları ve artan hatırlatmalar']
         : ['Centralized credentials, training records, and attestations with fast search', 'Expiry tracking and renewals with notifications to employees & supervisors', 'Auto-assignments from SOP changes and CAPA actions with due date rules', 'Role/site coverage matrix with gap alerts and escalating reminders']),
-      outcome: lang === 'tr' ? 'Eğitime bağlı bulgularda azalma, sürpriz son tarihler yok, denetime hazır kayıtlar.' : 'Fewer training-related findings, zero-surprise expiries, audit-ready records.'
+      outcome: lang === 'tr' ? 'Eğitime bağlı bulgularda azalma, sürpriz son tarihler yok, denetime hazır kayıtlar' : 'Fewer training-related findings, zero-surprise expiries, audit-ready records'
     }
   ]
 
@@ -134,7 +134,7 @@ export function ModulesSection() {
         >
           <h2 className="text-heading-2 mb-6">{lang === 'tr' ? 'Modüller' : 'Modules'}</h2>
           <p className="text-body-large max-w-3xl mx-auto">
-            {lang === 'tr' ? 'CERTI\'nin temel modüllerini keşfedin - her biri kalite yönetiminin farklı bir alanını ele alan güçlü araçlar.' : 'Explore CERTI\'s core modules - powerful tools that each address a different aspect of quality management.'}
+            {lang === 'tr' ? 'CERTI\'nin temel modüllerini keşfedin — kalite yönetiminin her alanı için tasarlanmış akıllı çözümler' : 'Explore CERTI\'s core modules - powerful tools that each address a different aspect of quality management'}
           </p>
         </motion.div>
 
