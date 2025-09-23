@@ -20,22 +20,45 @@ export default function Home() {
   useEffect(() => {
     const handleInitialHash = () => {
       const hash = window.location.hash.replace('#', '')
+      console.log('Initial hash:', hash) // Debug log
+      
       if (hash && hash !== 'home') {
-        // Wait for the page to fully load before scrolling
+        // Wait for loading screen to complete (1200ms) plus additional time for content to be visible
         setTimeout(() => {
           const element = document.getElementById(hash)
+          console.log('Element found:', element) // Debug log
+          
           if (element) {
             const headerOffset = 80
             const elementPosition = element.getBoundingClientRect().top
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+            
+            console.log('Scrolling to:', offsetPosition) // Debug log
             
             window.scrollTo({
               top: offsetPosition,
               behavior: 'smooth'
             })
             setActiveSection(hash)
+          } else {
+            console.log('Element not found for hash:', hash) // Debug log
+            // Try again after a longer delay if element not found
+            setTimeout(() => {
+              const retryElement = document.getElementById(hash)
+              if (retryElement) {
+                const headerOffset = 80
+                const elementPosition = retryElement.getBoundingClientRect().top
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+                
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: 'smooth'
+                })
+                setActiveSection(hash)
+              }
+            }, 1000)
           }
-        }, 100)
+        }, 1500) // Wait for loading screen (1200ms) + 300ms buffer
       }
     }
 

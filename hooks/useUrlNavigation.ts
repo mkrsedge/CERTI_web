@@ -59,8 +59,8 @@ export function useUrlNavigation() {
     const handleInitialHash = () => {
       const hash = window.location.hash.replace('#', '')
       if (hash) {
-        // Wait for the page to fully load before scrolling
-        setTimeout(handleNavigation, 100)
+        // Wait for loading screen to complete (1200ms) plus buffer time
+        setTimeout(handleNavigation, 1500)
       }
     }
 
