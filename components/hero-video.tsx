@@ -33,12 +33,12 @@ export function HeroVideo({
       
       setIsMobile(isMobileDevice)
       
-      // Check for performance capabilities
-      const hasLowMemory = (navigator as any).deviceMemory && (navigator as any).deviceMemory <= 2
+      // Check for performance capabilities (more conservative)
+      const hasLowMemory = (navigator as any).deviceMemory && (navigator as any).deviceMemory <= 1.5 // More restrictive
       const hasSlowConnection = (navigator as any).connection && 
                                ((navigator as any).connection.effectiveType === 'slow-2g' || 
                                 (navigator as any).connection.effectiveType === '2g')
-      const hasLowEndDevice = hasLowMemory || hasSlowConnection || isMobileDevice
+      const hasLowEndDevice = hasLowMemory || hasSlowConnection // Remove automatic mobile classification
       
       setUseMobileOptimizations(hasLowEndDevice)
       
@@ -74,22 +74,14 @@ export function HeroVideo({
     }
 
     const handleCanPlay = () => {
-      // Apply mobile optimizations
+      // Apply mobile optimizations (more conservative)
       if (useMobileOptimizations && video) {
-        // Reduce frame rate for smoother playback on mobile
-        video.playbackRate = 0.8 // Slightly slower for smoother playback
+        // Only apply optimizations for very low-end devices
+        console.log('Applying conservative mobile optimizations')
         
-        // Set video quality optimizations
-        if ('requestVideoFrameCallback' in video) {
-          // Use requestVideoFrameCallback for better performance
-          const callback = () => {
-            if (video.readyState >= 2) {
-              // Video is ready, optimize further
-              video.currentTime = Math.floor(video.currentTime)
-            }
-          }
-          ;(video as any).requestVideoFrameCallback(callback)
-        }
+        // Don't reduce playback rate - let it play normally
+        // Just ensure hardware acceleration is working
+        video.style.transform = 'translate3d(0,0,0)'
       }
       
       // Video can play, try to play it
@@ -141,7 +133,7 @@ export function HeroVideo({
         loop
         muted
         playsInline
-        preload={useMobileOptimizations ? "none" : "metadata"}
+        preload="metadata"
         className={`w-full h-full object-cover hero-video transition-opacity duration-1000 ${
           videoLoaded ? 'opacity-100' : 'opacity-0'
         } ${className}`}

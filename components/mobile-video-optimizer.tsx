@@ -34,12 +34,11 @@ export function MobileVideoOptimizer({ children, fallbackComponent }: MobileVide
       const hardwareConcurrency = navigator.hardwareConcurrency
       const hasLowCPUCores = hardwareConcurrency && hardwareConcurrency <= 2
       
-      // Determine if device is low-end
+      // Determine if device is low-end (more conservative approach)
       const lowEndDevice = isMobile && (
         hasLowMemory || 
         hasSlowConnection || 
-        isVerySmallScreen || 
-        hasLowCPUCores
+        (isVerySmallScreen && hasLowCPUCores) // Only disable on very small screens WITH low CPU
       )
       
       setIsLowEndDevice(lowEndDevice)

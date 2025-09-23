@@ -195,12 +195,7 @@ body {
     -webkit-perspective: 1000px;
   }
   
-  /* Disable video on very low-end devices */
-  @media (max-device-width: 480px) and (max-device-height: 800px) {
-    .hero-video {
-      display: none;
-    }
-  }
+  /* Note: Video is now controlled by JavaScript logic instead of CSS */
 }
 
 /* Smooth video loading transitions */

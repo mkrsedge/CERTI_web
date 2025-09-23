@@ -12,15 +12,11 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
-      {/* Background Video with Mobile Optimization */}
-      <MobileVideoOptimizer 
-        fallbackComponent={<VideoFallback />}
-      >
-        <HeroVideo 
-          src="/gitness-spline-test (1).mp4"
-          fallbackClassName="animate-pulse"
-        />
-      </MobileVideoOptimizer>
+      {/* Background Video with Conservative Mobile Optimization */}
+      <HeroVideo 
+        src="/gitness-spline-test (1).mp4"
+        fallbackClassName="animate-pulse"
+      />
       
       {/* Brand-tinted overlay for better text readability and brand cohesion */}
       <div className="absolute inset-0" style={{ backgroundColor: 'rgba(62,39,35,0.35)' }}></div>
