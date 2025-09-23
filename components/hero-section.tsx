@@ -12,7 +12,7 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
       {/* Background Video */}
       <SimpleVideo 
-        src="/gitness-spline-test (1).mp4"
+        src="/gitness-spline-test.mp4"
       />
       
       {/* Brand-tinted overlay for better text readability and brand cohesion */}
