@@ -100,7 +100,7 @@ export function HeroSection() {
               className="rounded-2xl border border-white/15 bg-white/20 backdrop-blur-md px-6 py-5 text-center shadow-lg"
             >
               <div className="text-3xl font-bold text-[#ffedac] mb-1 drop-shadow">{kpi.v}</div>
-              <div className="text-[#afdbf5] text-sm font-medium">{kpi.t}</div>
+              <div className="text-[#ffedac] text-sm font-medium">{kpi.t}</div>
             </div>
           ))}
         </motion.div>
