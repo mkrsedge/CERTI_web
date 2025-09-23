@@ -311,8 +311,8 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           <nav className="mobile-menu-nav" aria-label="Mobile Primary">
             <button className="mobile-link" onClick={() => { handleSectionClick('home', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.home')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('overview', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.overview')}</button>
+            <button className="mobile-link" onClick={() => { handleSectionClick('usecases', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.caseStudies')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('modules', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.modules')}</button>
-            <button className="mobile-link" onClick={() => { handleSectionClick('case-studies', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.caseStudies')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('pricing', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.pricing')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('demo', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.demo')}</button>
           </nav>
