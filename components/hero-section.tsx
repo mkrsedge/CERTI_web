@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
-import { HeroVideo } from './hero-video'
-import { MobileVideoOptimizer, VideoFallback } from './mobile-video-optimizer'
+import { SmartMobileVideo } from './smart-mobile-video'
 import { VideoDiagnostics } from './video-diagnostics'
 import { useLanguage } from './language-context'
 
@@ -12,8 +11,8 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
-      {/* Background Video with Conservative Mobile Optimization */}
-      <HeroVideo 
+      {/* Background Video with Smart Mobile Optimization */}
+      <SmartMobileVideo 
         src="/gitness-spline-test (1).mp4"
         fallbackClassName="animate-pulse"
       />

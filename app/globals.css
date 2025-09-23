@@ -185,17 +185,38 @@ body {
     perspective: 1000px;
     will-change: transform, opacity;
     
-    /* Reduce rendering complexity */
-    filter: none;
+    /* Optimize for smooth playback */
     image-rendering: optimizeSpeed;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
     
     /* Better mobile performance */
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000px;
+    -webkit-image-rendering: optimizeSpeed;
+    
+    /* Reduce GPU load */
+    filter: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    
+    /* Optimize compositing */
+    isolation: isolate;
+    contain: layout style paint;
   }
   
-  /* Note: Video is now controlled by JavaScript logic instead of CSS */
+  /* Force hardware acceleration on mobile */
+  .hero-video::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    transform: translateZ(0);
+    pointer-events: none;
+  }
 }
 
 /* Smooth video loading transitions */
