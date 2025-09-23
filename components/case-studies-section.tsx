@@ -132,9 +132,9 @@ export function CaseStudiesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-heading-2 mb-6">{lang === 'tr' ? 'Kullanım Senaryoları' : 'Use-Cases'}</h2>
+          <h2 className="text-heading-2 mb-6">{lang === 'tr' ? 'Modüller' : 'Modules'}</h2>
           <p className="text-body-large max-w-3xl mx-auto">
-            {lang === 'tr' ? 'İşletme operasyonlarınızdaki her alanı kapsayacak şekilde tasarlanmış kapsamlı modül paketimizi keşfedin.' : 'Explore our comprehensive suite of modules designed to address every aspect of your business operations and growth.'}
+            {lang === 'tr' ? 'CERTI\'nin, doküman kontrolden müşteri memnuniyetine kadar operasyonlarınızı nasıl güçlendirdiğini keşfedin.' : 'Discover how CERTI elevates quality management across your operations—from document control to customer satisfaction.'}
           </p>
         </motion.div>
 
