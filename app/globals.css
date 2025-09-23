@@ -162,6 +162,25 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Prevent initial content flash */
+body.loading {
+  overflow: hidden;
+}
+
+/* Loading screen animations */
+@keyframes loadingPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading-spinner {
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }

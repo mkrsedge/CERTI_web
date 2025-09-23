@@ -9,6 +9,7 @@ import { CaseStudiesSection } from '@/components/case-studies-section'
 import { PricingSection } from '@/components/pricing-section'
 import { DemoSection } from '@/components/demo-section'
 import { Footer } from '@/components/footer'
+import { LoadingScreen } from '@/components/loading-screen'
 import Script from 'next/script'
 
 export default function Home() {
@@ -158,7 +159,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <LoadingScreen minimumLoadingTime={1200}>
       {/* Load GSAP for navigation animations */}
       <Script 
         src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" 
@@ -202,7 +203,7 @@ export default function Home() {
       </main>
       
       <Footer />
-    </>
+    </LoadingScreen>
   )
 }
 
