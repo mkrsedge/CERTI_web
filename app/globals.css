@@ -153,15 +153,20 @@
 }
 
 html {
-  scroll-behavior: auto;
-  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Neue Machina', var(--font-inter), sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 /* Prevent initial content flash */

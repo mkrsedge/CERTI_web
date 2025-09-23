@@ -27,7 +27,7 @@ export function SimpleVideo({ src, className = '' }: SimpleVideoProps) {
     }
 
     const handleCanPlay = () => {
-      // Simple autoplay attempt
+      // Try to play the video
       video.play().catch(() => {
         // Ignore autoplay errors - video will still be visible
       })
@@ -46,7 +46,7 @@ export function SimpleVideo({ src, className = '' }: SimpleVideoProps) {
 
   return (
     <div className={`absolute inset-0 w-full h-full ${className}`}>
-      {/* Simple fallback background */}
+      {/* Fallback background */}
       {(hasError || !isLoaded) && (
         <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100" />
       )}
@@ -59,7 +59,7 @@ export function SimpleVideo({ src, className = '' }: SimpleVideoProps) {
         muted
         playsInline
         preload="metadata"
-        className={`w-full h-full object-cover transition-opacity duration-1000 ${
+        className={`w-full h-full object-cover hero-video transition-opacity duration-1000 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
         style={{ objectPosition: 'center' }}
