@@ -10,8 +10,8 @@ const dict: I18nDict = {
     // Nav
     'nav.home': 'Home',
     'nav.overview': 'Overview',
-    'nav.modules': 'Use Cases',
-    'nav.caseStudies': 'Modules',
+    'nav.modules': 'Modules',
+    'nav.caseStudies': 'Case Studies',
     'nav.pricing': 'Pricing',
     'nav.demo': 'Book a Demo',
     'nav.toggle.toTR': 'Switch to Turkish',
@@ -181,8 +181,8 @@ const dict: I18nDict = {
     // Nav
     'nav.home': 'Ana Sayfa',
     'nav.overview': 'Genel Bakış',
-    'nav.modules': 'Kullanım Senaryoları',
-    'nav.caseStudies': 'Modüller',
+    'nav.modules': 'Modüller',
+    'nav.caseStudies': 'Kullanım Senaryoları',
     'nav.pricing': 'Fiyatlandırma',
     'nav.demo': 'Demo Talep Et',
     'nav.toggle.toTR': 'Türkçe’ye geç',
@@ -235,7 +235,7 @@ const dict: I18nDict = {
     'overview.cap.6.desc': 'Canlı metrikler ve uyum durumu.',
 
     // Modules
-    'modules.header': 'Kullanım Senaryoları',
+    'modules.header': 'Modüller',
     'modules.sub': 'CERTI’nin, doküman kontrolden müşteri memnuniyetine kadar operasyonlarınızı nasıl güçlendirdiğini keşfedin.',
     'modules.1.title': 'Akıllı Doküman Yönetimi',
     'modules.1.sub': 'Akıllı Doküman Kontrolü',

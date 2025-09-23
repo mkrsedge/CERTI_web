@@ -43,7 +43,7 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">{t('footer.products')}</h3>
             <ul className="space-y-2">
-              <li><a href="#modules" onClick={(e) => handleSectionClick('modules', e)} className="hover:text-white transition-colors">{t('footer.coreModules')}</a></li>
+              <li><a href="#modules" onClick={(e) => handleSectionClick('modules', e)} className="hover:text-white transition-colors">{t('nav.modules')}</a></li>
               <li><a href="#case-studies" onClick={(e) => handleSectionClick('case-studies', e)} className="hover:text-white transition-colors">{t('nav.caseStudies')}</a></li>
             </ul>
           </div>
