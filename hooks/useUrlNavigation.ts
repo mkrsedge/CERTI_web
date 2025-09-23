@@ -81,14 +81,29 @@ export function useUrlNavigation() {
   useEffect(() => {
     if (typeof window === 'undefined') return
     
-    const currentSection = getCurrentSection()
-    const langPrefix = lang === 'tr' ? '/tr' : '/en'
-    const expectedUrl = `${window.location.origin}${langPrefix}#${currentSection}`
+    // Don't automatically correct URLs that are already in the correct format
+    // This prevents redirecting from /tr#usecases to /en#usecases
+    const currentPath = window.location.pathname
+    const currentHash = window.location.hash
     
-    // Only update if URL doesn't match expected format
-    if (window.location.pathname !== langPrefix || window.location.hash !== `#${currentSection}`) {
-      window.history.replaceState({}, '', expectedUrl)
+    // If we're already on a language-specific URL with a hash, don't change it
+    if ((currentPath === '/tr' || currentPath === '/en') && currentHash) {
+      return
     }
+    
+    // Only update if URL doesn't match expected format for non-language-specific URLs
+    const timer = setTimeout(() => {
+      const currentSection = getCurrentSection()
+      const langPrefix = lang === 'tr' ? '/tr' : '/en'
+      const expectedUrl = `${window.location.origin}${langPrefix}#${currentSection}`
+      
+      // Only update if we're on the root path without a language prefix
+      if (window.location.pathname === '/' && !window.location.hash) {
+        window.history.replaceState({}, '', expectedUrl)
+      }
+    }, 100)
+    
+    return () => clearTimeout(timer)
   }, [lang])
 
   return {
