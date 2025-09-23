@@ -223,7 +223,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#modules" className="nav-menu__link" data-section="modules" onClick={(e) => handleSectionClick('modules', e)}>
+            <a href="#usecases" className="nav-menu__link" data-section="usecases" onClick={(e) => handleSectionClick('usecases', e)}>
               <div className="nav-menu__number">03</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -232,7 +232,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#case-studies" className="nav-menu__link" data-section="case-studies" onClick={(e) => handleSectionClick('case-studies', e)}>
+            <a href="#modules" className="nav-menu__link" data-section="modules" onClick={(e) => handleSectionClick('modules', e)}>
               <div className="nav-menu__number">04</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">

@@ -19,7 +19,7 @@ export default function Home() {
   // Handle scroll-based navigation
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'overview', 'modules', 'case-studies', 'pricing', 'demo']
+      const sections = ['home', 'overview', 'usecases', 'modules', 'pricing', 'demo']
       const scrollPosition = window.scrollY + 150 // Increased offset for better detection
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -185,11 +185,11 @@ export default function Home() {
           <OverviewSection />
         </div>
         
-        <div id="modules" className="section" data-section="modules">
+        <div id="usecases" className="section" data-section="usecases">
           <CaseStudiesSection />
         </div>
         
-        <div id="case-studies" className="section" data-section="case-studies">
+        <div id="modules" className="section" data-section="modules">
           <ModulesSection />
         </div>
         
