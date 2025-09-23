@@ -110,8 +110,8 @@ export function DemoSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-light text-white mb-6">{t('demo.title')}</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">{t('demo.lead')}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">{t('demo.title')}</h2>
+          <p className="text-xl text-brand-secondary/80 max-w-3xl mx-auto">{t('demo.lead')}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
