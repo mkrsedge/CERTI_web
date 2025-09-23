@@ -11,7 +11,7 @@ export function ModulesSection() {
   const icons = [
     // DocCore
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="4" width="18" height="16" rx="2"/>
         <path d="M7 8h10"/>
         <path d="M7 12h6"/>
@@ -20,7 +20,7 @@ export function ModulesSection() {
     ),
     // Audit
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <path d="M7 10l5 5 5-5"/>
         <path d="M12 15V3"/>
@@ -28,13 +28,13 @@ export function ModulesSection() {
     ),
     // Resolve
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M20 6L9 17l-5-5"/>
       </svg>
     ),
     // Complaints/Slate
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/>
         <path d="M8 12h8"/>
         <path d="M12 8v8"/>
@@ -90,8 +90,8 @@ export function ModulesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">{t('modules.header')}</h2>
-          <p className="text-xl text-brand-secondary/80 max-w-3xl mx-auto">{t('modules.sub')}</p>
+          <h2 className="text-heading-2 mb-6">{t('modules.header')}</h2>
+          <p className="text-body-large max-w-3xl mx-auto">{t('modules.sub')}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">

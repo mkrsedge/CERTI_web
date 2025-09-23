@@ -302,8 +302,8 @@ export function OverviewSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">{t('overview.header')}</h2>
-          <p className="text-xl text-brand-secondary/80 max-w-3xl mx-auto leading-relaxed">{t('overview.sub')}</p>
+          <h2 className="text-heading-2 mb-6">{t('overview.header')}</h2>
+          <p className="text-body-large max-w-3xl mx-auto leading-relaxed">{t('overview.sub')}</p>
         </motion.div>
 
         {/* Portrait-only swipeable Journey Cards (below header) */}

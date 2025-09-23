@@ -95,7 +95,7 @@ export function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-brand-secondary mb-6"
+            className="text-heading-2 mb-6"
           >
             {t('pricing.header')}
           </motion.h2>
@@ -103,7 +103,7 @@ export function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-brand-secondary/80 max-w-2xl mx-auto"
+            className="text-body-large max-w-2xl mx-auto"
           >
             {t('pricing.sub')}
           </motion.p>
