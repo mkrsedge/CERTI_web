@@ -15,19 +15,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${base}/#overview`,
+      url: `${base}/en`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${base}/#modules`,
+      url: `${base}/tr`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${base}/#overview`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${base}/#case-studies`,
+      url: `${base}/#usecases`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${base}/#modules`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.7,
@@ -36,13 +48,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/#pricing`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${base}/#demo`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.7,
     },
   ]
 }
