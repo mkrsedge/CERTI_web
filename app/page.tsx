@@ -16,6 +16,33 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('home')
   const mainRef = useRef<HTMLElement>(null)
 
+  // Handle initial hash navigation on page load
+  useEffect(() => {
+    const handleInitialHash = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash && hash !== 'home') {
+        // Wait for the page to fully load before scrolling
+        setTimeout(() => {
+          const element = document.getElementById(hash)
+          if (element) {
+            const headerOffset = 80
+            const elementPosition = element.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            })
+            setActiveSection(hash)
+          }
+        }, 100)
+      }
+    }
+
+    // Handle initial hash on page load
+    handleInitialHash()
+  }, [])
+
   // Handle scroll-based navigation
   useEffect(() => {
     const handleScroll = () => {

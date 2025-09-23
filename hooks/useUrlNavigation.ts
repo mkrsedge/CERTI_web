@@ -37,17 +37,42 @@ export function useUrlNavigation() {
     }
   }
 
-  // Listen for browser back/forward buttons
+  // Listen for browser back/forward buttons and handle initial hash
   useEffect(() => {
-    const handlePopState = () => {
+    const handleNavigation = () => {
       const section = getCurrentSection()
       // Scroll to section if it exists
       const element = document.getElementById(section)
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
+        const headerOffset = 80
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
       }
     }
 
+    // Handle initial hash on page load
+    const handleInitialHash = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash) {
+        // Wait for the page to fully load before scrolling
+        setTimeout(handleNavigation, 100)
+      }
+    }
+
+    // Handle popstate (back/forward buttons)
+    const handlePopState = () => {
+      setTimeout(handleNavigation, 50)
+    }
+
+    // Handle initial load
+    handleInitialHash()
+    
+    // Handle browser navigation
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
