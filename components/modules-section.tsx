@@ -134,7 +134,7 @@ export function ModulesSection() {
         >
           <h2 className="text-heading-2 mb-6">{lang === 'tr' ? 'Modüller' : 'Modules'}</h2>
           <p className="text-body-large max-w-3xl mx-auto">
-            {lang === 'tr' ? 'CERTI\'nin, doküman kontrolden müşteri memnuniyetine kadar operasyonlarınızı nasıl güçlendirdiğini keşfedin.' : 'Discover how CERTI elevates quality management across your operations—from document control to customer satisfaction.'}
+            {lang === 'tr' ? 'CERTI\'nin temel modüllerini keşfedin - her biri kalite yönetiminin farklı bir alanını ele alan güçlü araçlar.' : 'Explore CERTI\'s core modules - powerful tools that each address a different aspect of quality management.'}
           </p>
         </motion.div>
 
