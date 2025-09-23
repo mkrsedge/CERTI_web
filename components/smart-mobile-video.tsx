@@ -108,6 +108,7 @@ export function SmartMobileVideo({
           // Add subtle optimizations that don't break playback
           video.style.imageRendering = 'optimizeSpeed' as any
           video.style.setProperty('image-rendering', 'optimizeSpeed')
+          video.style.setProperty('-webkit-image-rendering', 'optimizeSpeed')
           
           // Optimize for mobile GPUs
           video.style.filter = 'contrast(1.05) saturate(1.02)' // Minimal processing
@@ -179,8 +180,7 @@ export function SmartMobileVideo({
           perspective: '1000px',
           willChange: 'transform, opacity',
           // Reduce rendering complexity for mobile
-          imageRendering: 'optimizeSpeed' as any,
-          WebkitImageRendering: 'optimizeSpeed' as any
+          imageRendering: 'optimizeSpeed' as any
         }}
         // Mobile-specific attributes for better performance
         disablePictureInPicture
