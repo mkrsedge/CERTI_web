@@ -7,6 +7,13 @@ import { useLanguage } from './language-context'
 export function PricingSection() {
   const { t } = useLanguage()
   const [selected, setSelected] = useState<null | 'lite' | 'standard' | 'fullqms'>(null)
+  
+  // Module definitions for each bundle
+  const bundleModules = {
+    lite: ['DocCore'],
+    standard: ['DocCore', 'ResolveCore', 'AuditCore'],
+    fullqms: ['DocCore', 'ResolveCore', 'AuditCore', 'SupplyCore', 'SkillCore']
+  }
   const comparisonFeatures = [
     {
       category: "Smart Doc Management",
@@ -123,14 +130,21 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('lite')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'lite' ? 'border-blue-300 ring-2 ring-blue-200' : 'border-gray-100'
+                  selected === 'lite' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <div className="text-lg font-semibold text-gray-900">Lite</div>
+                    <div className={`text-lg font-semibold ${selected === 'lite' ? 'text-blue-900' : 'text-gray-900'}`}>Lite</div>
                     <div className="text-gray-500 text-sm">Entry-level document control</div>
                   </div>
+                  {selected === 'lite' && (
+                    <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </button>
 
@@ -139,14 +153,21 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('standard')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'standard' ? 'border-blue-300 ring-2 ring-blue-200' : 'border-gray-100'
+                  selected === 'standard' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <div className="text-lg font-semibold text-gray-900">Standard</div>
+                    <div className={`text-lg font-semibold ${selected === 'standard' ? 'text-blue-900' : 'text-gray-900'}`}>Standard</div>
                     <div className="text-gray-500 text-sm">Advanced audit + CAPA</div>
                   </div>
+                  {selected === 'standard' && (
+                    <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </button>
 
@@ -155,17 +176,61 @@ export function PricingSection() {
                 type="button"
                 onClick={() => setSelected('fullqms')}
                 className={`text-left bg-white rounded-2xl border-2 p-6 shadow-sm hover:shadow-md transition-all duration-300 group h-full ${
-                  selected === 'fullqms' ? 'border-blue-300 ring-2 ring-blue-200' : 'border-gray-100'
+                  selected === 'fullqms' ? 'border-blue-500 ring-2 ring-blue-200 bg-blue-50' : 'border-gray-100 hover:border-blue-200'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <div className="text-lg font-semibold text-gray-900">Full QMS</div>
+                    <div className={`text-lg font-semibold ${selected === 'fullqms' ? 'text-blue-900' : 'text-gray-900'}`}>Full QMS</div>
                     <div className="text-gray-500 text-sm">End-to-end automation</div>
                   </div>
+                  {selected === 'fullqms' && (
+                    <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </button>
             </div>
+
+            {/* Module Display for Selected Bundle */}
+            {selected && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-200"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    {selected === 'lite' && 'Lite Bundle Modules:'}
+                    {selected === 'standard' && 'Standard Bundle Modules:'}
+                    {selected === 'fullqms' && 'Full QMS Bundle Modules:'}
+                  </h4>
+                  <button
+                    onClick={() => setSelected(null)}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                    aria-label="Clear selection"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="flex flex-wrap justify-center gap-1.5">
+                  {bundleModules[selected].map((module, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-blue-700 border border-blue-300 shadow-sm"
+                    >
+                      {module}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            )}
 
             {/* Included in every plan */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
