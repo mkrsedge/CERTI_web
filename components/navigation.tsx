@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from './language-context'
+import { useUrlNavigation } from '@/hooks/useUrlNavigation'
 
 interface NavigationProps {
   activeSection: string
@@ -10,10 +11,29 @@ interface NavigationProps {
 
 export function Navigation({ activeSection, onSectionChange }: NavigationProps) {
   const { lang, setLang, t } = useLanguage()
+  const { navigateToSection } = useUrlNavigation()
   const [language] = useState('EN')
   const toggleLanguage = () => setLang(lang === 'en' ? 'tr' : 'en')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement | null>(null)
+
+  const handleSectionClick = (section: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    navigateToSection(section, onSectionChange)
+    
+    // Also scroll to the section
+    const element = document.getElementById(section)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
 
   useEffect(() => {
     // Initialize navigation immediately for better responsiveness
@@ -185,7 +205,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           {/* Center - Navigation Menu */}
           <div className="navbar-center">
             <span id="nav-indicator" className="nav-indicator" aria-hidden="true" />
-            <a href="#home" className="nav-menu__link nav-menu__link--current" data-section="home" onClick={(e) => { e.preventDefault(); onSectionChange('home'); }}>
+            <a href="#home" className="nav-menu__link nav-menu__link--current" data-section="home" onClick={(e) => handleSectionClick('home', e)}>
               <div className="nav-menu__number">01</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -194,7 +214,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#overview" className="nav-menu__link" data-section="overview" onClick={(e) => { e.preventDefault(); onSectionChange('overview'); }}>
+            <a href="#overview" className="nav-menu__link" data-section="overview" onClick={(e) => handleSectionClick('overview', e)}>
               <div className="nav-menu__number">02</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -203,7 +223,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#modules" className="nav-menu__link" data-section="modules" onClick={(e) => { e.preventDefault(); onSectionChange('modules'); }}>
+            <a href="#modules" className="nav-menu__link" data-section="modules" onClick={(e) => handleSectionClick('modules', e)}>
               <div className="nav-menu__number">03</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -212,7 +232,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#case-studies" className="nav-menu__link" data-section="case-studies" onClick={(e) => { e.preventDefault(); onSectionChange('case-studies'); }}>
+            <a href="#case-studies" className="nav-menu__link" data-section="case-studies" onClick={(e) => handleSectionClick('case-studies', e)}>
               <div className="nav-menu__number">04</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -221,7 +241,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#pricing" className="nav-menu__link" data-section="pricing" onClick={(e) => { e.preventDefault(); onSectionChange('pricing'); }}>
+            <a href="#pricing" className="nav-menu__link" data-section="pricing" onClick={(e) => handleSectionClick('pricing', e)}>
               <div className="nav-menu__number">05</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -230,7 +250,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#demo" className="nav-menu__link" data-section="demo" onClick={(e) => { e.preventDefault(); onSectionChange('demo'); }}>
+            <a href="#demo" className="nav-menu__link" data-section="demo" onClick={(e) => handleSectionClick('demo', e)}>
               <div className="nav-menu__number">06</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -289,12 +309,12 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             <button className="mobile-menu-close" onClick={() => setIsMenuOpen(false)} aria-label="Close menu">×</button>
           </div>
           <nav className="mobile-menu-nav" aria-label="Mobile Primary">
-            <button className="mobile-link" onClick={() => { onSectionChange('home'); setIsMenuOpen(false) }}>{t('nav.home')}</button>
-            <button className="mobile-link" onClick={() => { onSectionChange('overview'); setIsMenuOpen(false) }}>{t('nav.overview')}</button>
-            <button className="mobile-link" onClick={() => { onSectionChange('modules'); setIsMenuOpen(false) }}>{t('nav.modules')}</button>
-            <button className="mobile-link" onClick={() => { onSectionChange('case-studies'); setIsMenuOpen(false) }}>{t('nav.caseStudies')}</button>
-            <button className="mobile-link" onClick={() => { onSectionChange('pricing'); setIsMenuOpen(false) }}>{t('nav.pricing')}</button>
-            <button className="mobile-link" onClick={() => { onSectionChange('demo'); setIsMenuOpen(false) }}>{t('nav.demo')}</button>
+            <button className="mobile-link" onClick={() => { handleSectionClick('home', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.home')}</button>
+            <button className="mobile-link" onClick={() => { handleSectionClick('overview', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.overview')}</button>
+            <button className="mobile-link" onClick={() => { handleSectionClick('modules', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.modules')}</button>
+            <button className="mobile-link" onClick={() => { handleSectionClick('case-studies', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.caseStudies')}</button>
+            <button className="mobile-link" onClick={() => { handleSectionClick('pricing', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.pricing')}</button>
+            <button className="mobile-link" onClick={() => { handleSectionClick('demo', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.demo')}</button>
           </nav>
           <div className="mobile-menu-actions">
             <button className="btn-primary mobile-cta" onClick={() => { onSectionChange('demo'); setIsMenuOpen(false) }}>{t('hero.cta.primary')}</button>

@@ -1,22 +1,41 @@
 'use client'
 
 import { useLanguage } from './language-context'
+import { useUrlNavigation } from '@/hooks/useUrlNavigation'
 
 export function Footer() {
   const { t } = useLanguage()
+  const { navigateToSection } = useUrlNavigation()
+
+  const handleSectionClick = (section: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    navigateToSection(section)
+    
+    // Also scroll to the section
+    const element = document.getElementById(section)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
     <footer className="bg-gray-900 text-gray-300 py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
           {/* Company */}
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">{t('footer.company')}</h3>
             <ul className="space-y-2">
-              <li><a href="#home" className="hover:text-white transition-colors">{t('footer.home')}</a></li>
-              <li><a href="#overview" className="hover:text-white transition-colors">{t('footer.about')}</a></li>
-              <li><a href="#demo" className="hover:text-white transition-colors">{t('footer.contact')}</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">{t('footer.careers')}</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">{t('footer.news')}</a></li>
+              <li><a href="#home" onClick={(e) => handleSectionClick('home', e)} className="hover:text-white transition-colors">{t('footer.home')}</a></li>
+              <li><a href="#overview" onClick={(e) => handleSectionClick('overview', e)} className="hover:text-white transition-colors">{t('footer.about')}</a></li>
+              <li><a href="#demo" onClick={(e) => handleSectionClick('demo', e)} className="hover:text-white transition-colors">{t('footer.contact')}</a></li>
             </ul>
           </div>
 
@@ -24,25 +43,8 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">{t('footer.products')}</h3>
             <ul className="space-y-2">
-              <li><a href="#modules" className="hover:text-white transition-colors">{t('nav.caseStudies')}</a></li>
-              <li><a href="#case-studies" className="hover:text-white transition-colors">DocCore</a></li>
-              <li><a href="#case-studies" className="hover:text-white transition-colors">AuditCore</a></li>
-              <li><a href="#case-studies" className="hover:text-white transition-colors">ResolveCore</a></li>
-              <li><a href="#case-studies" className="hover:text-white transition-colors">SupplyCore</a></li>
-              <li><a href="#case-studies" className="hover:text-white transition-colors">SkillCore</a></li>
-            </ul>
-          </div>
-
-          {/* Solutions */}
-          <div>
-            <h3 className="text-white font-semibold text-lg mb-4">{t('footer.solutions')}</h3>
-            <ul className="space-y-2">
-              <li><a href="#overview" className="hover:text-white transition-colors">{t('solutions.docControl')}</a></li>
-              <li><a href="#overview" className="hover:text-white transition-colors">{t('solutions.auditMgmt')}</a></li>
-              <li><a href="#overview" className="hover:text-white transition-colors">{t('solutions.risk')}</a></li>
-              <li><a href="#overview" className="hover:text-white transition-colors">{t('solutions.training')}</a></li>
-              <li><a href="#overview" className="hover:text-white transition-colors">{t('solutions.supplier')}</a></li>
-              <li><a href="#overview" className="hover:text-white transition-colors">{t('solutions.reporting')}</a></li>
+              <li><a href="#modules" onClick={(e) => handleSectionClick('modules', e)} className="hover:text-white transition-colors">{t('footer.coreModules')}</a></li>
+              <li><a href="#case-studies" onClick={(e) => handleSectionClick('case-studies', e)} className="hover:text-white transition-colors">{t('nav.caseStudies')}</a></li>
             </ul>
           </div>
 
@@ -50,12 +52,8 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold text-lg mb-4">{t('footer.resources')}</h3>
             <ul className="space-y-2">
-              <li><a href="#pricing" className="hover:text-white transition-colors">{t('footer.pricing')}</a></li>
-              <li><a href="#demo" className="hover:text-white transition-colors">{t('footer.bookDemo')}</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">{t('footer.documentation')}</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">{t('footer.api')}</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">{t('footer.support')}</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">{t('footer.status')}</a></li>
+              <li><a href="#pricing" onClick={(e) => handleSectionClick('pricing', e)} className="hover:text-white transition-colors">{t('footer.pricing')}</a></li>
+              <li><a href="#demo" onClick={(e) => handleSectionClick('demo', e)} className="hover:text-white transition-colors">{t('footer.bookDemo')}</a></li>
             </ul>
           </div>
         </div>

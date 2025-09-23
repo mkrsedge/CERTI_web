@@ -357,15 +357,38 @@ const LanguageContext = createContext<Ctx | undefined>(undefined)
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>('en')
   useEffect(() => {
+    // Get language from URL first, then localStorage, then default to English
+    const getLanguageFromUrl = () => {
+      if (typeof window === 'undefined') return 'en'
+      const pathname = window.location.pathname
+      return pathname.startsWith('/tr') ? 'tr' : 'en'
+    }
+    
     const stored = typeof window !== 'undefined' ? (localStorage.getItem('lang') as Lang | null) : null
-    const initial: Lang = stored || ((document?.documentElement.getAttribute('lang') || 'en').startsWith('tr') ? 'tr' : 'en')
+    const urlLang = getLanguageFromUrl()
+    const initial: Lang = urlLang || stored || 'en'
+    
     setLangState(initial)
     if (typeof document !== 'undefined') document.documentElement.setAttribute('lang', initial)
   }, [])
 
   const setLang = (l: Lang) => {
     setLangState(l)
-    if (typeof window !== 'undefined') localStorage.setItem('lang', l)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lang', l)
+      
+      // Update URL to reflect language change
+      const currentPath = window.location.pathname
+      const currentHash = window.location.hash
+      const newLangPrefix = l === 'tr' ? '/tr' : '/en'
+      
+      // Remove existing language prefix and add new one
+      let newPath = currentPath.replace(/^\/[a-z]{2}/, '') || '/'
+      newPath = newPath === '/' ? newLangPrefix : `${newLangPrefix}${newPath}`
+      
+      const newUrl = `${window.location.origin}${newPath}${currentHash}`
+      window.history.pushState({}, '', newUrl)
+    }
     if (typeof document !== 'undefined') document.documentElement.setAttribute('lang', l)
   }
 
