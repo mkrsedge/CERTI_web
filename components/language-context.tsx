@@ -289,7 +289,7 @@ const dict: I18nDict = {
     'form.message.placeholder': 'Mevcut zorluklarınızı ve hedeflerinizi kısaca paylaşın…',
     'form.scheduleDemo': 'Demoyu Planla',
     'pricing.customSolution.title': 'Özel Çözüm Gerekiyor mu?',
-    'pricing.customSolution.desc': 'Kuruluşunuzun benzersiz gereksinimleri ve ölçeğine özel bir plan hazırlayabiliriz.',
+    'pricing.customSolution.desc': 'Kuruluşunuzun gereksinimleri ve ölçeğine özel bir plan hazırlayabiliriz.',
     'pricing.customSolution.contactSales': 'Satış Ekibi ile İletişim',
     'pricing.customSolution.scheduleDemo': 'Bize Ulaşın',
 
