@@ -53,6 +53,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        {/* Essential viewport meta tag for mobile responsiveness */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         {/* Structured Data: SoftwareApplication */}
         <meta charSet="utf-8" />
         <Script id="ld-software" type="application/ld+json" strategy="afterInteractive"

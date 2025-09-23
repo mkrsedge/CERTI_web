@@ -19,6 +19,8 @@ export function LoadingScreen({ children, minimumLoadingTime = 1500 }: LoadingSc
     // Ensure minimum loading time for smooth experience
     const timer = setTimeout(() => {
       setIsLoading(false)
+      // Ensure loading class is removed when loading completes
+      document.body.classList.remove('loading')
     }, minimumLoadingTime)
 
     // Also check if all critical resources are loaded
@@ -26,6 +28,8 @@ export function LoadingScreen({ children, minimumLoadingTime = 1500 }: LoadingSc
       if (document.readyState === 'complete') {
         setTimeout(() => {
           setIsLoading(false)
+          // Ensure loading class is removed when resources are loaded
+          document.body.classList.remove('loading')
         }, 500) // Small delay to ensure everything is rendered
       }
     }

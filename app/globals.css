@@ -175,10 +175,27 @@ body {
   html {
     scroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
+    /* Ensure proper mobile scrolling */
+    height: 100%;
+    overflow-x: hidden;
   }
   
   body {
     -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    /* Ensure body can scroll on mobile */
+    height: 100%;
+    position: relative;
+    /* Prevent scroll issues on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Fix for iOS bounce scroll */
+    overscroll-behavior: none;
+  }
+  
+  /* Ensure main content area is scrollable */
+  #main {
+    min-height: 100vh;
+    position: relative;
     overflow-x: hidden;
   }
 }
@@ -186,6 +203,37 @@ body {
 /* Prevent initial content flash */
 body.loading {
   overflow: hidden;
+  /* Ensure loading state doesn't persist on mobile */
+  position: fixed;
+  width: 100%;
+}
+
+/* Ensure scrolling is restored after loading */
+body:not(.loading) {
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/* Mobile-specific loading fixes */
+@media (max-width: 768px) {
+  body.loading {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    /* Prevent touch events during loading */
+    touch-action: none;
+  }
+  
+  body:not(.loading) {
+    overflow: visible;
+    position: static;
+    width: auto;
+    height: auto;
+    /* Restore touch events after loading */
+    touch-action: auto;
+  }
 }
 
 /* Ensure main content is scrollable */

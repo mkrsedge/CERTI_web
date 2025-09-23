@@ -64,6 +64,12 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
       root.classList.remove('no-scroll')
       body.classList.remove('no-scroll')
     }
+    
+    // Cleanup function to ensure classes are removed when component unmounts
+    return () => {
+      root.classList.remove('no-scroll')
+      body.classList.remove('no-scroll')
+    }
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (!isMenuOpen) return
@@ -666,7 +672,33 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
         .mobile-cta { flex: 1; padding: 12px 16px; font-size: 1rem; }
 
         /* No-scroll helper */
-        .no-scroll { overflow: hidden !important; }
+        .no-scroll { 
+          overflow: hidden !important; 
+          position: fixed !important;
+          width: 100% !important;
+          height: 100% !important;
+        }
+        
+        /* Mobile-specific no-scroll fixes */
+        @media (max-width: 768px) {
+          .no-scroll {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            height: 100% !important;
+            /* Prevent touch events when menu is open */
+            touch-action: none !important;
+          }
+          
+          /* Ensure scrolling is restored when no-scroll is removed */
+          html:not(.no-scroll), body:not(.no-scroll) {
+            overflow: visible !important;
+            position: static !important;
+            width: auto !important;
+            height: auto !important;
+            touch-action: auto !important;
+          }
+        }
 
         @media (max-width: 768px) {
           .header-cta { display: inline-flex; order: 2; }
