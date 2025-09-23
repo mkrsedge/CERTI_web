@@ -33,7 +33,7 @@ const dict: I18nDict = {
     'overview.header': 'Start Your CERTI Journey',
     'overview.sub': 'Follow a seamless path—from integration to results—that transforms quality management from chaos to controlled excellence.',
     'overview.step1.title': 'Connect your quality ecosystem',
-    'overview.step1.desc': 'Connect your drives and systems. CERTI fits into your workflow so data flows in without messy migrations.',
+    'overview.step1.desc': 'Connect your systems and processes. CERTI adapts to your workflow; data flows seamlessly without complex integrations.',
     'overview.step1.tag': 'API-first integration',
     'overview.step2.title': 'CERTI learns your organization',
     'overview.step2.desc': 'Our AI reads your SOPs, HACCP plans, and policies, then maps them to the standards you follow.',
