@@ -1,195 +1,218 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useLanguage } from './language-context'
 
 export function ModulesSection() {
   const { t, lang } = useLanguage()
-  const [activeModule, setActiveModule] = useState(0)
-  const origin = typeof window !== 'undefined' ? window.location.origin : ''
-  const icons = [
-    // DocCore
+  const [expandedModule, setExpandedModule] = useState<number | null>(null)
+
+  // Icons for Core Modules (aligned by index)
+  const moduleIcons = [
+    // DOCCORE
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="w-7 h-7 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="4" width="18" height="16" rx="2"/>
         <path d="M7 8h10"/>
         <path d="M7 12h6"/>
         <path d="M7 16h4"/>
       </svg>
     ),
-    // Audit
+    // AUDITCORE
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <path d="M7 10l5 5 5-5"/>
-        <path d="M12 15V3"/>
+      <svg viewBox="0 0 24 24" className="w-7 h-7 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M8 13l3 3 5-7"/>
       </svg>
     ),
-    // Resolve
+    // RESOLVECORE
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" className="w-7 h-7 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M20 6L9 17l-5-5"/>
       </svg>
     ),
-    // Complaints/Slate
+    // SUPPLYCORE
     (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M8 12h8"/>
-        <path d="M12 8v8"/>
+      <svg viewBox="0 0 24 24" className="w-7 h-7 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <path d="M3.27 6.96L12 12l8.73-5.04"/>
+        <path d="M12 22V12"/>
+      </svg>
+    ),
+    // SKILLCORE
+    (
+      <svg viewBox="0 0 24 24" className="w-7 h-7 icon-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M22 12l-10 6L2 12l10-6 10 6z"/>
+        <path d="M6 12v5c0 .7 4 2 6 2s6-1.3 6-2v-5"/>
       </svg>
     ),
   ]
 
   const modules = [
     {
-      title: t('modules.1.title'),
-      subtitle: t('modules.1.sub'),
-      description: t('modules.1.desc'),
-      features: ['Intelligent standards mapping', 'AI-assisted document updates', 'Centralized document control', 'Compliance tracking'],
-      color: 'from-brand-secondary/80 to-brand-secondary',
-      videoId: lang === 'tr' ? 'gzlBOoJhP4o' : 'IcV9a3_bZVY',
-      videoTitle: lang === 'tr' ? 'Akıllı Doküman Yönetimi (TR)' : 'Smart Document Management (EN)'
+      number: '01',
+      title: 'DOCCORE',
+      subtitle: lang === 'tr' ? 'Dokümanlar, her zaman denetime hazır' : 'Documents, always audit-ready',
+      description: lang === 'tr' ? 'Akıllı doküman kontrolü ve değişiklik yönetimi.' : 'Intelligent document control & change management.',
+      published: 'AUG 2024',
+      fullDescription: lang === 'tr'
+        ? 'Dokümanlarınızı her değişiklikle güncel tuttuğunuzdan emin olun. DocCore, her kalite dokümanını ilgili standart maddeleriyle ilişkilendirir; sürümleri, onay süreçlerini ve uyumluluk etkilerini tek bir ekran üzerinde uçtan uca takip etmenizi sağlar.'
+        : 'Stop guessing what each change touches. DocCore links every quality document to the clause it supports, then tracks versions, approvals, and compliance impact in a single audit trail.',
+      features: (lang === 'tr'
+        ? ['Madde bazlı doküman eşleştirme ve açıkların görünür kılınması', 'Etkisini belirten akıllı değişiklik talepleri (ilişkili prosedür ve eğitimlerle)', 'Rol bazlı onay akışları ve temiz denetim izleri', 'Revizyonlarla senkron kanıt ekleri']
+        : ['Clause-aware document mapping & gap detection', 'Smart change requests with impact guidance (linked procedures, training)', 'Role-based approvals and clean audit trails', 'Evidence attachments that stay in sync with revisions']),
+      outcome: lang === 'tr' ? 'Daha hızlı revizyonlar, daha az kör nokta, temiz kanıtlar.' : 'Faster revisions, fewer blind spots, clean evidence.'
     },
     {
-      title: t('modules.2.title'),
-      subtitle: t('modules.2.sub'),
-      description: t('modules.2.desc'),
-      features: ['Digital audit logging', 'Evidence management', 'Task assignment', 'Multi-standard support'],
-      color: 'from-brand-secondary/60 to-brand-secondary/80',
-      videoId: lang === 'tr' ? 'BB2pqvCokDQ' : '6-ug5Wme6qQ',
-      videoTitle: lang === 'tr' ? 'Denetime Hazırlık (TR)' : 'Audit Readiness (EN)'
+      number: '02',
+      title: 'AUDITCORE',
+      subtitle: lang === 'tr' ? 'Her denetimi ilk seferde başarıyla geçin' : 'Pass every audit on the first attempt',
+      description: lang === 'tr' ? 'Mobil denetimler, Yapay Zeka ön kontrolleri, anlık hazırlık durumu.' : 'Mobile audits, AI pre-checks, real-time readiness.',
+      published: 'SEP 2024',
+      fullDescription: lang === 'tr'
+        ? 'Kendi şablonlarınızla mobil denetimler gerçekleştirin, bulguları anında kaydedin ve denetçiden önce hangi maddelerin hazır olduğunu gösteren gerçek zamanlı uyum haritasını takip edin.'
+        : "Run mobile audits with your own templates, generate findings in real time, and see live clause coverage that tells you exactly what's ready and what's not—before the auditor does.",
+      features: (lang === 'tr'
+        ? ['Özelleştirilebilir kontrol listeleri ve mobil veri toplama', 'Olası uygunsuzlukları işaretleyen Yapay Zeka ön kontrolleri', 'Maddelere göre canlı kapsama paneli', 'Denetçiye sunulacak tek tık kanıt paketleri']
+        : ['Customizable checklists and mobile capture', 'AI pre-checks that flag likely non-conformances', 'Live clause coverage dashboard', 'One-click evidence packets ready for auditors']),
+      outcome: lang === 'tr' ? 'Hazırlık süresi haftalardan saatlere iner.' : 'Preparation in hours, not weeks.'
     },
     {
-      title: t('modules.3.title'),
-      subtitle: t('modules.3.sub'),
-      description: t('modules.3.desc'),
-      features: ['Guided root cause analysis', 'Task-based tracking', 'Downtime reduction', 'Real-time issue resolution'],
-      color: 'from-brand-secondary/40 to-brand-secondary/60',
-      videoId: lang === 'tr' ? 'lO1Zllt9vqs' : 'zTuzGvD0TZc',
-      videoTitle: lang === 'tr' ? 'Üretim Hattı Sorun Giderme (TR)' : 'Production Issue Resolution (EN)'
+      number: '03',
+      title: 'RESOLVECORE',
+      subtitle: lang === 'tr' ? 'Sorunları büyümeden çözün' : 'Resolve issues before they escalate',
+      description: lang === 'tr' ? 'Yapay Zeka taslaklı DÖF’ler, Kök Neden Analizi, doğrulama.' : 'AI-drafted CAPAs, RCA, and verification.',
+      published: 'OCT 2024',
+      fullDescription: lang === 'tr'
+        ? 'Sorunları ve müşteri şikayetlerini kalıcı çözümlere dönüştürün. ResolveCore kök neden analizine rehberlik eder, prosedürlerinize dayanarak DÖF taslakları üretir ve etkililik doğrulamalarını takip eder; sorunların tekrarlamasını engeller.'
+        : "Turn issues and customer complaints into lasting fixes. ResolveCore guides root cause analysis, drafts corrective and preventive actions from your procedures, and verifies effectiveness—so problems don’t return.",
+      features: (lang === 'tr'
+        ? ['Kök Neden Analizi rehberliği (örn. 5 Neden)', 'Dokümanlarınızla (örn. prosedürleriniz, risk planlarınız) bağlantılı Yapay Zeka destekli DÖF taslakları', 'Etkililik kontrolleri ve otomatik hatırlatmalar', 'Tekrarlayan riskleri izlemek için eğilim analizi']
+        : ['Root cause analysis guidance (e.g., 5 Whys)', 'AI-assisted CAPAs linked to SOPs and forms', 'Effectiveness checks with due date reminders', 'Trend analysis to track repeat risks']),
+      outcome: lang === 'tr' ? 'Tekrarlayan bulgularda ölçülebilir azalma, daha hızlı çözüm.' : 'Measurably fewer repeat findings and faster resolutions.'
     },
     {
-      title: t('modules.4.title'),
-      subtitle: t('modules.4.sub'),
-      description: t('modules.4.desc'),
-      features: ['Structured case management', 'AI-suggested corrections', 'Automated report generation', 'Customer communication'],
-      color: 'from-brand-secondary/20 to-brand-secondary/40',
-      videoId: lang === 'tr' ? 'X6jP6FoM8Tc' : 'kl5RDH5F4VQ',
-      videoTitle: lang === 'tr' ? 'Müşteri Şikayeti Yönetimi (TR)' : 'Customer Complaint Resolution (EN)'
+      number: '04',
+      title: 'SUPPLYCORE',
+      subtitle: lang === 'tr' ? 'Tedarikçilerden sürpriz yok.' : 'No surprises from suppliers.',
+      description: lang === 'tr' ? 'Tedarikçi devreye alma, dokümanlar, uygunsuzluklar.' : 'Supplier onboarding, documentation, and non-conformances.',
+      published: 'NOV 2024',
+      fullDescription: lang === 'tr'
+        ? 'Onayları, spesifikasyonları ve sertifikaları tek merkezde yönetin. Geçerlilik tarihleri yaklaşmadan uyarılar alın; uygunsuzlukları kaydedip sorunları doğrudan DÖF akışına yönlendirin—tedarikçi kaynaklı problemleri üretim hattına yansımadan önleyin.'
+        : 'Centralize approvals, specs, and certificates. Receive reminders before expiries, log non-conformances, and route issues straight into CAPA—so production never learns about a supplier problem the hard way.',
+      features: (lang === 'tr'
+        ? ['Sertifika ve spesifikasyonlarda son tarih takibi', 'Zamanında doküman, olay ve eğilimlerle tedarikçi puanlama/panelleri', 'Tedarikçi olaylarının DÖF’e aktarımı', 'Devreye alma iş akışları ve doküman toplama']
+        : ['Expiry tracking for certs & specs', 'Supplier scoring and performance dashboards (on-time docs, incidents, trend lines)', 'Supplier incidents to CAPA handoff', 'Onboarding workflows and doc collection']),
+      outcome: lang === 'tr' ? 'Güvenilir tedarik zinciri, daha güçlü denetimler.' : 'A more reliable supply chain and stronger audits.'
+    },
+    {
+      number: '05',
+      title: 'SKILLCORE',
+      subtitle: lang === 'tr' ? 'İşgücü uyumluluğu otomatik pilotta' : 'Workforce compliance on autopilot',
+      description: lang === 'tr' ? 'Eğitim, yetkinlik ve sertifikasyonlar otomatik pilotta.' : 'Workforce training, skills & certifications on autopilot.',
+      published: 'DEC 2024',
+      fullDescription: lang === 'tr'
+        ? 'Sertifika ve eğitim gerekliliklerini merkezileştirin. Rol ve lokasyona göre doğru aksiyonları önerin; tamamlamayı teşvik edin ve dışa aktarılabilir kayıtlarla işgücü uyumluluğunu her zaman güvence altına alın.'
+        : 'When a certification or training is required, SkillCore auto-suggests the right actions by role and site, encourages completion, and maintains a clean, exportable trail—so workforce compliance never falls behind.',
+      features: (lang === 'tr'
+        ? ['Yetkinlik belgeleri, eğitim kayıtları ve beyanlarda merkezi arşiv', 'Son tarih takibi ve yenileme bildirimleri', 'SOP değişiklikleri ve DÖF aksiyonlarından otomatik atamalar', 'Rol/lokasyon matrisleri, boşluk uyarıları ve artan hatırlatmalar']
+        : ['Centralized credentials, training records, and attestations with fast search', 'Expiry tracking and renewals with notifications to employees & supervisors', 'Auto-assignments from SOP changes and CAPA actions with due date rules', 'Role/site coverage matrix with gap alerts and escalating reminders']),
+      outcome: lang === 'tr' ? 'Eğitime bağlı bulgularda azalma, sürpriz son tarihler yok, denetime hazır kayıtlar.' : 'Fewer training-related findings, zero-surprise expiries, audit-ready records.'
     }
   ]
 
   return (
-    <section className="min-h-screen bg-white px-6 py-20">
-      <div className="content-container">
+    <section id="case-studies" className="min-h-screen bg-white px-4 py-16">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-heading-2 mb-6">{t('modules.header')}</h2>
-          <p className="text-body-large max-w-3xl mx-auto">{t('modules.sub')}</p>
+          <h2 className="text-heading-2 mb-6">{lang === 'tr' ? 'Modüller' : 'Modules'}</h2>
+          <p className="text-body-large max-w-3xl mx-auto">
+            {lang === 'tr' ? 'CERTI\'nin, doküman kontrolden müşteri memnuniyetine kadar operasyonlarınızı nasıl güçlendirdiğini keşfedin.' : 'Discover how CERTI elevates quality management across your operations—from document control to customer satisfaction.'}
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Module Navigation */}
-          <div className="space-y-4">
+        {/* Module Sections */}
+        <div className="space-y-12">
             {modules.map((module, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 flex items-start gap-3 ${
-                  activeModule === index
-                    ? 'bg-white shadow-lg border-l-4 border-[#a9aecf]'
-                    : 'bg-transparent hover:bg-white hover:shadow-md'
-                }`}
-                onClick={() => setActiveModule(index)}
-              >
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
-                  <p className="text-gray-600 text-sm">{module.subtitle}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Module Details */}
-          <motion.div
-            key={activeModule}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="app-card p-8"
-          >
-            {/* Video Section with framed viewport */}
-            {modules[activeModule].videoId ? (
-              <div className="mb-8">
-                <div className="aspect-video w-full rounded-xl overflow-hidden bg-gray-100 relative">
-                  <div className={`absolute inset-0 pointer-events-none rounded-xl p-[2px]`} style={{background: 'linear-gradient(135deg, rgba(99,102,241,0.4), rgba(255,237,172,0.4))'}} />
-                  <div className="absolute inset-[2px] rounded-[10px] overflow-hidden">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube-nocookie.com/embed/${modules[activeModule].videoId}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1${origin ? `&origin=${encodeURIComponent(origin)}` : ''}`}
-                    title={modules[activeModule].title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    loading="lazy"
-                    referrerPolicy="origin-when-cross-origin"
-                    allowFullScreen
-                    className="w-full h-full"
-                    onError={(e) => {
-                      const iframe = e.currentTarget as HTMLIFrameElement
-                      // Fallback to standard domain if nocookie domain encounters restrictions
-                      const id = modules[activeModule].videoId
-                      iframe.src = `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1${origin ? `&origin=${encodeURIComponent(origin)}` : ''}`
-                    }}
-                  ></iframe>
-                  </div>
-                </div>
-
-              </div>
-            ) : (
-              <div className="mb-8">
-                <div className="aspect-video w-full rounded-xl bg-gray-100 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${modules[activeModule].color} flex items-center justify-center mb-4 mx-auto`}>
-                      <div className="text-white text-2xl font-bold">
-                        {modules[activeModule].title.split(' ').map(word => word[0]).join('')}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="relative"
+            >
+              <div className="bg-white rounded-3xl border-4 p-8 md:p-12 relative overflow-hidden" style={{borderColor: '#3e2723'}}>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                  <div className="lg:col-span-8">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner" style={{ backgroundColor: '#ffedac' }}>
+                        {moduleIcons[index]}
                       </div>
-                    </div>
-                    <p className="text-gray-500">Video coming soon</p>
+                      <h3 className="text-3xl md:text-5xl font-bold leading-tight uppercase tracking-wide" style={{color: '#3e2723'}}>
+                        {module.title}
+                      </h3>
+                </div>
+                    <p className="text-lg md:text-xl leading-relaxed max-w-3xl" style={{color: '#3e2723'}}>
+                      {module.description}
+                    </p>
+          </div>
+                  <div className="lg:col-span-4 flex justify-end">
+                    <button
+                      onClick={() => setExpandedModule(expandedModule === index ? null : index)}
+                      className="px-8 py-4 font-bold text-xl transition-colors uppercase tracking-wide rounded-full shadow-lg"
+                      style={{backgroundColor: '#ffedac', color: '#3e2723'}}
+                    >
+                      {lang === 'tr' ? 'DETAYLAR' : 'DETAILS'}
+                    </button>
                   </div>
                 </div>
+
+                <AnimatePresence>
+                  {expandedModule === index && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-6 mt-6 border-top border-gray-200">
+                        <h4 className="text-3xl font-bold mb-6 uppercase tracking-wide" style={{color: '#3e2723'}}>
+                          {module.subtitle}
+                        </h4>
+                        <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                          {module.fullDescription}
+                        </p>
+                        <div className="grid grid-cols-1 gap-8">
+                          <div>
+                            <h5 className="text-xl font-bold mb-6 uppercase tracking-wide" style={{color: '#3e2723'}}>{lang === 'tr' ? 'Temel Yetenekler:' : 'Key Capabilities:'}</h5>
+                            <ul className="space-y-3">
+                              {module.features.map((feature: string, featureIndex: number) => (
+                                <li key={featureIndex} className="flex items-start gap-3">
+                                  <div className="w-3 h-3 rounded-full mt-1 flex-shrink-0" style={{backgroundColor: '#3e2723'}}></div>
+                                  <span className="text-gray-700 text-base leading-relaxed">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="text-gray-700 text-base leading-relaxed font-medium mt-6"><span className="uppercase tracking-wide font-bold" style={{color: '#3e2723'}}>{lang === 'tr' ? 'Sonuç: ' : 'Outcome: '}</span>{module.outcome}</p>
+                          </div>
               </div>
-            )}
-            
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center">
-                {icons[activeModule]}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900">{modules[activeModule].title}</h3>
-            </div>
-
-            <p className="text-[#a9aecf] font-medium mb-4">{modules[activeModule].subtitle}</p>
-
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              {modules[activeModule].description}
-            </p>
-
-            {/* Key features removed previously to keep layout minimal */}
-
-
           </motion.div>
+          ))}
         </div>
       </div>
     </section>
   )
 }
-
-

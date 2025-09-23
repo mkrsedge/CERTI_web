@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { Navigation } from '@/components/navigation'
 import { HeroSection } from '@/components/hero-section'
 import { OverviewSection } from '@/components/overview-section'
+import { UseCasesSection } from '@/components/use-cases-section'
 import { ModulesSection } from '@/components/modules-section'
-import { CaseStudiesSection } from '@/components/case-studies-section'
 import { PricingSection } from '@/components/pricing-section'
 import { DemoSection } from '@/components/demo-section'
 import { Footer } from '@/components/footer'
@@ -186,11 +186,11 @@ export default function Home() {
         </div>
         
         <div id="usecases" className="section" data-section="usecases">
-          <ModulesSection />
+          <UseCasesSection />
         </div>
         
         <div id="modules" className="section" data-section="modules">
-          <CaseStudiesSection />
+          <ModulesSection />
         </div>
         
         <div id="pricing" className="section" data-section="pricing">
