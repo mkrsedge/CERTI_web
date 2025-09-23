@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
 import { HeroVideo } from './hero-video'
+import { MobileVideoOptimizer, VideoFallback } from './mobile-video-optimizer'
 import { VideoDiagnostics } from './video-diagnostics'
 import { useLanguage } from './language-context'
 
@@ -11,11 +12,15 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
-      {/* Background Video with Fallback */}
-      <HeroVideo 
-        src="/gitness-spline-test (1).mp4"
-        fallbackClassName="animate-pulse"
-      />
+      {/* Background Video with Mobile Optimization */}
+      <MobileVideoOptimizer 
+        fallbackComponent={<VideoFallback />}
+      >
+        <HeroVideo 
+          src="/gitness-spline-test (1).mp4"
+          fallbackClassName="animate-pulse"
+        />
+      </MobileVideoOptimizer>
       
       {/* Brand-tinted overlay for better text readability and brand cohesion */}
       <div className="absolute inset-0" style={{ backgroundColor: 'rgba(62,39,35,0.35)' }}></div>

@@ -176,6 +176,33 @@ body {
   backface-visibility: hidden;
 }
 
+/* Mobile video optimizations */
+@media (max-width: 768px) {
+  .hero-video {
+    /* Hardware acceleration for mobile */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+    
+    /* Reduce rendering complexity */
+    filter: none;
+    image-rendering: optimizeSpeed;
+    
+    /* Better mobile performance */
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+  }
+  
+  /* Disable video on very low-end devices */
+  @media (max-device-width: 480px) and (max-device-height: 800px) {
+    .hero-video {
+      display: none;
+    }
+  }
+}
+
 /* Smooth video loading transitions */
 .video-fade-in {
   animation: videoFadeIn 1s ease-out forwards;
@@ -206,6 +233,21 @@ body {
   .hero-content {
     animation: mobileFadeIn 0.8s ease-out forwards;
   }
+  
+  /* Shimmer animation for fallback backgrounds */
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
   
   .hero-content h1 {
     animation: mobileSlideUp 0.6s ease-out 0.2s both;

@@ -20,8 +20,40 @@ export function HeroVideo({
   const [videoLoaded, setVideoLoaded] = useState(false)
   const [videoError, setVideoError] = useState(false)
   const [showFallback, setShowFallback] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [useMobileOptimizations, setUseMobileOptimizations] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const fallbackTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+
+  // Detect mobile and performance capabilities
+  useEffect(() => {
+    const checkMobileAndPerformance = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                             window.innerWidth <= 768
+      
+      setIsMobile(isMobileDevice)
+      
+      // Check for performance capabilities
+      const hasLowMemory = (navigator as any).deviceMemory && (navigator as any).deviceMemory <= 2
+      const hasSlowConnection = (navigator as any).connection && 
+                               ((navigator as any).connection.effectiveType === 'slow-2g' || 
+                                (navigator as any).connection.effectiveType === '2g')
+      const hasLowEndDevice = hasLowMemory || hasSlowConnection || isMobileDevice
+      
+      setUseMobileOptimizations(hasLowEndDevice)
+      
+      console.log('Video optimization:', {
+        isMobile: isMobileDevice,
+        hasLowMemory,
+        hasSlowConnection,
+        useMobileOptimizations: hasLowEndDevice,
+        deviceMemory: (navigator as any).deviceMemory,
+        connectionType: (navigator as any).connection?.effectiveType
+      })
+    }
+
+    checkMobileAndPerformance()
+  }, [])
 
   // Handle video loading states
   useEffect(() => {
@@ -42,6 +74,24 @@ export function HeroVideo({
     }
 
     const handleCanPlay = () => {
+      // Apply mobile optimizations
+      if (useMobileOptimizations && video) {
+        // Reduce frame rate for smoother playback on mobile
+        video.playbackRate = 0.8 // Slightly slower for smoother playback
+        
+        // Set video quality optimizations
+        if ('requestVideoFrameCallback' in video) {
+          // Use requestVideoFrameCallback for better performance
+          const callback = () => {
+            if (video.readyState >= 2) {
+              // Video is ready, optimize further
+              video.currentTime = Math.floor(video.currentTime)
+            }
+          }
+          ;(video as any).requestVideoFrameCallback(callback)
+        }
+      }
+      
       // Video can play, try to play it
       video.play().catch((error) => {
         console.warn('Autoplay failed:', error)
@@ -91,11 +141,26 @@ export function HeroVideo({
         loop
         muted
         playsInline
-        preload="metadata"
+        preload={useMobileOptimizations ? "none" : "metadata"}
         className={`w-full h-full object-cover hero-video transition-opacity duration-1000 ${
           videoLoaded ? 'opacity-100' : 'opacity-0'
         } ${className}`}
-        style={{ objectPosition: 'center' }}
+        style={{ 
+          objectPosition: 'center',
+          // Mobile optimizations
+          ...(useMobileOptimizations && {
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            perspective: '1000px',
+            willChange: 'transform'
+          })
+        }}
+        // Mobile-specific attributes
+        {...(useMobileOptimizations && {
+          disablePictureInPicture: true,
+          disableRemotePlayback: true,
+          crossOrigin: 'anonymous'
+        })}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
