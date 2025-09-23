@@ -248,7 +248,8 @@ body {
     transform: translateX(100%);
   }
 }
-  
+
+@media (max-width: 768px) {
   .hero-content h1 {
     animation: mobileSlideUp 0.6s ease-out 0.2s both;
   }
