@@ -291,7 +291,7 @@ const dict: I18nDict = {
     'pricing.customSolution.title': 'Özel Çözüm Gerekiyor mu?',
     'pricing.customSolution.desc': 'Kuruluşunuzun benzersiz gereksinimleri ve ölçeğine özel bir plan hazırlayabiliriz.',
     'pricing.customSolution.contactSales': 'Satış Ekibi ile İletişim',
-    'pricing.customSolution.scheduleDemo': 'Satış Ekibine Ulaş',
+    'pricing.customSolution.scheduleDemo': 'Bize Ulaşın',
 
     // Pricing (headings and shared labels)
     'pricing.header': 'Fiyatlandırma',
