@@ -227,7 +227,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               <div className="nav-menu__number">03</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">{t('nav.modules')}</span>
+                  <span className="nav-menu__word">{t('nav.caseStudies')}</span>
                 </div>
               </div>
             </a>
@@ -236,7 +236,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               <div className="nav-menu__number">04</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
-                  <span className="nav-menu__word">{t('nav.caseStudies')}</span>
+                  <span className="nav-menu__word">{t('nav.modules')}</span>
                 </div>
               </div>
             </a>

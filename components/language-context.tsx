@@ -10,8 +10,8 @@ const dict: I18nDict = {
     // Nav
     'nav.home': 'Home',
     'nav.overview': 'Overview',
-    'nav.modules': 'Modules',
-    'nav.caseStudies': 'Use-Cases',
+    'nav.modules': 'Use-Cases',
+    'nav.caseStudies': 'Modules',
     'nav.pricing': 'Pricing',
     'nav.demo': 'Book a Demo',
     'nav.toggle.toTR': 'Switch to Turkish',
@@ -181,8 +181,8 @@ const dict: I18nDict = {
     // Nav
     'nav.home': 'Ana Sayfa',
     'nav.overview': 'Genel Bakış',
-    'nav.modules': 'Modüller',
-    'nav.caseStudies': 'Kullanım Senaryoları',
+    'nav.modules': 'Kullanım Senaryoları',
+    'nav.caseStudies': 'Modüller',
     'nav.pricing': 'Fiyatlandırma',
     'nav.demo': 'Demo Talep Et',
     'nav.toggle.toTR': 'Türkçe’ye geç',
