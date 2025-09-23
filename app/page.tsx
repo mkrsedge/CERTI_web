@@ -186,11 +186,11 @@ export default function Home() {
         </div>
         
         <div id="modules" className="section" data-section="modules">
-          <ModulesSection />
+          <CaseStudiesSection />
         </div>
         
         <div id="case-studies" className="section" data-section="case-studies">
-          <CaseStudiesSection />
+          <ModulesSection />
         </div>
         
         <div id="pricing" className="section" data-section="pricing">

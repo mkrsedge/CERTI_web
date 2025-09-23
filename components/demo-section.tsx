@@ -134,7 +134,7 @@ export function DemoSection() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     id="demo-name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
                     placeholder={lang === 'tr' ? 'Adınız Soyadınız' : 'John Doe'}
                   />
                 </div>
@@ -146,7 +146,7 @@ export function DemoSection() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     id="demo-email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
                     placeholder={lang === 'tr' ? 'ad@firma.com' : 'john@company.com'}
                   />
                 </div>
@@ -161,7 +161,7 @@ export function DemoSection() {
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     id="demo-company"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
                     placeholder={lang === 'tr' ? 'Firma Adı' : 'Company Name'}
                   />
                 </div>
@@ -172,7 +172,7 @@ export function DemoSection() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     id="demo-phone"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
                     placeholder={lang === 'tr' ? '+90 5xx xxx xx xx' : '+1 (555) 123-4567'}
                   />
                 </div>
@@ -205,7 +205,7 @@ export function DemoSection() {
                     value={formData.preferredDate}
                     onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
                     id="demo-preferred-date"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
                   />
                 </div>
                 <div>
@@ -215,7 +215,7 @@ export function DemoSection() {
                     value={formData.preferredTime}
                     onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
                     id="demo-preferred-time"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
                   >
                     <option value="">{t('form.preferredTime.placeholder')}</option>
                     {timeOptions.map((option) => (
@@ -234,7 +234,7 @@ export function DemoSection() {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
                   id="demo-message"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors resize-none"
                   placeholder={lang === 'tr' ? 'Mevcut zorluklarınızı ve hedeflerinizi kısaca paylaşın...' : "Briefly describe your current challenges and what you're looking to achieve..."}
                 ></textarea>
               </div>
@@ -246,7 +246,7 @@ export function DemoSection() {
                 type="submit"
                 disabled={isSubmitting}
                 className={`w-full text-white font-medium py-4 px-6 rounded-lg transition-colors duration-200 text-lg ${
-                  isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#a9aecf] hover:bg-[#9299c4]'
+                  isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand-secondary hover:bg-brand-secondary/90'
                 }`}
               >
                 {isSubmitting ? (lang === 'tr' ? 'Gönderiliyor…' : 'Sending…') : t('form.scheduleDemo')}
@@ -261,43 +261,43 @@ export function DemoSection() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <div className="bg-gray-800 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold text-white mb-4">{t('demo.expect.title')}</h3>
+            <div className="bg-brand-secondary rounded-2xl p-8">
+              <h3 className="text-xl font-semibold text-brand-primary mb-4">{t('demo.expect.title')}</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#a9aecf] rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-brand-primary rounded-full mt-2"></div>
                   <div>
-                    <div className="text-white font-medium">{t('demo.expect.1.title')}</div>
-                    <div className="text-gray-400 text-sm">{t('demo.expect.1.sub')}</div>
+                    <div className="text-brand-primary font-medium">{t('demo.expect.1.title')}</div>
+                    <div className="text-brand-primary/70 text-sm">{t('demo.expect.1.sub')}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#a9aecf] rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-brand-primary rounded-full mt-2"></div>
                   <div>
-                    <div className="text-white font-medium">{t('demo.expect.2.title')}</div>
-                    <div className="text-gray-400 text-sm">{t('demo.expect.2.sub')}</div>
+                    <div className="text-brand-primary font-medium">{t('demo.expect.2.title')}</div>
+                    <div className="text-brand-primary/70 text-sm">{t('demo.expect.2.sub')}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-[#a9aecf] rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-brand-primary rounded-full mt-2"></div>
                   <div>
-                    <div className="text-white font-medium">{t('demo.expect.3.title')}</div>
-                    <div className="text-gray-400 text-sm">{t('demo.expect.3.sub')}</div>
+                    <div className="text-brand-primary font-medium">{t('demo.expect.3.title')}</div>
+                    <div className="text-brand-primary/70 text-sm">{t('demo.expect.3.sub')}</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gray-800 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold text-white mb-4">{t('contact.title')}</h3>
-              <div className="space-y-3 text-gray-300">
+            <div className="bg-brand-secondary rounded-2xl p-8">
+              <h3 className="text-xl font-semibold text-brand-primary mb-4">{t('contact.title')}</h3>
+              <div className="space-y-3 text-brand-primary/80">
                 <div>
-                  <div className="text-[#a9aecf] font-medium">{t('contact.email')}</div>
-                  <a href="mailto:info@makers-edge.com" className="hover:underline">info@makers-edge.com</a>
+                  <div className="text-brand-primary font-medium">{t('contact.email')}</div>
+                  <a href="mailto:info@makers-edge.com" className="hover:underline text-brand-primary">info@makers-edge.com</a>
                 </div>
                 <div>
-                  <div className="text-[#a9aecf] font-medium">{t('contact.telephone')}</div>
-                  <a href={`tel:${telHref}`} className="hover:underline">{phoneNumber}</a>
+                  <div className="text-brand-primary font-medium">{t('contact.telephone')}</div>
+                  <a href={`tel:${telHref}`} className="hover:underline text-brand-primary">{phoneNumber}</a>
                 </div>
               </div>
             </div>
