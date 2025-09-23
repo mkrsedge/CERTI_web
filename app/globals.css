@@ -153,18 +153,26 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Neue Machina', var(--font-inter), sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* Prevent initial content flash */
 body.loading {
   overflow: hidden;
+}
+
+/* Ensure main content is scrollable */
+#main {
+  position: relative;
+  min-height: 100vh;
 }
 
 /* Loading screen animations */
