@@ -72,8 +72,12 @@ export function LoadingScreen({ children, minimumLoadingTime = 1500 }: LoadingSc
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="mb-8"
               >
-                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-[#3e2723] to-[#ffedac] rounded-2xl flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">C</span>
+                <div className="w-32 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <img 
+                    src="/CERTI_logo.png" 
+                    alt="CERTI Logo" 
+                    className="w-full h-full object-contain filter brightness-0 invert"
+                  />
                 </div>
               </motion.div>
 
@@ -174,6 +178,13 @@ export function MinimalLoadingScreen({ children, minimumLoadingTime = 1000 }: Lo
             className="fixed inset-0 z-50 bg-white flex items-center justify-center"
           >
             <div className="text-center">
+              <div className="w-20 h-10 mx-auto mb-4 flex items-center justify-center">
+                <img 
+                  src="/CERTI_logo.png" 
+                  alt="CERTI Logo" 
+                  className="w-full h-full object-contain filter brightness-0 invert"
+                />
+              </div>
               <div className="w-8 h-8 border-2 border-[#3e2723] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-sm text-gray-600">Yükleniyor...</p>
             </div>
