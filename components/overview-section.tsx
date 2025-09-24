@@ -181,7 +181,13 @@ export function OverviewSection() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary text-center mb-6">{t('overview.capabilities')}</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-secondary text-center mb-6">
+            {t('overview.capabilities')} - CERTI QMS Features
+          </h2>
+          <p className="text-center text-brand-secondary/70 mb-8 max-w-3xl mx-auto text-lg">
+            Discover how our <strong>Quality Management System</strong> transforms your <strong>QMS software</strong> experience. 
+            From <strong>document control</strong> to <strong>audit management</strong>, get comprehensive <strong>certi quality management</strong> solutions.
+          </p>
           <div className="relative">
             <div className="pointer-events-none absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white to-transparent z-10" />
             <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white to-transparent z-10" />
@@ -302,8 +308,15 @@ export function OverviewSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-heading-2 mb-6">{t('overview.header')}</h2>
-          <p className="text-body-large max-w-3xl mx-auto leading-relaxed">{t('overview.sub')}</p>
+          <h2 className="text-heading-2 mb-6">Start Your CERTI QMS Journey - Quality Management System Implementation</h2>
+          <p className="text-body-large max-w-3xl mx-auto leading-relaxed mb-4">
+            {t('overview.sub')}
+          </p>
+          <p className="text-body max-w-4xl mx-auto leading-relaxed text-brand-secondary/80">
+            Our <strong>CERTI QMS software</strong> provides end-to-end <strong>quality management</strong> solutions for manufacturers. 
+            Get <strong>certi compliance software</strong> that ensures <strong>ISO 9001</strong> and <strong>FDA compliance</strong> 
+            while streamlining <strong>document control</strong>, <strong>CAPA management</strong>, and <strong>supplier quality</strong> processes.
+          </p>
         </motion.div>
 
         {/* Portrait-only swipeable Journey Cards (below header) */}

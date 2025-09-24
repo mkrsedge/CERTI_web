@@ -4,7 +4,7 @@ export const dynamic = 'force-static'
 export const revalidate = 86400
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.certi.example.com'
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://getcerti.com'
   const currentDate = new Date()
   
   return [

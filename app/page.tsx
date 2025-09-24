@@ -253,6 +253,42 @@ export default function Home() {
       </main>
       
       <Footer />
+      
+      {/* SEO Content Section - Hidden but accessible to search engines */}
+      <section className="sr-only" aria-hidden="false">
+        <div className="container mx-auto px-6 py-8">
+          <h2>CERTI QMS - Complete Quality Management System Solution</h2>
+          <p>
+            <strong>Get CERTI</strong> - the leading <strong>Quality Management System</strong> for manufacturers. 
+            Our <strong>CERTI QMS software</strong> provides comprehensive <strong>certi quality management</strong> 
+            solutions that streamline your entire quality process.
+          </p>
+          
+          <h3>Why Choose CERTI QMS Software?</h3>
+          <ul>
+            <li><strong>Document Control:</strong> Advanced document management with version control and approval workflows</li>
+            <li><strong>Audit Management:</strong> Streamlined audit preparation and execution with mobile capabilities</li>
+            <li><strong>CAPA Management:</strong> AI-powered corrective and preventive action management</li>
+            <li><strong>Supplier Quality:</strong> Complete supplier onboarding and quality monitoring</li>
+            <li><strong>Training Management:</strong> Employee training tracking and certification management</li>
+            <li><strong>Risk Assessment:</strong> Comprehensive risk identification and mitigation planning</li>
+          </ul>
+          
+          <h3>Industry Compliance</h3>
+          <p>
+            <strong>CERTI compliance software</strong> ensures adherence to <strong>ISO 9001</strong>, <strong>FDA compliance</strong>, 
+            <strong>ISO 13485</strong>, and other quality standards. Our <strong>QMS software</strong> is designed for 
+            <strong>manufacturing quality</strong> excellence.
+          </p>
+          
+          <h3>Get CERTI Today</h3>
+          <p>
+            Ready to transform your quality management? <strong>Get CERTI</strong> and experience the power of 
+            AI-native <strong>certi quality management</strong>. Contact us for a personalized demo of our 
+            <strong>Quality Management System</strong>.
+          </p>
+        </div>
+      </section>
     </LoadingScreen>
   )
 }

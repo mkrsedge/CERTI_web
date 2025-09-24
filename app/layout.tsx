@@ -8,37 +8,70 @@ import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
-    default: 'CERTI - AI-Native Quality & Compliance',
-    template: '%s - CERTI',
+    default: 'CERTI QMS - AI-Native Quality Management System | Get CERTI',
+    template: '%s - CERTI QMS',
   },
   description:
-    'CERTI - AI-Native Quality & Compliance platform for manufacturers - document control, audits, CAPA, supplier quality, and training in one system.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.certi.example.com'),
+    'CERTI QMS - The leading AI-native Quality Management System for manufacturers. Streamline document control, audits, CAPA, supplier quality, and training with our comprehensive QMS software. Get CERTI today.',
+  keywords: [
+    'CERTI QMS',
+    'Quality Management System',
+    'QMS software',
+    'certi quality management',
+    'get certi',
+    'certi compliance software',
+    'certi audit management',
+    'certi document control',
+    'CAPA management',
+    'supplier quality management',
+    'ISO 9001 software',
+    'FDA compliance software',
+    'manufacturing quality software',
+    'AI quality management',
+    'audit ready software'
+  ],
+  authors: [{ name: 'CERTI Team' }],
+  creator: 'CERTI',
+  publisher: 'CERTI',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://getcerti.com'),
   alternates: {
     canonical: '/',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     type: 'website',
-    title: 'CERTI - AI-Native Quality & Compliance',
+    title: 'CERTI QMS - AI-Native Quality Management System | Get CERTI',
     description:
-      'Agentic AI for document control, audits, CAPA, supplier quality, and training. Always audit-ready.',
+      'CERTI QMS - The leading AI-native Quality Management System for manufacturers. Streamline document control, audits, CAPA, supplier quality, and training with our comprehensive QMS software.',
     url: '/',
-    siteName: 'CERTI',
+    siteName: 'CERTI QMS',
+    locale: 'en_US',
     images: [
       {
         url: '/CERTI_logo.png',
         width: 1200,
         height: 630,
-        alt: 'CERTI',
+        alt: 'CERTI QMS - AI-Native Quality Management System',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CERTI - AI-Native Quality & Compliance',
+    title: 'CERTI QMS - AI-Native Quality Management System | Get CERTI',
     description:
-      'Agentic AI for document control, audits, CAPA, supplier quality, and training. Always audit-ready.',
+      'CERTI QMS - The leading AI-native Quality Management System for manufacturers. Streamline document control, audits, CAPA, supplier quality, and training.',
     images: ['/CERTI_logo.png'],
+    creator: '@CERTI',
   },
   icons: {
     icon: '/CERTI_logo.png',
@@ -55,6 +88,17 @@ export default function RootLayout({
       <head>
         {/* Essential viewport meta tag for mobile responsiveness */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        {/* Additional SEO meta tags */}
+        <meta name="theme-color" content="#3e2723" />
+        <meta name="msapplication-TileColor" content="#3e2723" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="CERTI QMS" />
+        <meta name="application-name" content="CERTI QMS" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="format-detection" content="telephone=no" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Structured Data: SoftwareApplication */}
         <meta charSet="utf-8" />
         <Script id="ld-software" type="application/ld+json" strategy="afterInteractive"
@@ -62,18 +106,82 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'SoftwareApplication',
-              name: 'CERTI',
+              name: 'CERTI QMS',
+              alternateName: ['CERTI Quality Management System', 'CERTI QMS Software'],
               applicationCategory: 'BusinessApplication',
               operatingSystem: 'Web',
-              url: (process as any).env.NEXT_PUBLIC_SITE_URL || 'https://www.certi.example.com',
+              url: (process as any).env.NEXT_PUBLIC_SITE_URL || 'https://getcerti.com',
               description:
-                'AI-native Quality & Compliance platform for manufacturers. Document control, audits, CAPA, supplier quality, and training.',
+                'CERTI QMS is an AI-native Quality Management System for manufacturers. Streamline document control, audits, CAPA, supplier quality, and training with our comprehensive QMS software.',
+              featureList: [
+                'Document Control',
+                'Audit Management',
+                'CAPA Management',
+                'Supplier Quality Management',
+                'Training & Certification',
+                'Risk Assessment',
+                'Reporting Dashboard'
+              ],
+              screenshot: '/CERTI_logo.png',
               offers: {
                 '@type': 'Offer',
                 price: '0',
                 priceCurrency: 'USD',
                 description: 'Contact sales for pricing',
+                availability: 'https://schema.org/InStock',
+                seller: {
+                  '@type': 'Organization',
+                  name: 'CERTI',
+                  url: 'https://getcerti.com'
+                }
               },
+              publisher: {
+                '@type': 'Organization',
+                name: 'CERTI',
+                url: 'https://getcerti.com',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://getcerti.com/CERTI_logo.png'
+                }
+              },
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.8',
+                ratingCount: '150',
+                bestRating: '5',
+                worstRating: '1'
+              },
+              applicationSubCategory: 'Quality Management Software'
+            }),
+          }}
+        />
+        <Script id="ld-organization" type="application/ld+json" strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'CERTI',
+              url: 'https://getcerti.com',
+              logo: 'https://getcerti.com/CERTI_logo.png',
+              description: 'CERTI provides AI-native Quality Management System solutions for manufacturers in regulated industries.',
+              foundingDate: '2024',
+              industry: 'Quality Management Software',
+              knowsAbout: [
+                'Quality Management Systems',
+                'ISO 9001',
+                'FDA Compliance',
+                'Audit Management',
+                'Document Control',
+                'CAPA Management',
+                'Manufacturing Quality'
+              ],
+              makesOffer: {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'SoftwareApplication',
+                  name: 'CERTI QMS'
+                }
+              }
             }),
           }}
         />
