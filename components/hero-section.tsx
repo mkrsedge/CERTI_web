@@ -32,7 +32,7 @@ export function HeroSection() {
           className="max-w-4xl mx-auto"
         >
           <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
-            {`CERTI QMS: ${t('hero.title.1')}`}
+            {`CERTI: ${t('hero.title.1')}`}
             <br />
             {t('hero.title.2')}
           </h1>
@@ -47,23 +47,6 @@ export function HeroSection() {
             <br />
             {t('hero.desc.2')}
           </motion.p>
-          
-          {/* SEO-focused subtitle with primary keywords */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="text-lg md:text-xl text-brand-primary/80 mb-6 leading-relaxed max-w-4xl mx-auto"
-          >
-            <p className="mb-2">
-              <strong>Get CERTI</strong> - The leading <strong>Quality Management System</strong> for manufacturers. 
-              Streamline your <strong>QMS software</strong> with AI-powered <strong>certi quality management</strong>.
-            </p>
-            <p>
-              Perfect for <strong>ISO 9001</strong>, <strong>FDA compliance</strong>, and <strong>audit management</strong>. 
-              Always <strong>audit-ready</strong> with <strong>certi compliance software</strong>.
-            </p>
-          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

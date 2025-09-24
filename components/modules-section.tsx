@@ -132,16 +132,9 @@ export function ModulesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-heading-2 mb-6">
-            {lang === 'tr' ? 'CERTI QMS Modülleri' : 'CERTI QMS Modules - Quality Management System Components'}
-          </h2>
-          <p className="text-body-large max-w-3xl mx-auto mb-4">
+          <h2 className="text-heading-2 mb-6">{lang === 'tr' ? 'Modüller' : 'Modules'}</h2>
+          <p className="text-body-large max-w-3xl mx-auto">
             {lang === 'tr' ? 'CERTI\'nin temel modüllerini keşfedin — kalite yönetiminin her alanı için tasarlanmış akıllı çözümler' : 'Explore CERTI\'s core modules - powerful tools that each address a different aspect of quality management'}
-          </p>
-          <p className="text-body max-w-4xl mx-auto leading-relaxed text-brand-secondary/80">
-            Our comprehensive <strong>QMS software</strong> modules provide everything you need for <strong>certi quality management</strong>. 
-            From <strong>document control</strong> and <strong>audit management</strong> to <strong>CAPA management</strong> and <strong>supplier quality</strong>, 
-            get complete <strong>certi compliance software</strong> solutions that ensure <strong>ISO 9001</strong> and <strong>FDA compliance</strong>.
           </p>
         </motion.div>
 
