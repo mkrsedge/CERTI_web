@@ -1,60 +1,26 @@
 import type { MetadataRoute } from 'next'
 
-export const dynamic = 'force-static'
-export const revalidate = 86400
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://getcerti.com'
-  const currentDate = new Date()
+  const base = 'https://getcerti.com'
   
   return [
     {
       url: `${base}/`,
-      lastModified: currentDate,
+      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: `${base}/en`,
-      lastModified: currentDate,
+      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
       url: `${base}/tr`,
-      lastModified: currentDate,
+      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
-    },
-    {
-      url: `${base}/#overview`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/#usecases`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${base}/#modules`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${base}/#pricing`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/#demo`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
     },
   ]
 }

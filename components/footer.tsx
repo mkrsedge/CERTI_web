@@ -69,7 +69,7 @@ export function Footer() {
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
               <div className="flex space-x-6">
                 <a href="#" className="hover:text-brand-primary transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-brand-primary transition-colors">Terms of Service</a>
+                <a href="/TaC" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors">Terms of Service</a>
                 <a href="#" className="hover:text-brand-primary transition-colors">Cookie Policy</a>
               </div>
 
