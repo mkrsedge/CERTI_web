@@ -104,12 +104,19 @@ export default function RootLayout({
           strategy="afterInteractive"
           async
         />
+        <Script
+          id="gtag-ads-src"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17889006787"
+          strategy="afterInteractive"
+          async
+        />
         <Script id="gtag-inline" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-6V8JMNC07B');
+            gtag('config', 'AW-17889006787');
           `}
         </Script>
         {/* Essential viewport meta tag for mobile responsiveness */}
