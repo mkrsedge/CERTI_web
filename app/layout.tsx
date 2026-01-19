@@ -98,6 +98,20 @@ export default function RootLayout({
               "})(window,document,'script','dataLayer','GTM-NJGW9WK9');",
           }}
         />
+        <Script
+          id="gtag-src"
+          src="https://www.googletagmanager.com/gtag/js?id=G-6V8JMNC07B"
+          strategy="afterInteractive"
+          async
+        />
+        <Script id="gtag-inline" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-6V8JMNC07B');
+          `}
+        </Script>
         {/* Essential viewport meta tag for mobile responsiveness */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         {/* Additional SEO meta tags */}
