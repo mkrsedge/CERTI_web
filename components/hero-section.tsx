@@ -4,9 +4,11 @@ import { motion } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
 import { SimpleVideo } from './simple-video'
 import { useLanguage } from './language-context'
+import { useUrlNavigation } from '@/hooks/useUrlNavigation'
 
 export function HeroSection() {
   const { t } = useLanguage()
+  const { updateUrl } = useUrlNavigation()
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
@@ -56,6 +58,7 @@ export function HeroSection() {
           >
             <button 
               onClick={() => {
+                updateUrl('demo')
                 if (typeof window !== 'undefined' && window.smoothScrollToSection) {
                   window.smoothScrollToSection('demo')
                 } else {
