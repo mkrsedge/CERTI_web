@@ -38,11 +38,121 @@ export function DemoSection() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<null | { ok: boolean; message: string }>(null)
+  const personalEmailDomains = useMemo(
+    () =>
+      new Set([
+        'gmail.com',
+        'yahoo.com',
+        'yahoo.co.uk',
+        'yahoo.fr',
+        'yahoo.de',
+        'hotmail.com',
+        'hotmail.co.uk',
+        'hotmail.fr',
+        'outlook.com',
+        'outlook.co.uk',
+        'live.com',
+        'msn.com',
+        'icloud.com',
+        'me.com',
+        'mac.com',
+        'aol.com',
+        'proton.me',
+        'protonmail.com',
+        'pm.me',
+        'gmx.com',
+        'gmx.de',
+        'gmx.net',
+        'mail.com',
+        'yandex.com',
+        'yandex.ru',
+        'zoho.com',
+        'fastmail.com',
+        'tutanota.com',
+        'tuta.com',
+        'hey.com',
+        'qq.com',
+        '163.com',
+        '126.com',
+        'sina.com',
+      ]),
+    []
+  )
+
+  const isWorkEmail = (email: string) => {
+    const normalized = email.trim().toLowerCase()
+    const atIndex = normalized.lastIndexOf('@')
+    if (atIndex === -1) return false
+    const domain = normalized.slice(atIndex + 1)
+    if (!domain || !domain.includes('.')) return false
+    return !personalEmailDomains.has(domain)
+  }
+
+  const companyJunkTokens = useMemo(
+    () =>
+      new Set([
+        'test',
+        'testing',
+        'asdf',
+        'qwerty',
+        'abc',
+        '123',
+        '1234',
+        'none',
+        'na',
+        'n/a',
+        'null',
+        'unknown',
+        'company',
+        'business',
+        'my company',
+        'no company',
+      ]),
+    []
+  )
+
+  const isValidCompanyName = (value: string) => {
+    const trimmed = value.trim()
+    if (trimmed.length < 2 || trimmed.length > 100) return false
+    if (!/[a-zA-Z]/.test(trimmed)) return false
+    const normalized = trimmed.toLowerCase()
+    if (companyJunkTokens.has(normalized)) return false
+    if (/^[^a-zA-Z0-9]+$/.test(trimmed)) return false
+    if (/^(.)\1{4,}$/.test(normalized.replace(/\s+/g, ''))) return false
+    if (/^(test|demo)\b/.test(normalized)) return false
+    if (/(.)\1{3,}/.test(normalized)) return false
+    if (normalized.length <= 4 && /[0-9]/.test(normalized)) return false
+    return true
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus(null)
     setIsSubmitting(true)
+
+    if (!isValidCompanyName(formData.company)) {
+      setStatus({
+        ok: false,
+        message:
+          lang === 'tr'
+            ? 'Lütfen geçerli bir şirket adı girin.'
+            : 'Please enter a valid company name.',
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    if (!isWorkEmail(formData.email)) {
+      setStatus({
+        ok: false,
+        message:
+          lang === 'tr'
+            ? 'Lütfen iş e-posta adresi kullanın. Kişisel e-postalar kabul edilmiyor.'
+            : 'Please use a work email address. Personal emails are not accepted.',
+      })
+      setIsSubmitting(false)
+      return
+    }
 
     const serviceId = 'service_g2ylsbj'
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || ''
