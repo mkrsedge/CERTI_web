@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Navigation } from '@/components/navigation'
 import { HeroSection } from '@/components/hero-section'
-import { PromoVideoSection } from '@/components/promo-video-section'
 import { OverviewSection } from '@/components/overview-section'
 import { UseCasesSection } from '@/components/use-cases-section'
 import { ModulesSection } from '@/components/modules-section'
@@ -230,10 +229,6 @@ export default function Home() {
         
         <div id="home" className="section" data-section="home">
           <HeroSection />
-        </div>
-
-        <div id="promo-video" className="section" data-section="promo-video">
-          <PromoVideoSection />
         </div>
         
         <div id="overview" className="section" data-section="overview">

@@ -26,10 +26,10 @@ const dict: I18nDict = {
     'hero.cta.secondary': 'Learn More',
     'hero.kpi.1': 'Compliance',
     'hero.kpi.2': 'Faster Audits',
-    'videoSection.badge': 'Product Overview',
-    'videoSection.heading': 'See how CERTI transforms quality management',
-    'videoSection.cta': 'Watch 2-min overview',
-    'videoSection.close': 'Close',
+    'usecases.promo.badge': 'Product Overview',
+    'usecases.promo.title': 'See how CERTI transforms quality management',
+    'usecases.promo.subtitle': 'Watch 2-min overview',
+    'usecases.promo.desc': 'A concise walkthrough of how CERTI helps teams stay audit-ready and resolve quality issues faster.',
 
     // Overview journey
     'overview.capabilities': 'What CERTI Enables',
@@ -200,10 +200,10 @@ const dict: I18nDict = {
     'hero.cta.secondary': 'Daha Fazla Bilgi',
     'hero.kpi.1': 'Uyumluluk',
     'hero.kpi.2': 'Daha Hızlı Denetimler',
-    'videoSection.badge': 'Urun Tanitimi',
-    'videoSection.heading': 'CERTI kalite yonetimini nasil donusturuyor',
-    'videoSection.cta': '2 dakikalik tanitimi izleyin',
-    'videoSection.close': 'Kapat',
+    'usecases.promo.badge': 'Urun Tanitimi',
+    'usecases.promo.title': 'CERTI kalite yonetimini nasil donusturuyor',
+    'usecases.promo.subtitle': '2 dakikalik tanitimi izleyin',
+    'usecases.promo.desc': 'CERTI nin ekiplerin denetime hazir kalmasina ve kalite sorunlarini daha hizli cozmelerine nasil yardimci oldugunu ozetleyen tanitim videosu.',
 
     // Overview journey
     'overview.capabilities': 'CERTI Neleri Sağlar',
@@ -408,4 +408,5 @@ export function useLanguage() {
   if (!ctx) throw new Error('useLanguage must be used within LanguageProvider')
   return ctx
 }
+
 
