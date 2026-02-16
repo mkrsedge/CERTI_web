@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { usePathname } from 'next/navigation'
 
 interface LoadingScreenProps {
   children: React.ReactNode
@@ -11,6 +12,8 @@ interface LoadingScreenProps {
 export function LoadingScreen({ children, minimumLoadingTime = 1500 }: LoadingScreenProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
+  const pathname = usePathname()
+  const isTurkishRoute = pathname?.startsWith('/tr')
 
   useEffect(() => {
     // Add loading class to body to prevent scrolling
@@ -96,7 +99,7 @@ export function LoadingScreen({ children, minimumLoadingTime = 1500 }: LoadingSc
                   CERTI
                 </h1>
                 <p className="text-sm text-gray-600">
-                  AI-Native Quality & Compliance
+                  {isTurkishRoute ? 'Yapay Zeka ile Kalite ve Uyumluluk' : 'AI-Native Quality & Compliance'}
                 </p>
               </motion.div>
 
