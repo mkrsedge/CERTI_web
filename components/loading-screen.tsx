@@ -96,7 +96,7 @@ export function LoadingScreen({ children, minimumLoadingTime = 1500 }: LoadingSc
                   CERTI
                 </h1>
                 <p className="text-sm text-gray-600">
-                  Yapay Zeka ile Kalite ve Uyumluluk
+                  AI-Native Quality & Compliance
                 </p>
               </motion.div>
 
