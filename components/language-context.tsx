@@ -26,9 +26,8 @@ const dict: I18nDict = {
     'hero.cta.secondary': 'Learn More',
     'hero.kpi.1': 'Compliance',
     'hero.kpi.2': 'Faster Audits',
-    'usecases.promo.badge': 'Product Overview',
-    'usecases.promo.title': 'See how CERTI transforms quality management',
-    'usecases.promo.subtitle': 'Watch 2-min overview',
+    'usecases.promo.title': 'How CERTI transforms quality management',
+    'usecases.promo.subtitle': 'Watch a 3-minute walkthrough of life before and after CERTI',
     'usecases.promo.desc': 'A concise walkthrough of how CERTI helps teams stay audit-ready and resolve quality issues faster.',
 
     // Overview journey
@@ -200,9 +199,8 @@ const dict: I18nDict = {
     'hero.cta.secondary': 'Daha Fazla Bilgi',
     'hero.kpi.1': 'Uyumluluk',
     'hero.kpi.2': 'Daha Hızlı Denetimler',
-    'usecases.promo.badge': 'Urun Tanitimi',
-    'usecases.promo.title': 'CERTI kalite yonetimini nasil donusturuyor',
-    'usecases.promo.subtitle': '2 dakikalik tanitimi izleyin',
+    'usecases.promo.title': 'CERTI ile kalite yonetimini sadeleştirin',
+    'usecases.promo.subtitle': '3 dakikalik CERTI urun tanitimini izleyin',
     'usecases.promo.desc': 'CERTI nin ekiplerin denetime hazir kalmasina ve kalite sorunlarini daha hizli cozmelerine nasil yardimci oldugunu ozetleyen tanitim videosu.',
 
     // Overview journey

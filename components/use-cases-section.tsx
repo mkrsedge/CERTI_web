@@ -138,11 +138,6 @@ export function UseCasesSection() {
                   {module.icon}
                 </div>
                 <div>
-                  {module.featured && (
-                    <span className="inline-block text-[10px] uppercase tracking-[0.12em] font-semibold text-[#3e2723] bg-[#ffedac]/70 px-2 py-1 rounded-full mb-2">
-                      {t('usecases.promo.badge')}
-                    </span>
-                  )}
                   <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
                   <p className="text-gray-600 text-sm">{module.subtitle}</p>
                 </div>
