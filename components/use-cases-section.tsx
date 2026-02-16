@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import type { ReactElement } from 'react'
 import { useLanguage } from './language-context'
 
 type UseCaseItem = {
@@ -12,7 +13,7 @@ type UseCaseItem = {
   videoId: string
   videoTitle: string
   featured: boolean
-  icon: JSX.Element
+  icon: ReactElement
 }
 
 export function UseCasesSection() {
