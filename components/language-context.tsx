@@ -24,9 +24,12 @@ const dict: I18nDict = {
     'hero.desc.2': 'Agentic AI tailored for highly regulated industries.',
     'hero.cta.primary': 'Book a Demo',
     'hero.cta.secondary': 'Learn More',
+    'hero.cta.promo': 'Watch Promo',
     'hero.kpi.1': 'Compliance',
     'hero.kpi.2': 'Faster Audits',
     'hero.kpi.3': 'Lower Costs',
+    'hero.promo.title': 'CERTI Promo Video',
+    'hero.promo.close': 'Close',
 
     // Overview journey
     'overview.capabilities': 'What CERTI Enables',
@@ -195,9 +198,12 @@ const dict: I18nDict = {
     'hero.desc.2': 'Regülasyona tabi sektörler için uçtan uca yapay zekâ çözümleri.',
     'hero.cta.primary': 'Demo Talep Et',
     'hero.cta.secondary': 'Daha Fazla Bilgi',
+    'hero.cta.promo': 'Promoyu İzle',
     'hero.kpi.1': 'Uyumluluk',
     'hero.kpi.2': 'Daha Hızlı Denetimler',
     'hero.kpi.3': 'Daha Düşük Maliyet',
+    'hero.promo.title': 'CERTI Tanıtım Videosu',
+    'hero.promo.close': 'Kapat',
 
     // Overview journey
     'overview.capabilities': 'CERTI Neleri Sağlar',
@@ -402,4 +408,3 @@ export function useLanguage() {
   if (!ctx) throw new Error('useLanguage must be used within LanguageProvider')
   return ctx
 }
-

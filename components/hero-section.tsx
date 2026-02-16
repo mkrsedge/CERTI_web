@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { AnimatedBackground } from './animated-background'
 import { SimpleVideo } from './simple-video'
 import { useLanguage } from './language-context'
@@ -9,108 +10,168 @@ import { useUrlNavigation } from '@/hooks/useUrlNavigation'
 export function HeroSection() {
   const { t } = useLanguage()
   const { updateUrl } = useUrlNavigation()
+  const [isPromoOpen, setIsPromoOpen] = useState(false)
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsPromoOpen(false)
+      }
+    }
+
+    if (isPromoOpen) {
+      window.addEventListener('keydown', onKeyDown)
+    }
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [isPromoOpen])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
-      {/* Background Video */}
-      <SimpleVideo 
-        src="/gitness-spline-test.mp4"
-      />
-      
-      {/* Brand-tinted overlay for better text readability and brand cohesion */}
-      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(62,39,35,0.35)' }}></div>
-      {/* Smoother bottom fade bridge to white to blend into Overview (starts below KPI area) */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 sm:h-16 md:h-20 bg-gradient-to-b from-white/0 via-white/35 to-white" />
+    <>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
+        {/* Background Video */}
+        <SimpleVideo
+          src="/gitness-spline-test.mp4"
+        />
 
-      {/* Animated Background */}
-      <AnimatedBackground />
+        {/* Brand-tinted overlay for better text readability and brand cohesion */}
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(62,39,35,0.35)' }}></div>
+        {/* Smoother bottom fade bridge to white to blend into Overview (starts below KPI area) */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 sm:h-16 md:h-20 bg-gradient-to-b from-white/0 via-white/35 to-white" />
 
-      {/* Content */}
-      <div className="relative z-10 content-container text-center hero-content -translate-y-6 md:-translate-y-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
-          <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
-            {`CERTI: ${t('hero.title.1')}`}
-            <br />
-            {t('hero.title.2')}
-          </h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-xl md:text-2xl text-brand-primary/90 mb-8 leading-relaxed"
-          >
-            {t('hero.desc.1')}
-            <br />
-            {t('hero.desc.2')}
-          </motion.p>
+        {/* Animated Background */}
+        <AnimatedBackground />
 
+        {/* Content */}
+        <div className="relative z-10 content-container text-center hero-content -translate-y-6 md:-translate-y-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="max-w-4xl mx-auto"
           >
-            <button 
-              onClick={() => {
-                updateUrl('demo')
-                if (typeof window !== 'undefined' && window.smoothScrollToSection) {
-                  window.smoothScrollToSection('demo')
-                } else {
-                  const demoSection = document.getElementById('demo');
-                  if (demoSection) {
-                    demoSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }
-              }}
-              className="btn-primary-hero text-lg relative z-20"
+            <h1 className="text-5xl md:text-7xl font-light text-brand-primary mb-4 leading-tight">
+              {`CERTI: ${t('hero.title.1')}`}
+              <br />
+              {t('hero.title.2')}
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="text-xl md:text-2xl text-brand-primary/90 mb-8 leading-relaxed"
             >
-              {t('hero.cta.primary')}
-            </button>
-            <button 
-              onClick={() => {
-                if (typeof window !== 'undefined' && window.smoothScrollToSection) {
-                  window.smoothScrollToSection('overview')
-                } else {
-                  const overviewSection = document.getElementById('overview');
-                  if (overviewSection) {
-                    overviewSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }
-              }}
-              className="btn-ghost-light text-lg relative z-20"
+              {t('hero.desc.1')}
+              <br />
+              {t('hero.desc.2')}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              {t('hero.cta.secondary')}
-            </button>
+              <button
+                onClick={() => {
+                  updateUrl('demo')
+                  if (typeof window !== 'undefined' && window.smoothScrollToSection) {
+                    window.smoothScrollToSection('demo')
+                  } else {
+                    const demoSection = document.getElementById('demo')
+                    if (demoSection) {
+                      demoSection.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }
+                }}
+                className="btn-primary-hero text-lg relative z-20"
+              >
+                {t('hero.cta.primary')}
+              </button>
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.smoothScrollToSection) {
+                    window.smoothScrollToSection('overview')
+                  } else {
+                    const overviewSection = document.getElementById('overview')
+                    if (overviewSection) {
+                      overviewSection.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }
+                }}
+                className="btn-ghost-light text-lg relative z-20"
+              >
+                {t('hero.cta.secondary')}
+              </button>
+              <button
+                onClick={() => setIsPromoOpen(true)}
+                className="btn-ghost-light text-lg relative z-20"
+              >
+                {t('hero.cta.promo')}
+              </button>
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* Quality & Compliance Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-        >
-          {[{v:'100%',t:t('hero.kpi.1')},{v:'80%',t:t('hero.kpi.2')},{v:'50%',t:t('hero.kpi.3')}].map((kpi, i) => (
+          {/* Quality & Compliance Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+          >
+            {[{ v: '100%', t: t('hero.kpi.1') }, { v: '80%', t: t('hero.kpi.2') }, { v: '50%', t: t('hero.kpi.3') }].map((kpi, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-white/15 bg-white/20 backdrop-blur-md px-6 py-5 text-center shadow-lg"
+              >
+                <div className="text-3xl font-bold text-[#ffedac] mb-1 drop-shadow">{kpi.v}</div>
+                <div className="text-[#ffedac] text-sm font-medium">{kpi.t}</div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {isPromoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsPromoOpen(false)}
+            className="fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm p-4 md:p-8"
+          >
             <div
-              key={i}
-              className="rounded-2xl border border-white/15 bg-white/20 backdrop-blur-md px-6 py-5 text-center shadow-lg"
+              className="mx-auto h-full w-full max-w-5xl flex flex-col justify-center"
+              onClick={(event) => event.stopPropagation()}
             >
-              <div className="text-3xl font-bold text-[#ffedac] mb-1 drop-shadow">{kpi.v}</div>
-              <div className="text-[#ffedac] text-sm font-medium">{kpi.t}</div>
+              <div className="mb-3 flex items-center justify-between">
+                <h2 className="text-white text-lg md:text-xl font-medium">{t('hero.promo.title')}</h2>
+                <button
+                  onClick={() => setIsPromoOpen(false)}
+                  className="rounded-md border border-white/30 px-3 py-1 text-sm text-white hover:bg-white/10"
+                >
+                  {t('hero.promo.close')}
+                </button>
+              </div>
+              <div className="aspect-video w-full overflow-hidden rounded-xl bg-black">
+                <iframe
+                  title={t('hero.promo.title')}
+                  className="h-full w-full"
+                  src="https://www.youtube-nocookie.com/embed/VRzwUWquSxc?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
             </div>
-          ))}
-        </motion.div>
-      </div>
-
-
-    </section>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
