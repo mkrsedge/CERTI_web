@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
@@ -26,6 +26,7 @@ const dict: I18nDict = {
     'hero.cta.secondary': 'Learn More',
     'hero.kpi.1': 'Compliance',
     'hero.kpi.2': 'Faster Audits',
+    'socialProof.tagline': 'Replacing paper, spreadsheets, and email for quality teams in manufacturing',
     'usecases.promo.title': 'How CERTI transforms quality management',
     'usecases.promo.subtitle': 'Watch a 3-minute walkthrough of life before and after CERTI',
     'usecases.promo.desc': 'A concise walkthrough of how CERTI helps teams stay audit-ready and resolve quality issues faster.',
@@ -199,6 +200,7 @@ const dict: I18nDict = {
     'hero.cta.secondary': 'Daha Fazla Bilgi',
     'hero.kpi.1': 'Uyumluluk',
     'hero.kpi.2': 'Daha Hızlı Denetimler',
+    'socialProof.tagline': 'Üretimdeki kalite ekiplerinin kağıt, Excel ve e-posta süreçlerini dijitale taşıyoruz',
     'usecases.promo.title': 'CERTI ile kalite yonetimini sadeleştirin',
     'usecases.promo.subtitle': '3 dakikalik CERTI urun tanitimini izleyin',
     'usecases.promo.desc': 'CERTI nin ekiplerin denetime hazir kalmasina ve kalite sorunlarini daha hizli cozmelerine nasil yardimci oldugunu ozetleyen tanitim videosu.',

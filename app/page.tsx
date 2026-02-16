@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Navigation } from '@/components/navigation'
 import { HeroSection } from '@/components/hero-section'
+import { SocialProofSection } from '@/components/social-proof-section'
 import { OverviewSection } from '@/components/overview-section'
 import { UseCasesSection } from '@/components/use-cases-section'
 import { ModulesSection } from '@/components/modules-section'
@@ -229,6 +230,10 @@ export default function Home() {
         
         <div id="home" className="section" data-section="home">
           <HeroSection />
+        </div>
+
+        <div id="social-proof" className="section" data-section="social-proof">
+          <SocialProofSection />
         </div>
         
         <div id="overview" className="section" data-section="overview">
