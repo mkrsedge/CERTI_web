@@ -19,12 +19,7 @@ type UseCaseItem = {
 export function UseCasesSection() {
   const { t, lang } = useLanguage()
   const [activeModule, setActiveModule] = useState(0)
-  const [logoFallback, setLogoFallback] = useState<Record<string, boolean>>({})
   const origin = typeof window !== 'undefined' ? window.location.origin : ''
-  const trustLogos = [
-    { name: 'EKOS Electric', src: '/logos/ekos-electric.png' },
-    { name: 'TARAZI', src: '/logos/tarazi.png' }
-  ]
 
   const modules: UseCaseItem[] = [
     {
@@ -118,26 +113,6 @@ export function UseCasesSection() {
         >
           <h2 className="text-heading-2 mb-6">{t('modules.header')}</h2>
           <p className="text-body-large max-w-3xl mx-auto">{t('modules.sub')}</p>
-          <div className="mt-6">
-            <p className="text-sm md:text-base text-[#3e2723]/75 mb-4">{t('socialProof.heading')}</p>
-            <div className="flex items-center justify-center gap-8 md:gap-12">
-              {trustLogos.map((logo) => (
-                <div key={logo.name} className="h-10 md:h-12 flex items-center">
-                  {!logoFallback[logo.name] ? (
-                    <img
-                      src={logo.src}
-                      alt={logo.name}
-                      className="max-h-9 md:max-h-10 w-auto object-contain"
-                      loading="lazy"
-                      onError={() => setLogoFallback((prev) => ({ ...prev, [logo.name]: true }))}
-                    />
-                  ) : (
-                    <span className="text-[#3e2723] font-semibold tracking-wide">{logo.name}</span>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
