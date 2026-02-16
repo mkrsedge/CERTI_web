@@ -35,7 +35,7 @@ export function SocialProofSection() {
   const [candidateIndex, setCandidateIndex] = useState<Record<string, number>>({})
 
   return (
-    <section className="bg-[#faf7ef] px-6 py-10 md:py-14 border-y border-[#3e2723]/8">
+    <section className="bg-[#faf7ef] px-6 py-10 md:py-12 border-y border-[#3e2723]/8">
       <div className="content-container">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
@@ -43,23 +43,23 @@ export function SocialProofSection() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-4xl text-center text-sm md:text-base text-[#3e2723]/80"
         >
-          {t('socialProof.tagline')}
+          {t('socialProof.heading')}
         </motion.p>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 max-w-3xl mx-auto">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-8 md:gap-12">
           {logos.map((logo) => (
             <motion.div
               key={logo.name}
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="h-24 md:h-28 rounded-xl border border-[#3e2723]/10 bg-white/70 backdrop-blur-sm flex items-center justify-center px-5"
+              className="h-12 md:h-14 flex items-center justify-center"
             >
               {!failedLogos[logo.name] ? (
                 <img
                   src={logo.srcCandidates[candidateIndex[logo.name] ?? 0]}
                   alt={logo.name}
-                  className="max-h-14 md:max-h-16 w-auto object-contain transition duration-300"
+                  className="max-h-10 md:max-h-12 w-auto object-contain transition duration-300"
                   loading="lazy"
                   onError={() => {
                     const current = candidateIndex[logo.name] ?? 0
@@ -77,6 +77,18 @@ export function SocialProofSection() {
             </motion.div>
           ))}
         </div>
+
+        <ul className="mt-6 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
+          <li className="rounded-lg bg-white/70 border border-[#3e2723]/10 px-3 py-2 text-sm text-[#3e2723]/85">
+            {t('socialProof.point1')}
+          </li>
+          <li className="rounded-lg bg-white/70 border border-[#3e2723]/10 px-3 py-2 text-sm text-[#3e2723]/85">
+            {t('socialProof.point2')}
+          </li>
+          <li className="rounded-lg bg-white/70 border border-[#3e2723]/10 px-3 py-2 text-sm text-[#3e2723]/85">
+            {t('socialProof.point3')}
+          </li>
+        </ul>
       </div>
     </section>
   )
