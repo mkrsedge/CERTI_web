@@ -5,13 +5,34 @@ import { motion } from 'framer-motion'
 import { useLanguage } from './language-context'
 
 const logos = [
-  { name: 'EKOS Electric', src: '/logos/ekos-electric.png' },
-  { name: 'TARAZI', src: '/logos/tarazi.png' }
+  {
+    name: 'EKOS Electric',
+    srcCandidates: [
+      '/logos/ekos-electric.png',
+      '/logos/ekos-electric.webp',
+      '/logos/ekos-electric.jpg',
+      '/ekos-electric.png',
+      '/ekos-electric.webp',
+      '/EKOS-electric.png'
+    ]
+  },
+  {
+    name: 'TARAZI',
+    srcCandidates: [
+      '/logos/tarazi.png',
+      '/logos/tarazi.webp',
+      '/logos/tarazi.jpg',
+      '/tarazi.png',
+      '/tarazi.webp',
+      '/TARAZI.png'
+    ]
+  }
 ]
 
 export function SocialProofSection() {
   const { t } = useLanguage()
   const [failedLogos, setFailedLogos] = useState<Record<string, boolean>>({})
+  const [candidateIndex, setCandidateIndex] = useState<Record<string, number>>({})
 
   return (
     <section className="bg-[#faf7ef] px-6 py-10 md:py-14 border-y border-[#3e2723]/8">
@@ -36,11 +57,19 @@ export function SocialProofSection() {
             >
               {!failedLogos[logo.name] ? (
                 <img
-                  src={logo.src}
+                  src={logo.srcCandidates[candidateIndex[logo.name] ?? 0]}
                   alt={logo.name}
-                  className="max-h-14 md:max-h-16 w-auto object-contain grayscale hover:grayscale-0 transition duration-300"
+                  className="max-h-14 md:max-h-16 w-auto object-contain transition duration-300"
                   loading="lazy"
-                  onError={() => setFailedLogos((prev) => ({ ...prev, [logo.name]: true }))}
+                  onError={() => {
+                    const current = candidateIndex[logo.name] ?? 0
+                    const next = current + 1
+                    if (next < logo.srcCandidates.length) {
+                      setCandidateIndex((prev) => ({ ...prev, [logo.name]: next }))
+                    } else {
+                      setFailedLogos((prev) => ({ ...prev, [logo.name]: true }))
+                    }
+                  }}
                 />
               ) : (
                 <span className="text-[#3e2723] font-semibold tracking-wide">{logo.name}</span>

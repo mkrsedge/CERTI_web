@@ -231,13 +231,13 @@ export default function Home() {
         <div id="home" className="section" data-section="home">
           <HeroSection />
         </div>
-
-        <div id="social-proof" className="section" data-section="social-proof">
-          <SocialProofSection />
-        </div>
         
         <div id="overview" className="section" data-section="overview">
           <OverviewSection />
+        </div>
+
+        <div id="social-proof" className="section" data-section="social-proof">
+          <SocialProofSection />
         </div>
         
         <div id="usecases" className="section" data-section="usecases">
