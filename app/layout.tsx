@@ -218,25 +218,6 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* EmailJS browser SDK for client-side email sending */}
-        <Script
-          id="emailjs-sdk"
-          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-          strategy="afterInteractive"
-        />
-        <Script id="emailjs-init" strategy="afterInteractive">
-          {`
-            (function(){
-              try {
-                // Initialize EmailJS if the library is present and a public key is provided
-                var pub = ${JSON.stringify(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '')};
-                if (typeof window !== 'undefined' && window.emailjs && pub) {
-                  window.emailjs.init(pub);
-                }
-              } catch (e) { /* noop */ }
-            })();
-          `}
-        </Script>
       </head>
       <body>
         <noscript>

@@ -1,215 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useLanguage } from './language-context'
+
+const DEFAULT_BOOKING_URL = 'https://calendar.app.google/bbrPiqazRiei7sQLA'
 
 export function DemoSection() {
   const { lang, t } = useLanguage()
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    phone: '',
-    employees: '',
-    preferredDate: '',
-    preferredTime: '',
-    message: ''
-  })
   const phoneNumber = useMemo(() => (lang === 'tr' ? '+90 542 599 18 84' : '+1 917 689 34 36'), [lang])
   const telHref = useMemo(() => phoneNumber.replace(/[^\d+]/g, ''), [phoneNumber])
-
-  const timeOptions = useMemo(() => {
-    if (lang === 'tr') {
-      const hours = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
-      return hours.map((hour) => {
-        const nextHour = String(parseInt(hour.split(':')[0], 10) + 1).padStart(2, '0')
-        return { value: hour, label: `${hour} - ${nextHour}:00` }
-      })
-    }
-    const hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00']
-    return hours.map((hour) => {
-      const nextHour = String(parseInt(hour.split(':')[0], 10) + 1).padStart(2, '0')
-      return { value: hour, label: `${hour} - ${nextHour}:00` }
-    })
-  }, [lang])
-
-  const minDate = useMemo(() => new Date().toISOString().split('T')[0], [])
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [status, setStatus] = useState<null | { ok: boolean; message: string }>(null)
-  const personalEmailDomains = useMemo(
-    () =>
-      new Set([
-        'gmail.com',
-        'yahoo.com',
-        'yahoo.co.uk',
-        'yahoo.fr',
-        'yahoo.de',
-        'hotmail.com',
-        'hotmail.co.uk',
-        'hotmail.fr',
-        'outlook.com',
-        'outlook.co.uk',
-        'live.com',
-        'msn.com',
-        'icloud.com',
-        'me.com',
-        'mac.com',
-        'aol.com',
-        'proton.me',
-        'protonmail.com',
-        'pm.me',
-        'gmx.com',
-        'gmx.de',
-        'gmx.net',
-        'mail.com',
-        'yandex.com',
-        'yandex.ru',
-        'zoho.com',
-        'fastmail.com',
-        'tutanota.com',
-        'tuta.com',
-        'hey.com',
-        'qq.com',
-        '163.com',
-        '126.com',
-        'sina.com',
-      ]),
-    []
-  )
-
-  const isWorkEmail = (email: string) => {
-    const normalized = email.trim().toLowerCase()
-    const atIndex = normalized.lastIndexOf('@')
-    if (atIndex === -1) return false
-    const domain = normalized.slice(atIndex + 1)
-    if (!domain || !domain.includes('.')) return false
-    return !personalEmailDomains.has(domain)
-  }
-
-  const companyJunkTokens = useMemo(
-    () =>
-      new Set([
-        'test',
-        'testing',
-        'asdf',
-        'qwerty',
-        'abc',
-        '123',
-        '1234',
-        'none',
-        'na',
-        'n/a',
-        'null',
-        'unknown',
-        'company',
-        'business',
-        'my company',
-        'no company',
-      ]),
-    []
-  )
-
-  const isValidCompanyName = (value: string) => {
-    const trimmed = value.trim()
-    if (trimmed.length < 2 || trimmed.length > 100) return false
-    if (!/[a-zA-Z]/.test(trimmed)) return false
-    const normalized = trimmed.toLowerCase()
-    if (companyJunkTokens.has(normalized)) return false
-    if (/^[^a-zA-Z0-9]+$/.test(trimmed)) return false
-    if (/^(.)\1{4,}$/.test(normalized.replace(/\s+/g, ''))) return false
-    if (/^(test|demo)\b/.test(normalized)) return false
-    if (/(.)\1{3,}/.test(normalized)) return false
-    if (normalized.length <= 4 && /[0-9]/.test(normalized)) return false
-    return true
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus(null)
-    setIsSubmitting(true)
-
-    if (!isValidCompanyName(formData.company)) {
-      setStatus({
-        ok: false,
-        message:
-          lang === 'tr'
-            ? 'Lütfen geçerli bir şirket adı girin.'
-            : 'Please enter a valid company name.',
-      })
-      setIsSubmitting(false)
-      return
-    }
-
-    if (!isWorkEmail(formData.email)) {
-      setStatus({
-        ok: false,
-        message:
-          lang === 'tr'
-            ? 'Lütfen iş e-posta adresi kullanın. Kişisel e-postalar kabul edilmiyor.'
-            : 'Please use a work email address. Personal emails are not accepted.',
-      })
-      setIsSubmitting(false)
-      return
-    }
-
-    const serviceId = 'service_g2ylsbj'
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || ''
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
-
-    if (!templateId || !publicKey) {
-      setStatus({
-        ok: false,
-        message:
-          lang === 'tr'
-            ? 'E-posta yapılandırması eksik. Lütfen EmailJS public key ve template ID ekleyin'
-            : 'Email configuration missing. Please add EmailJS public key and template ID.',
-      })
-      setIsSubmitting(false)
-      return
-    }
-
-    const params = {
-      to_email: 'kaan@makers-edge.com',
-      name: formData.name,
-      email: formData.email,
-      company: formData.company,
-      phone: formData.phone,
-      employees: formData.employees,
-      preferred_date: formData.preferredDate,
-      preferred_time: formData.preferredTime,
-      message: formData.message,
-      submitted_at: new Date().toISOString(),
-    }
-
-    try {
-      const ej: any = (globalThis as any).emailjs
-      if (!ej?.send) throw new Error('EmailJS SDK not loaded')
-      const res = await ej.send(serviceId, templateId, params, publicKey)
-      if (res?.status !== 200) throw new Error('EmailJS send failed')
-      setStatus({
-        ok: true,
-        message: lang === 'tr' ? 'Talebiniz alındı. Teşekkürler!' : 'Your request has been sent. Thank you!',
-      })
-      setFormData({ name: '', email: '', company: '', phone: '', employees: '', preferredDate: '', preferredTime: '', message: '' })
-    } catch (err: any) {
-      setStatus({
-        ok: false,
-        message:
-          lang === 'tr'
-            ? 'Gönderim başarısız. Lütfen daha sonra tekrar deneyin'
-            : 'Submission failed. Please try again later.',
-      })
-      if (typeof window !== 'undefined') {
-        const status = (err && (err.status || err.code)) || 'unknown'
-        const text = (err && (err.text || err.message)) || err
-        console.warn('EmailJS error:', status, text)
-      }
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+  const bookingUrl = process.env.NEXT_PUBLIC_GOOGLE_SCHEDULER_URL || DEFAULT_BOOKING_URL
+  const bookingTitle = lang === 'tr' ? 'CERTI demo planlama takvimi' : 'CERTI demo booking calendar'
+  const fallbackLabel = lang === 'tr' ? 'Takvimi yeni sekmede ac' : 'Open scheduler in a new tab'
+  const helperText =
+    lang === 'tr'
+      ? 'Uygun bir zamani secmek icin asagidaki takvimi kullanin.'
+      : 'Use the calendar below to choose a time that works for you.'
 
   return (
     <section className="min-h-screen bg-white px-6 py-20">
@@ -224,152 +31,12 @@ export function DemoSection() {
           <p className="text-body-large max-w-3xl mx-auto">{t('demo.lead')}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Form */}
+        <div className="space-y-8">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-white rounded-2xl p-8"
-          >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">{t('demo.request')}</h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="demo-name" className="block text-sm font-medium text-gray-700 mb-2">{lang === 'tr' ? 'Ad Soyad *' : 'Full Name *'}</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    id="demo-name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
-                    placeholder={lang === 'tr' ? 'Adınız Soyadınız' : 'John Doe'}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="demo-email" className="block text-sm font-medium text-gray-700 mb-2">{lang === 'tr' ? 'İş E-postası *' : 'Work Email *'}</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    id="demo-email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
-                    placeholder={lang === 'tr' ? 'ad@firma.com' : 'john@company.com'}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="demo-company" className="block text-sm font-medium text-gray-700 mb-2">{lang === 'tr' ? 'Firma *' : 'Company *'}</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    id="demo-company"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
-                    placeholder={lang === 'tr' ? 'Firma Adı' : 'Company Name'}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="demo-phone" className="block text-sm font-medium text-gray-700 mb-2">{lang === 'tr' ? 'Telefon' : 'Phone Number'}</label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    id="demo-phone"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
-                    placeholder={lang === 'tr' ? '+90 5xx xxx xx xx' : '+1 (555) 123-4567'}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="demo-employees" className="block text-sm font-medium text-gray-700 mb-2">{lang === 'tr' ? 'Firma Büyüklüğü' : 'Company Size'}</label>
-                <select
-                  value={formData.employees}
-                  onChange={(e) => setFormData({ ...formData, employees: e.target.value })}
-                  id="demo-employees"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a9aecf] focus:border-transparent outline-none transition-colors"
-                >
-                  <option value="">{lang === 'tr' ? 'Büyüklük seçin' : 'Select company size'}</option>
-                  <option value="1-10">{lang === 'tr' ? '1-10 çalışan' : '1-10 employees'}</option>
-                  <option value="11-50">{lang === 'tr' ? '11-50 çalışan' : '11-50 employees'}</option>
-                  <option value="51-200">{lang === 'tr' ? '51-200 çalışan' : '51-200 employees'}</option>
-                  <option value="201-1000">{lang === 'tr' ? '201-1000 çalışan' : '201-1000 employees'}</option>
-                  <option value="1000+">{lang === 'tr' ? '1000+ çalışan' : '1000+ employees'}</option>
-                </select>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="demo-preferred-date" className="block text-sm font-medium text-gray-700 mb-2">{t('form.preferredDate')}</label>
-                  <input
-                    type="date"
-                    required
-                    min={minDate}
-                    value={formData.preferredDate}
-                    onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                    id="demo-preferred-date"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="demo-preferred-time" className="block text-sm font-medium text-gray-700 mb-2">{t('form.preferredTime')}</label>
-                  <select
-                    required
-                    value={formData.preferredTime}
-                    onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                    id="demo-preferred-time"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors"
-                  >
-                    <option value="">{t('form.preferredTime.placeholder')}</option>
-                    {timeOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {lang === 'tr' ? `${option.label} (TR)` : `${option.label} (ET)`}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="demo-message" className="block text-sm font-medium text-gray-700 mb-2">{lang === 'tr' ? 'İhtiyaçlarınızı anlatın' : 'Tell us about your needs'}</label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
-                  id="demo-message"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-secondary focus:border-transparent outline-none transition-colors resize-none"
-                  placeholder={lang === 'tr' ? 'Mevcut zorluklarınızı ve hedeflerinizi kısaca paylaşın...' : "Briefly describe your current challenges and what you're looking to achieve..."}
-                ></textarea>
-              </div>
-
-              {status && (
-                <div className={`text-sm ${status.ok ? 'text-green-600' : 'text-red-600'}`}>{status.message}</div>
-              )}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full text-white font-medium py-4 px-6 rounded-lg transition-colors duration-200 text-lg ${
-                  isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-brand-secondary hover:bg-brand-secondary/90'
-                }`}
-              >
-                {isSubmitting ? (lang === 'tr' ? 'Gönderiliyor…' : 'Sending…') : t('form.scheduleDemo')}
-              </button>
-            </form>
-          </motion.div>
-
-          {/* Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8"
           >
             <div className="bg-brand-secondary rounded-2xl p-8">
               <h3 className="text-xl font-semibold text-brand-primary mb-4">{t('demo.expect.title')}</h3>
@@ -411,6 +78,35 @@ export function DemoSection() {
                 </div>
               </div>
             </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="bg-white rounded-2xl p-8"
+          >
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">{t('demo.request')}</h3>
+            <p className="text-sm text-gray-600 mb-6">{helperText}</p>
+
+            <div className="rounded-2xl border border-gray-200 overflow-hidden bg-gray-50">
+              <iframe
+                src={bookingUrl}
+                title={bookingTitle}
+                className="w-full h-[520px] md:h-[580px] lg:h-[620px] border-0"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="fullscreen"
+              />
+            </div>
+
+            <noscript>
+              <p className="mt-4 text-sm text-gray-600">
+                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="underline">
+                  {fallbackLabel}
+                </a>
+              </p>
+            </noscript>
           </motion.div>
         </div>
       </div>
