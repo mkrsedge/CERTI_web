@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from './language-context'
 import { useUrlNavigation } from '@/hooks/useUrlNavigation'
+import { getBookingUrl } from '@/lib/booking'
 
 interface NavigationProps {
   activeSection: string
@@ -12,6 +13,7 @@ interface NavigationProps {
 export function Navigation({ activeSection, onSectionChange }: NavigationProps) {
   const { lang, setLang, t } = useLanguage()
   const { navigateToSection } = useUrlNavigation()
+  const bookingUrl = getBookingUrl()
   const [language] = useState('EN')
   const toggleLanguage = () => setLang(lang === 'en' ? 'tr' : 'en')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -263,7 +265,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           {/* Right side - Language Toggle */}
           <div className="navbar-right">
             <button
-              onClick={() => onSectionChange('demo')}
+              onClick={() => window.open(bookingUrl, '_blank', 'noopener,noreferrer')}
               className="btn-primary header-cta"
             >
               {t('hero.cta.primary')}
@@ -317,7 +319,15 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             <button className="mobile-link" onClick={() => { handleSectionClick('demo', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.demo')}</button>
           </nav>
           <div className="mobile-menu-actions">
-            <button className="btn-primary mobile-cta" onClick={() => { onSectionChange('demo'); setIsMenuOpen(false) }}>{t('hero.cta.primary')}</button>
+            <button
+              className="btn-primary mobile-cta"
+              onClick={() => {
+                window.open(bookingUrl, '_blank', 'noopener,noreferrer')
+                setIsMenuOpen(false)
+              }}
+            >
+              {t('hero.cta.primary')}
+            </button>
             <button onClick={toggleLanguage} className="language-toggle mobile-lang">
               <span className={`language-option ${lang === 'en' ? 'active' : ''}`}>EN</span>
               <span className="language-separator">/</span>

@@ -3,10 +3,12 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from './language-context'
+import { getBookingUrl } from '@/lib/booking'
 
 export function PricingSection() {
   const { t } = useLanguage()
   const [selected, setSelected] = useState<null | 'lite' | 'standard' | 'fullqms'>(null)
+  const bookingUrl = getBookingUrl()
   
   // Module definitions for each bundle
   const bundleModules = {
@@ -365,10 +367,7 @@ export function PricingSection() {
             <div className="flex justify-center">
               <button 
                 onClick={() => {
-                  const demoSection = document.getElementById('demo')
-                  if (demoSection) {
-                    demoSection.scrollIntoView({ behavior: 'smooth' })
-                  }
+                  window.open(bookingUrl, '_blank', 'noopener,noreferrer')
                 }}
                 className="bg-gray-900 text-white font-semibold py-3 px-8 rounded-xl hover:bg-gray-800 transition-colors"
               >

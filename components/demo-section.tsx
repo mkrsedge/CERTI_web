@@ -3,20 +3,18 @@
 import { motion } from 'framer-motion'
 import { useMemo } from 'react'
 import { useLanguage } from './language-context'
-
-const DEFAULT_BOOKING_URL = 'https://calendar.app.google/bBPikunCZbbzPqVHA'
+import { getBookingUrl } from '@/lib/booking'
 
 export function DemoSection() {
   const { lang, t } = useLanguage()
   const phoneNumber = useMemo(() => (lang === 'tr' ? '+90 542 599 18 84' : '+1 917 689 34 36'), [lang])
   const telHref = useMemo(() => phoneNumber.replace(/[^\d+]/g, ''), [phoneNumber])
-  const bookingUrl = process.env.NEXT_PUBLIC_GOOGLE_SCHEDULER_URL || DEFAULT_BOOKING_URL
-  const bookingTitle = lang === 'tr' ? 'CERTI demo planlama takvimi' : 'CERTI demo booking calendar'
-  const fallbackLabel = lang === 'tr' ? 'Takvimi yeni sekmede ac' : 'Open scheduler in a new tab'
+  const bookingUrl = getBookingUrl()
   const helperText =
     lang === 'tr'
-      ? 'Uygun bir zamani secmek icin asagidaki takvimi kullanin.'
-      : 'Use the calendar below to choose a time that works for you.'
+      ? 'Uygun bir zamani secmek icin planlama sayfamizi yeni sekmede acin.'
+      : 'Open our scheduling page in a new tab to choose a time that works for you.'
+  const bookingCta = lang === 'tr' ? 'Demo Randevusu Al' : 'Book a Demo'
 
   return (
     <section className="min-h-screen bg-white px-6 py-20">
@@ -89,24 +87,16 @@ export function DemoSection() {
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">{t('demo.request')}</h3>
             <p className="text-sm text-gray-600 mb-6">{helperText}</p>
 
-            <div className="rounded-2xl border border-gray-200 overflow-hidden bg-gray-50">
-              <iframe
-                src={bookingUrl}
-                title={bookingTitle}
-                className="w-full h-[520px] md:h-[580px] lg:h-[620px] border-0"
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allow="fullscreen"
-              />
+            <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 md:p-12 text-center">
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-brand-primary px-8 py-4 text-sm font-semibold text-white transition hover:opacity-90"
+              >
+                {bookingCta}
+              </a>
             </div>
-
-            <noscript>
-              <p className="mt-4 text-sm text-gray-600">
-                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="underline">
-                  {fallbackLabel}
-                </a>
-              </p>
-            </noscript>
           </motion.div>
         </div>
       </div>

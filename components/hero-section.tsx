@@ -5,10 +5,12 @@ import { AnimatedBackground } from './animated-background'
 import { SimpleVideo } from './simple-video'
 import { useLanguage } from './language-context'
 import { useUrlNavigation } from '@/hooks/useUrlNavigation'
+import { getBookingUrl } from '@/lib/booking'
 
 export function HeroSection() {
   const { t } = useLanguage()
   const { updateUrl } = useUrlNavigation()
+  const bookingUrl = getBookingUrl()
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-14 md:pt-20 hero-portrait-offset">
@@ -59,14 +61,7 @@ export function HeroSection() {
             <button
               onClick={() => {
                 updateUrl('demo')
-                if (typeof window !== 'undefined' && window.smoothScrollToSection) {
-                  window.smoothScrollToSection('demo')
-                } else {
-                  const demoSection = document.getElementById('demo')
-                  if (demoSection) {
-                    demoSection.scrollIntoView({ behavior: 'smooth' })
-                  }
-                }
+                window.open(bookingUrl, '_blank', 'noopener,noreferrer')
               }}
               className="btn-primary-hero text-lg relative z-20"
             >

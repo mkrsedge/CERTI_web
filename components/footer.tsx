@@ -2,10 +2,12 @@
 
 import { useLanguage } from './language-context'
 import { useUrlNavigation } from '@/hooks/useUrlNavigation'
+import { getBookingUrl } from '@/lib/booking'
 
 export function Footer() {
   const { t } = useLanguage()
   const { navigateToSection } = useUrlNavigation()
+  const bookingUrl = getBookingUrl()
 
   const handleSectionClick = (section: string, e: React.MouseEvent) => {
     e.preventDefault()
@@ -53,7 +55,7 @@ export function Footer() {
             <h3 className="text-brand-primary font-semibold text-lg mb-4">{t('footer.resources')}</h3>
             <ul className="space-y-2">
               <li><a href="#pricing" onClick={(e) => handleSectionClick('pricing', e)} className="hover:text-brand-primary transition-colors">{t('footer.pricing')}</a></li>
-              <li><a href="#demo" onClick={(e) => handleSectionClick('demo', e)} className="hover:text-brand-primary transition-colors">{t('footer.bookDemo')}</a></li>
+              <li><a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors">{t('footer.bookDemo')}</a></li>
             </ul>
           </div>
         </div>
