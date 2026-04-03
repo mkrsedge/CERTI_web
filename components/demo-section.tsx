@@ -92,7 +92,7 @@ export function DemoSection() {
                 href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-brand-primary px-8 py-4 text-sm font-semibold text-white transition hover:opacity-90"
+                className="inline-flex items-center justify-center rounded-full bg-brand-secondary px-8 py-4 text-sm font-semibold text-brand-primary transition hover:opacity-90"
               >
                 {bookingCta}
               </a>

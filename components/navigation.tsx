@@ -252,7 +252,13 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
-            <a href="#demo" className="nav-menu__link" data-section="demo" onClick={(e) => handleSectionClick('demo', e)}>
+            <a
+              href={bookingUrl}
+              className="nav-menu__link"
+              data-section="demo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="nav-menu__number">06</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -316,7 +322,15 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             <button className="mobile-link" onClick={() => { handleSectionClick('usecases', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.caseStudies')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('modules', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.modules')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('pricing', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.pricing')}</button>
-            <button className="mobile-link" onClick={() => { handleSectionClick('demo', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.demo')}</button>
+            <button
+              className="mobile-link"
+              onClick={() => {
+                window.open(bookingUrl, '_blank', 'noopener,noreferrer')
+                setIsMenuOpen(false)
+              }}
+            >
+              {t('nav.demo')}
+            </button>
           </nav>
           <div className="mobile-menu-actions">
             <button
