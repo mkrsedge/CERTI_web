@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { useMemo } from 'react'
 import { useLanguage } from './language-context'
 
-const DEFAULT_BOOKING_URL = 'https://calendar.app.google/Nz8pGCmoYQjhKbH27'
+const DEFAULT_BOOKING_URL = 'https://calendar.app.google/bBPikunCZbbzPqVHA'
 
 export function DemoSection() {
   const { lang, t } = useLanguage()
