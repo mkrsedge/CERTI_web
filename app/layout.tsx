@@ -95,32 +95,15 @@ export default function RootLayout({
               "new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0]," +
               "j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=" +
               "'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);" +
-              "})(window,document,'script','dataLayer','GTM-NJGW9WK9');",
+              "})(window,document,'script','dataLayer','GTM-PBVLC4QL');",
           }}
         />
-        <Script
-          id="gtag-src"
-          src="https://www.googletagmanager.com/gtag/js?id=G-6V8JMNC07B"
-          strategy="afterInteractive"
-          async
-        />
-        <Script
-          id="gtag-ads-src"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17889006787"
-          strategy="afterInteractive"
-          async
-        />
-        <Script id="gtag-inline" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-6V8JMNC07B');
-            gtag('config', 'AW-17889006787');
-          `}
-        </Script>
         {/* Essential viewport meta tag for mobile responsiveness */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta
+          name="google-site-verification"
+          content="Cbk0pWT9gjQNutr9j5uSvDy3O70x2UnT5y3LqtIyUzs"
+        />
         {/* Additional SEO meta tags */}
         <meta name="theme-color" content="#3e2723" />
         <meta name="msapplication-TileColor" content="#3e2723" />
@@ -222,7 +205,7 @@ export default function RootLayout({
       <body>
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-NJGW9WK9"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PBVLC4QL"
             height="0"
             width="0"
             style={{ display: 'none', visibility: 'hidden' }}
