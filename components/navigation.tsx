@@ -14,13 +14,33 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
   const { lang, setLang, t } = useLanguage()
   const { navigateToSection } = useUrlNavigation()
   const bookingUrl = getBookingUrl()
+  const [isBlogPath, setIsBlogPath] = useState(false)
+  const isBlogRoute = activeSection === 'blog' || isBlogPath
   const [language] = useState('EN')
   const toggleLanguage = () => setLang(lang === 'en' ? 'tr' : 'en')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement | null>(null)
 
+  useEffect(() => {
+    setIsBlogPath(window.location.pathname.startsWith('/blog'))
+  }, [])
+
   const handleSectionClick = (section: string, e: React.MouseEvent) => {
     e.preventDefault()
+
+    const navigateHomeSection = () => {
+      const langPrefix = lang === 'tr' ? '/tr' : '/en'
+      window.location.href = `${langPrefix}#${section}`
+    }
+
+    const currentPath = window.location.pathname.replace(/\/$/, '')
+    const isHomeRoute = currentPath === '' || currentPath === '/en' || currentPath === '/tr'
+
+    if (!isHomeRoute) {
+      navigateHomeSection()
+      return
+    }
+
     navigateToSection(section, onSectionChange)
     
     // Also scroll to the section
@@ -126,6 +146,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
     const sections = document.querySelectorAll(".section[data-section]")
     const navLinks = document.querySelectorAll(".nav-menu__link")
     const indicator = document.getElementById('nav-indicator') as HTMLSpanElement | null
+    const isCurrentBlogPath = window.location.pathname.startsWith('/blog')
     
     console.log(`Found ${sections.length} sections and ${navLinks.length} nav links`)
     
@@ -149,7 +170,10 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
       if (lastActiveIndex !== activeIndex) {
         console.log(`Setting active link: ${activeIndex}`)
         navLinks.forEach((link, idx) => {
-          if (idx === activeIndex) {
+          const linkSection = (link as HTMLElement).dataset.section
+          const shouldActivate = idx === activeIndex && (linkSection !== 'blog' || isCurrentBlogPath)
+
+          if (shouldActivate) {
             link.classList.add("nav-menu__link--current")
             link.setAttribute("aria-current", "page")
           } else {
@@ -174,8 +198,16 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
       })
     })
 
-    // Initialize Home as active on first render
-    setActiveLink(0)
+    // Initialize the appropriate active item on first render
+    if (sections.length === 0) {
+      const preferredSection = isCurrentBlogPath ? 'blog' : activeSection
+      const preferredIndex = Array.from(navLinks).findIndex(
+        (link) => (link as HTMLElement).dataset.section === preferredSection
+      )
+      setActiveLink(preferredIndex >= 0 ? preferredIndex : 0)
+    } else {
+      setActiveLink(0)
+    }
 
     // Refresh ScrollTrigger on window resize
     window.addEventListener("resize", () => {
@@ -207,7 +239,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           {/* Center - Navigation Menu */}
           <div className="navbar-center">
             <span id="nav-indicator" className="nav-indicator" aria-hidden="true" />
-            <a href="#home" className="nav-menu__link nav-menu__link--current" data-section="home" onClick={(e) => handleSectionClick('home', e)}>
+            <a href="#home" className={`nav-menu__link ${!isBlogRoute && activeSection === 'home' ? 'nav-menu__link--current' : ''}`} data-section="home" onClick={(e) => handleSectionClick('home', e)}>
               <div className="nav-menu__number">01</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
@@ -252,6 +284,15 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               </div>
             </a>
 
+            <a href="/blog/" className={`nav-menu__link ${isBlogRoute ? 'nav-menu__link--current' : ''}`} data-section="blog">
+              <div className="nav-menu__number">06</div>
+              <div className="nav-menu__text-wrap">
+                <div className="nav-menu__text">
+                  <span className="nav-menu__word">Blog</span>
+                </div>
+              </div>
+            </a>
+
             <a
               href={bookingUrl}
               className="nav-menu__link"
@@ -259,7 +300,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="nav-menu__number">06</div>
+              <div className="nav-menu__number">07</div>
               <div className="nav-menu__text-wrap">
                 <div className="nav-menu__text">
                   <span className="nav-menu__word">{t('nav.demo')}</span>
@@ -270,12 +311,14 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
 
           {/* Right side - Language Toggle */}
           <div className="navbar-right">
-            <button
-              onClick={() => window.open(bookingUrl, '_blank', 'noopener,noreferrer')}
-              className="btn-primary header-cta"
-            >
-              {t('hero.cta.primary')}
-            </button>
+            {!isBlogRoute && (
+              <button
+                onClick={() => window.open(bookingUrl, '_blank', 'noopener,noreferrer')}
+                className="btn-primary header-cta"
+              >
+                {t('hero.cta.primary')}
+              </button>
+            )}
             <button
               type="button"
               className="hamburger-btn"
@@ -322,6 +365,13 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             <button className="mobile-link" onClick={() => { handleSectionClick('usecases', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.caseStudies')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('modules', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.modules')}</button>
             <button className="mobile-link" onClick={() => { handleSectionClick('pricing', { preventDefault: () => {} } as any); setIsMenuOpen(false) }}>{t('nav.pricing')}</button>
+            <a
+              className="mobile-link"
+              href="/blog/"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
+            </a>
             <button
               className="mobile-link"
               onClick={() => {
@@ -449,7 +499,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
         .nav-menu__link {
           position: relative;
           text-decoration: none;
-          font-family: 'Neue Machina', 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.75rem;
           color: #3e2723;
           padding: 8px 12px;
@@ -481,7 +531,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
         .nav-menu__number {
           font-size: 0.65rem;
           margin-right: 5px;
-          font-family: 'Inter', monospace;
+          font-family: inherit;
           opacity: 0.9;
           font-weight: 600;
           transition: all 0.3s ease;
@@ -510,7 +560,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
           border: 1px solid rgba(62, 39, 35, 0.2);
           border-radius: 8px;
           padding: 7px 12px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.75rem;
           font-weight: 600;
           cursor: pointer;

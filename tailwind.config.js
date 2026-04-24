@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Neue Machina', 'Inter', 'sans-serif'],
+        sans: ['Neue Machina', 'sans-serif'],
       },
       colors: {
         // Website brand colors

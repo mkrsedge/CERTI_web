@@ -3,7 +3,6 @@ import './globals.css'
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider'
 import { CookieConsent } from '@/components/cookie-consent'
 import { LanguageProvider } from '@/components/language-context'
-import { inter } from './fonts'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'CERTI Team' }],
   creator: 'CERTI',
   publisher: 'CERTI',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://getcerti.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.getcerti.com'),
   alternates: {
     canonical: '/',
   },
@@ -84,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <head>
         <Script
           id="gtm-init"
@@ -113,8 +112,6 @@ export default function RootLayout({
         <meta name="application-name" content="CERTI QMS" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="format-detection" content="telephone=no" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Structured Data: SoftwareApplication */}
         <meta charSet="utf-8" />
         <Script id="ld-software" type="application/ld+json" strategy="afterInteractive"
@@ -126,7 +123,7 @@ export default function RootLayout({
               alternateName: ['CERTI Quality Management System', 'CERTI QMS Software'],
               applicationCategory: 'BusinessApplication',
               operatingSystem: 'Web',
-              url: (process as any).env.NEXT_PUBLIC_SITE_URL || 'https://getcerti.com',
+              url: (process as any).env.NEXT_PUBLIC_SITE_URL || 'https://www.getcerti.com',
               description:
                 'CERTI QMS is an AI-native Quality Management System for manufacturers. Streamline document control, audits, CAPA, supplier quality, and training with our comprehensive QMS software.',
               featureList: [
@@ -148,16 +145,16 @@ export default function RootLayout({
                 seller: {
                   '@type': 'Organization',
                   name: 'CERTI',
-                  url: 'https://getcerti.com'
+                  url: 'https://www.getcerti.com'
                 }
               },
               publisher: {
                 '@type': 'Organization',
                 name: 'CERTI',
-                url: 'https://getcerti.com',
+                url: 'https://www.getcerti.com',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://getcerti.com/CERTI_logo.png'
+                  url: 'https://www.getcerti.com/CERTI_logo.png'
                 }
               },
               aggregateRating: {
@@ -177,8 +174,8 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'CERTI',
-              url: 'https://getcerti.com',
-              logo: 'https://getcerti.com/CERTI_logo.png',
+              url: 'https://www.getcerti.com',
+              logo: 'https://www.getcerti.com/CERTI_logo.png',
               description: 'CERTI provides AI-native Quality Management System solutions for manufacturers in regulated industries.',
               foundingDate: '2024',
               industry: 'Quality Management Software',

@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 
-# Update this to your production domain if different
-Sitemap: https://getcerti.com/sitemap.xml
+Sitemap: https://www.getcerti.com/sitemap.xml
 

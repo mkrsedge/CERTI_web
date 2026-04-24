@@ -258,9 +258,165 @@ html {
 }
 
 body {
-  font-family: 'Neue Machina', var(--font-inter), sans-serif;
+  font-family: 'Neue Machina', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Critical fallback styles to prevent unstyled navigation flashes before component CSS hydrates. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+.full-width-navbar {
+  position: fixed;
+  top: calc(0.5rem + env(safe-area-inset-top));
+  left: calc(0.5rem + env(safe-area-inset-left));
+  right: calc(0.5rem + env(safe-area-inset-right));
+  z-index: 1000;
+  width: calc(100% - (1rem + env(safe-area-inset-left) + env(safe-area-inset-right)));
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.navbar-content,
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navbar-center {
+  flex: 1;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.navbar-right {
+  gap: 0.25rem;
+}
+
+.navbar-logo {
+  width: auto;
+  height: 35px;
+}
+
+.nav-menu__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  color: #3e2723;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-menu__number {
+  margin-right: 5px;
+  font-size: 0.65rem;
+}
+
+.nav-menu__word {
+  font-size: 0.85rem;
+}
+
+.nav-menu__link--current {
+  color: #1a0703;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(62, 39, 35, 0.16);
+}
+
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(62, 39, 35, 0.2);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #3e2723;
+  padding: 7px 12px;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.language-separator {
+  margin: 0 8px;
+  opacity: 0.4;
+}
+
+.hamburger-btn,
+.header-cta {
+  display: none;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .navbar-center {
+    display: none;
+  }
+
+  .full-width-navbar {
+    min-height: 60px;
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
+  }
+
+  .navbar-logo {
+    height: 28px;
+  }
+
+  .hamburger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 8px;
+    background: #ffffff;
+  }
 }
 
 /* Lenis smooth scroll styles */

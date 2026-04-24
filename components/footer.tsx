@@ -5,12 +5,21 @@ import { useUrlNavigation } from '@/hooks/useUrlNavigation'
 import { getBookingUrl } from '@/lib/booking'
 
 export function Footer() {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   const { navigateToSection } = useUrlNavigation()
   const bookingUrl = getBookingUrl()
 
   const handleSectionClick = (section: string, e: React.MouseEvent) => {
     e.preventDefault()
+
+    const currentPath = window.location.pathname.replace(/\/$/, '')
+    const isHomeRoute = currentPath === '' || currentPath === '/en' || currentPath === '/tr'
+    if (!isHomeRoute) {
+      const langPrefix = lang === 'tr' ? '/tr' : '/en'
+      window.location.href = `${langPrefix}#${section}`
+      return
+    }
+
     navigateToSection(section)
     
     // Also scroll to the section
@@ -46,14 +55,15 @@ export function Footer() {
             <h3 className="text-brand-primary font-semibold text-lg mb-4">{t('footer.products')}</h3>
             <ul className="space-y-2">
               <li><a href="#modules" onClick={(e) => handleSectionClick('modules', e)} className="hover:text-brand-primary transition-colors">{t('nav.modules')}</a></li>
-              <li><a href="#case-studies" onClick={(e) => handleSectionClick('case-studies', e)} className="hover:text-brand-primary transition-colors">{t('nav.caseStudies')}</a></li>
+              <li><a href="#usecases" onClick={(e) => handleSectionClick('usecases', e)} className="hover:text-brand-primary transition-colors">{t('nav.caseStudies')}</a></li>
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Blog */}
           <div>
-            <h3 className="text-brand-primary font-semibold text-lg mb-4">{t('footer.resources')}</h3>
+            <h3 className="text-brand-primary font-semibold text-lg mb-4">Blog</h3>
             <ul className="space-y-2">
+              <li><a href="/blog/" className="hover:text-brand-primary transition-colors">Blog</a></li>
               <li><a href="#pricing" onClick={(e) => handleSectionClick('pricing', e)} className="hover:text-brand-primary transition-colors">{t('footer.pricing')}</a></li>
               <li><a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors">{t('footer.bookDemo')}</a></li>
             </ul>
