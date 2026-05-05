@@ -11,7 +11,7 @@ const dict: I18nDict = {
     'nav.home': 'Home',
     'nav.overview': 'Overview',
     'nav.modules': 'Modules',
-    'nav.caseStudies': 'Use-Cases',
+    'nav.caseStudies': 'Use Cases',
     'nav.pricing': 'Pricing',
     'nav.demo': 'Book a Demo',
     'nav.toggle.toTR': 'Switch to Turkish',
@@ -72,7 +72,7 @@ const dict: I18nDict = {
     'overview.cap.6.desc': 'See live metrics and compliance status.',
 
     // Modules
-    'modules.header': 'Use-Cases',
+    'modules.header': 'Use Cases',
     'modules.sub': 'Discover how CERTI elevates quality management across your operations—from document control to customer satisfaction.',
     'modules.1.title': 'Smart Document Management',
     'modules.1.sub': 'Intelligent Document Control',
