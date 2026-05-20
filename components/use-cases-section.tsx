@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useLanguage } from './language-context'
 
 type ArcadeDemo = {
@@ -30,17 +30,55 @@ const arcadeDemos: ArcadeDemo[] = [
 ]
 
 function ArcadeEmbed({ demo }: { demo: ArcadeDemo }) {
+  const embedRef = useRef<HTMLDivElement>(null)
+
+  const openFullscreen = async () => {
+    const element = embedRef.current
+    if (!element) return
+
+    if (element.requestFullscreen) {
+      await element.requestFullscreen()
+    }
+  }
+
   return (
-    <div style={{ position: 'relative', paddingBottom: 'calc(49.296875% + 41px)', height: '0', width: '100%' }}>
-      <iframe
-        src={demo.src}
-        title={demo.title}
-        frameBorder="0"
-        loading="lazy"
-        allowFullScreen
-        allow="clipboard-write"
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', colorScheme: 'light' }}
-      />
+    <div ref={embedRef} className="relative bg-white">
+      <button
+        type="button"
+        onClick={openFullscreen}
+        className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-black/10 bg-white/95 text-[#3e2723] shadow-md backdrop-blur transition hover:bg-white md:hidden"
+        aria-label="Open demo fullscreen"
+        title="Open fullscreen"
+      >
+        <svg
+          aria-hidden="true"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+          <path d="M16 3h3a2 2 0 0 1 2 2v3" />
+          <path d="M8 21H5a2 2 0 0 1-2-2v-3" />
+          <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+        </svg>
+      </button>
+
+      <div style={{ position: 'relative', paddingBottom: 'calc(49.296875% + 41px)', height: '0', width: '100%' }}>
+        <iframe
+          src={demo.src}
+          title={demo.title}
+          frameBorder="0"
+          loading="lazy"
+          allowFullScreen
+          allow="clipboard-write; fullscreen"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', colorScheme: 'light' }}
+        />
+      </div>
     </div>
   )
 }
