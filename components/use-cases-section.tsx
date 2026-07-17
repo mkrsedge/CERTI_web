@@ -16,16 +16,30 @@ const arcadeDemos: ArcadeDemo[] = [
   {
     id: 'customer-complaint',
     label: 'Issue Management',
-    title: "Investigate and Resolve a Customer Complaint with CERTI's Guided Root Cause Analysis",
-    subtitle: 'Guided Root Cause Analysis',
-    src: 'https://demo.arcade.software/3MKupUKJpzgNv0fdVre0?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true'
+    title: 'Submit and Investigate a Customer Complaint',
+    subtitle: 'Guided Root Cause Analysis & CAPA',
+    src: 'https://demo.arcade.software/PWBNgAKPv8EJf19bvGFh?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true'
+  },
+  {
+    id: 'allergen-mismatch',
+    label: 'Food Safety',
+    title: 'Review and Resolve an Allergen Mismatch in Product Labeling',
+    subtitle: 'Allergen Control & Corrective Actions',
+    src: 'https://demo.arcade.software/bP7Y8IEhBHDzW04BhAvw?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true'
+  },
+  {
+    id: 'batch-record',
+    label: 'Batch Records',
+    title: 'Submit a Batch Record and Resolve COA Holds',
+    subtitle: 'Digital Batch Logging & Compliant Release',
+    src: 'https://demo.arcade.software/tij5FFovUpB2Osh5YYAp?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true'
   },
   {
     id: 'change-management',
     label: 'Change Management',
-    title: 'Change Management and Impact Analysis with CERTI',
-    subtitle: 'Impact Analysis',
-    src: 'https://demo.arcade.software/GJc8ZvZZeKBOBM58HIn1?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true'
+    title: 'Manage Change Requests for SQF Food Safety Code Updates',
+    subtitle: 'Regulatory Updates & Impact Analysis',
+    src: 'https://demo.arcade.software/cBFS9NrdbaO31ZYF8530?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true'
   }
 ]
 
