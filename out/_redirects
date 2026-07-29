@@ -1,4 +1,56 @@
-# Redirect /TaC to the Terms and Conditions PDF
-/TaC /CERTI%20-%20Terms%20And%20Conditions_Oct2025.pdf 200
-# Redirect /PrivacyPolicy to the Privacy Policy PDF
-/PrivacyPolicy /CERTI_Privacy_Policy.pdf 200
+# Cloudflare Pages redirects — https://developers.cloudflare.com/pages/configuration/redirects/
+# Format:  <source>  <destination>  <status>
+# First match wins, so specific rules go above general ones.
+
+# ─── Canonical host ───────────────────────────────────────────────────────────
+# Both www and apex served 200 before this deploy, which is duplicate content.
+# The whole site canonicalises to the apex, so www redirects to it.
+#
+# IMPORTANT: on Cloudflare the authoritative place for a host-level redirect is a
+# Redirect Rule in the dashboard, because Pages applies _redirects only after the
+# request has already reached this project. This line is a mirror so the intent
+# travels with the repo. Create the dashboard rule too:
+#     If   hostname equals www.getcerti.com
+#     Then dynamic redirect to concat("https://getcerti.com", http.request.uri.path)
+#     Status 301, preserve query string
+https://www.getcerti.com/*   https://getcerti.com/:splat   301
+
+# ─── Legal documents ──────────────────────────────────────────────────────────
+# The previous site served these as PDFs via 200-rewrites. They are now proper
+# HTML pages, so the old paths redirect to them and there is exactly one live
+# version of each document rather than two that can drift apart.
+/PrivacyPolicy    /privacy-policy   301
+/privacypolicy    /privacy-policy   301
+/TaC              /terms            301
+/tac              /terms            301
+
+# ─── Retired locale paths ─────────────────────────────────────────────────────
+# The old site had /en/ and /tr/. The new site is single-locale English at the root.
+/en/*   /   301
+/tr/*   /   301
+
+# ─── Retired blog ─────────────────────────────────────────────────────────────
+# All 14 of these were "Coming Soon" stubs of ~120 words, so no real content is
+# lost, but they were live and indexed and thin pages are better redirected than
+# left to 404. The slugs are a ready-made content plan: when the real blog ships,
+# delete the matching line and publish at the same slug so the redirect becomes
+# the article. Keep /blog/ itself listed rather than using /blog/* — a wildcard
+# would pre-break the new blog the moment it launches.
+/blog/                                            /   301
+/blog/ai-native-vs-legacy-qms/                    /   301
+/blog/best-qms-software-small-manufacturers/      /   301
+/blog/brcgs-compliance-packaging-companies/       /   301
+/blog/brcgs-criteria-that-fail-most-manufacturers/ /  301
+/blog/capa-management-software-root-cause-analysis/ / 301
+/blog/certi-qms-challenges-food-packaging-manufacturers/ / 301
+/blog/iso-9001-2026-food-manufacturers/           /   301
+/blog/iso-9001-compliance-checklist-food-manufacturers/ / 301
+/blog/non-conformance-report-template/            /   301
+/blog/qms-implementation-under-30-days/           /   301
+/blog/qms-vs-spreadsheets/                        /   301
+/blog/sqf-certification-guide-food-manufacturers/ /   301
+/blog/sqf-edition-10-changes/                     /   301
+/blog/what-is-qms-food-manufacturing/             /   301
+
+# Cloudflare Pages serves /404.html automatically for anything unmatched, so no
+# catch-all rule is needed. Add a 301 here for EVERY url you ever change.

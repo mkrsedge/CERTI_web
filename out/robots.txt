@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.getcerti.com/sitemap.xml
+Sitemap: https://getcerti.com/sitemap.xml
 
+# Staging / preview subdomains must NOT be indexed. They should ship their OWN
+# robots.txt that blocks everything (do not rely on this production file):
+#
+#   User-agent: *
+#   Disallow: /
+#
+# On Cloudflare Pages, gate preview deployments behind Access, or serve the
+# block above for *.pages.dev and any staging.getcerti.com host.

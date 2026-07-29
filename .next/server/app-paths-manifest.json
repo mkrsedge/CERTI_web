@@ -1,9 +1,0 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/en/page": "app/en/page.js",
-  "/tr/page": "app/tr/page.js",
-  "/page": "app/page.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
-  "/blog/what-is-qms-food-manufacturing/page": "app/blog/what-is-qms-food-manufacturing/page.js",
-  "/blog/page": "app/blog/page.js"
-}
