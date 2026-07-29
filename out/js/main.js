@@ -742,26 +742,89 @@
       }
       setBeat(0);
 
-      /* ---- fetch the master only once the section is a screen or two away ---- */
+      /* ---- fetch the master well before the section arrives ----
+         It is 6.3MB and gets scrubbed, so a first frame is not enough: seeking into a
+         range that has not downloaded yet stalls visibly. Wait for a contiguous buffer
+         from the start before handing over from the poster, and begin fetching two
+         screens out so there is time to get it. */
       let ready = false;
-      film.addEventListener('loadeddata', () => {
+
+      function hasUsableBuffer() {
+        const b = film.buffered;
+        const want = Math.min(film.duration || 8, 6);
+        for (let i = 0; i < b.length; i++) {
+          if (b.start(i) <= 0.15 && b.end(i) >= want) return true;
+        }
+        return false;
+      }
+
+      function goReady() {
+        if (ready) return;
+        if (film.readyState < 4 && !hasUsableBuffer()) return;
         ready = true;
         orbit.classList.add('is-ready');
-      }, { once: true });
+      }
+
+      film.addEventListener('progress', goReady);
+      film.addEventListener('canplaythrough', goReady);
+      film.addEventListener('loadeddata', goReady);
       film.addEventListener('error', buildList, { once: true });
 
       ScrollTrigger.create({
         trigger: orbit,
-        start: 'top bottom+=60%',
+        start: 'top bottom+=200%',
         once: true,
-        onEnter: () => { film.src = DIR + 'floor.mp4'; film.load(); },
+        onEnter: () => {
+          film.preload = 'auto';
+          film.src = DIR + 'floor.mp4';
+          film.load();
+        },
       });
 
-      /* ---- scroll → playhead ----
-         pSmooth trails the raw scroll progress so the film carries a little weight, then
-         one seek per frame at most. Seeks are cheap here because the master is encoded with
-         a keyframe every 4 frames. */
-      let pRaw = 0, pSmooth = 0, lastSeek = -1;
+      /* ---- seek pacing ----
+         A decoder cannot finish a seek inside one animation frame. Assigning currentTime
+         every frame — which is what this did — buries it in requests it can never drain,
+         and the element sticks in a permanent seeking state: the faster you scroll, the
+         worse it gets. So allow exactly one seek in flight, keep only the newest target,
+         and fire the next when the decoder says it finished. That self-throttles to
+         whatever the machine can actually manage instead of to the frame rate. */
+      let seekBusy = false, queued = null, lastSent = -1, seekStarted = 0;
+      /* fastSeek lands on the nearest keyframe rather than the exact frame and is far
+         cheaper. Keyframes are 0.167s apart here, which is finer than anyone can scroll,
+         so the imprecision is invisible. Safari has it; Chrome falls back. */
+      const rawSeek = typeof film.fastSeek === 'function'
+        ? (t) => film.fastSeek(t)
+        : (t) => { film.currentTime = t; };
+
+      function sendSeek(t) {
+        lastSent = t;
+        seekBusy = true;
+        seekStarted = performance.now();
+        rawSeek(t);
+      }
+
+      function seekReleased() {
+        seekBusy = false;
+        if (queued !== null) {
+          const t = queued;
+          queued = null;
+          sendSeek(t);
+        }
+      }
+      film.addEventListener('seeked', seekReleased);
+      film.addEventListener('stalled', seekReleased);
+
+      function requestSeek(t) {
+        if (!ready) return;
+        if (Math.abs(t - lastSent) < 1 / 48) return;
+        /* if a seek has been pending unreasonably long (unbuffered range, stalled
+           network) stop waiting on it, or the film freezes for good */
+        if (seekBusy && performance.now() - seekStarted < 900) { queued = t; return; }
+        sendSeek(t);
+      }
+
+      /* ---- scroll → playhead ---- */
+      let pRaw = 0, pSmooth = 0;
       let vel = 0, velEased = 0, active = false, ticking = false;
 
       function startTicker() {
@@ -771,15 +834,15 @@
       }
 
       function frame() {
-        /* film-weight inertia on the playhead */
-        pSmooth += (pRaw - pSmooth) * 0.15;
-        if (Math.abs(pRaw - pSmooth) < 0.0002) pSmooth = pRaw;
+        /* Film-weight inertia, but catch up harder the further behind we are. A flat lerp
+           made fast scrolling feel laggy: the playhead trailed for a second after the
+           scroll had already stopped. */
+        const gap = pRaw - pSmooth;
+        pSmooth += gap * Math.min(0.55, 0.15 + Math.abs(gap) * 3);
+        if (Math.abs(gap) < 0.0002) pSmooth = pRaw;
 
         const t = pSmooth * (film.duration || FILM_DUR);
-        if (ready && Math.abs(t - lastSeek) > 1 / 48) {
-          lastSeek = t;
-          film.currentTime = t;
-        }
+        requestSeek(t);
 
         /* scroll velocity becomes depth: push back and tilt while moving, settle at rest */
         velEased += (vel - velEased) * 0.09;
