@@ -1,5 +1,7 @@
+# Cloudflare Pages project binding. Kept deliberately: this is the deployment contract,
+# not old-site content. It declares the output directory, which is what lets the existing
+# Pages configuration keep working untouched after the redesign.
 name = "certi-website"
-compatibility_date = "2024-08-01"
 
 [pages]
 pages_build_output_dir = "out"
