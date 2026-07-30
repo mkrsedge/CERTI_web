@@ -1046,20 +1046,31 @@
      ships its own control bar (fullscreen, copy link, step nav), so we do not add or remove
      controls of our own. */
   const ARCADE_EMBED = '?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true';
-  const arcade = (id) => 'https://demo.arcade.software/' + id + ARCADE_EMBED;
+  const arcade = (id, aspect) => ({
+    url: 'https://demo.arcade.software/' + id + ARCADE_EMBED,
+    /* `aspect` is the demo's own height-to-width percentage, which Arcade derives from the
+       recording and bakes into its embed snippet. It is NOT a constant across demos: the
+       first four were recorded at 2560x1262 (49.296875%) and the supplier one at 2560x1356
+       (52.96875%). Get it wrong and the player is handed the wrong shape, which is what
+       previously mis-scaled its interactive layer and clipped its control bar. To find it
+       for a new demo, open demo.arcade.software/<id> and divide the largest asset's height
+       by its width. */
+    aspect: aspect,
+  });
   const ARCADE = {
     /* "Submit and Investigate a Customer Complaint" — guided root cause into a CAPA */
-    capa:     arcade('PWBNgAKPv8EJf19bvGFh'),
-    supplier: '',
-    gfsi:     '',
+    capa:     arcade('PWBNgAKPv8EJf19bvGFh', 49.296875),
+    /* "Manage Suppliers and Incoming Quality" — COAs checked against spec on arrival */
+    supplier: arcade('R7wWuEgkyR5pzHUZqFZe', 52.96875),
+    gfsi:     null,
     /* "Manage Change Requests for SQF Food Safety Code Updates" — change impact analysis */
-    docs:     arcade('cBFS9NrdbaO31ZYF8530'),
+    docs:     arcade('cBFS9NrdbaO31ZYF8530', 49.296875),
     /* "Submit a Batch Record and Resolve COA Holds" — the production record flow */
-    forms:    arcade('tij5FFovUpB2Osh5YYAp'),
-    recall:   '',
+    forms:    arcade('tij5FFovUpB2Osh5YYAp', 49.296875),
+    recall:   null,
     /* "Review and Resolve an Allergen Mismatch in Product Labeling" — spec conflict caught */
-    label:    arcade('bP7Y8IEhBHDzW04BhAvw'),
-    em:       '',
+    label:    arcade('bP7Y8IEhBHDzW04BhAvw', 49.296875),
+    em:       null,
   };
   const QS_KEYS = ['capa', 'supplier', 'gfsi', 'docs', 'forms', 'recall', 'label', 'em'];
 
@@ -1078,14 +1089,15 @@
     let isOpen = false;
 
     function openQs(card, key) {
-      const url = ARCADE[key];
+      const demo = ARCADE[key];
       qsTitle.textContent = label(card);
-      /* Arcade's official embed, verbatim: the wrapper is a padding-bottom aspect box holding
-         the demo's own ratio (49.296875%) plus 41px for the player's control bar, where its
-         fullscreen, copy-link and step controls live. Nothing may resize the iframe. */
-      qsMount.innerHTML = url
-        ? '<div style="position:relative;padding-bottom:calc(49.296875% + 41px);height:0;width:100%">' +
-          '<iframe src="' + url + '" title="' + esc(label(card)) + ' interactive demo"' +
+      /* Arcade's official embed, verbatim: a padding-bottom aspect box carrying this demo's
+         own ratio plus 41px for the player's control bar, where its fullscreen, copy-link
+         and step controls live. Nothing may resize the iframe. */
+      qsMount.innerHTML = demo
+        ? '<div style="position:relative;padding-bottom:calc(' + demo.aspect +
+          '% + 41px);height:0;width:100%">' +
+          '<iframe src="' + demo.url + '" title="' + esc(label(card)) + ' interactive demo"' +
           /* all three fullscreen attributes, as Arcade's own snippet ships them: WebKit still
              wants the prefixed form, and without it the player's fullscreen button does
              nothing in Safari even though allow="fullscreen" satisfies Chrome */
@@ -1095,7 +1107,11 @@
           '</div>'
         : '<div class="mcard__soon"><span>Interactive demo coming soon</span></div>';
 
-      track('quickstart_demo_opened', { quickstart: key, name: label(card), hasDemo: !!url });
+      /* the panel's max width is derived from the same ratio, so a taller demo gets a
+         narrower panel instead of overflowing the viewport */
+      qsmodal.style.setProperty('--qs-aspect', demo ? demo.aspect / 100 : 0.49296875);
+
+      track('quickstart_demo_opened', { quickstart: key, name: label(card), hasDemo: !!demo });
 
       lastFocus = document.activeElement;
       isOpen = true;

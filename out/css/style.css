@@ -2016,7 +2016,10 @@ ul { list-style: none; }
 }
 .qsmodal__panel {
   position: relative;
-  width: min(76vw, calc((88vh - 3.4rem - 41px) / 0.49296875));
+  /* Height budget solved for width: the embed is (width x --qs-aspect) + 41px of control
+     bar, so this is the widest panel whose demo still fits in 88vh. --qs-aspect is set per
+     demo by openQs(), because Arcade's ratio differs between recordings. */
+  width: min(76vw, calc((88vh - 3.4rem - 41px) / var(--qs-aspect, 0.49296875)));
   max-width: 78rem;
   background: var(--bg);
   border: 1px solid var(--line);
