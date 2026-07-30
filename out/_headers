@@ -1,6 +1,5 @@
 # Cloudflare Pages headers — https://developers.cloudflare.com/pages/configuration/headers/
-# Carried over from the previous site so the security headers are not lost in the
-# redesign, with the caching rules extended to cover this site's asset types.
+# Security headers carried over from the previous site so they survive the redesign.
 
 /*
   X-Frame-Options: DENY
@@ -8,31 +7,47 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
 
-# Fingerprint-free filenames, so HTML must always be revalidated or a deploy can
-# leave visitors on a stale page that references assets which no longer exist.
+# ─── Caching ──────────────────────────────────────────────────────────────────
+# There is no build step here, so filenames carry no content hash and files are
+# edited in place. `immutable` is therefore wrong for anything that changes: the
+# first version of this file marked css and js immutable for a year, and the very
+# next JS change could not be shipped — Cloudflare served the year-old copy from
+# edge cache and browsers would have held it just as long.
+#
+# So only fonts are immutable, because a different font means a different family
+# and therefore a different filename. Everything else revalidates. The cost is one
+# conditional request per asset, answered with an empty 304, which is cheap.
+#
+# If you ever do want long-lived caching on css/js, add a content hash to the
+# filename first. Do not simply raise max-age.
+
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
 
-# These three are re-read by crawlers and must never be served stale.
+# Re-read by crawlers, so never served stale for long.
 /robots.txt
   Cache-Control: public, max-age=3600
 /sitemap.xml
   Cache-Control: public, max-age=3600
 
-# Long-lived assets. Filenames are stable, so if one is ever replaced in place its
-# name has to change too or clients will keep the cached copy for a year.
+# Images are replaced rarely but it does happen, so they revalidate after an hour
+# rather than being locked in for a year.
 /img/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Fonts genuinely never change in place — a new font is a new family and a new
+# filename — so these are the one safe case for immutable.
 /fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-/css/*
-  Cache-Control: public, max-age=31536000, immutable
-/js/*
   Cache-Control: public, max-age=31536000, immutable
 
 # The Intelligence film is scrubbed by scroll, so byte-range requests matter: the
-# browser seeks into it rather than streaming from the start.
+# browser seeks into it rather than streaming from the start. It has already been
+# re-cut several times, so it revalidates like the other media.
 /*.mp4
   Content-Type: video/mp4
   Accept-Ranges: bytes
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, must-revalidate
