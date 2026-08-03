@@ -1604,11 +1604,7 @@ ul { list-style: none; }
   color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.55;
-  /* 52ch rather than 40ch. Card copy is rigid and the photo is what flexes, so every extra
-     wrapped line costs the same amount of photo on ALL nine cards — they share a height.
-     Widening the measure took the longest card from 7 lines to 5 and gave 46px back to the
-     photo. Still comfortably readable; beyond this the gain flattens out. */
-  max-width: 52ch;
+  max-width: 40ch;
 }
 .mcard__line {
   position: absolute;
@@ -1695,9 +1691,7 @@ ul { list-style: none; }
     max-height: 44rem;          /* stops the cards going absurd on very tall screens */
     align-items: stretch;       /* every card the same height, however long its copy */
   }
-  /* Wider than before so the longest card's copy wraps into fewer lines. See the note on
-     .mcard__desc: line count is paid for out of the photo, on every card at once. */
-  .mcard { width: clamp(320px, 28vw, 460px); height: 100%; }
+  .mcard { width: clamp(270px, 24vw, 380px); height: 100%; }
   .mcard__media {
     aspect-ratio: auto;         /* the 3:2 default becomes a floor, not a fixed size */
     flex: 1 1 auto;
@@ -1707,7 +1701,7 @@ ul { list-style: none; }
 }
 /* Shorter windows: wider cards, because fewer text wraps means less rigid height to find */
 @media (min-width: 769px) and (max-height: 820px) {
-  .mcard { width: clamp(330px, 30vw, 470px); }
+  .mcard { width: clamp(300px, 27vw, 420px); }
   .mcard__body { padding: clamp(1rem, 1.6vw, 1.3rem); }
 }
 /* 1366x768 laptops and anything with deep browser chrome: claw height back from the
