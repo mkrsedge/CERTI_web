@@ -1071,8 +1071,10 @@
     /* "Review and Resolve an Allergen Mismatch in Product Labeling" — spec conflict caught */
     label:    arcade('bP7Y8IEhBHDzW04BhAvw', 49.296875),
     em:       null,
+    /* "Automate RFIs and Buyer Questionnaire" — answers grounded in your own records */
+    buyer:    arcade('I9RyGunscamGLALWY4BO', 52.96875),
   };
-  const QS_KEYS = ['capa', 'supplier', 'gfsi', 'docs', 'forms', 'recall', 'label', 'em'];
+  const QS_KEYS = ['capa', 'supplier', 'gfsi', 'docs', 'forms', 'recall', 'label', 'em', 'buyer'];
 
   const qsCards = [...document.querySelectorAll('#quickstarts .mcard')];
   const qsmodal = document.getElementById('qsmodal');
