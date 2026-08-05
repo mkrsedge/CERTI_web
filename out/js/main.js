@@ -1062,7 +1062,8 @@
     capa:     arcade('PWBNgAKPv8EJf19bvGFh', 49.296875),
     /* "Manage Suppliers and Incoming Quality" — COAs checked against spec on arrival */
     supplier: arcade('R7wWuEgkyR5pzHUZqFZe', 52.96875),
-    gfsi:     null,
+    /* "Link Documentation to Food Safety Compliance Requirements" — records mapped to GFSI */
+    gfsi:     arcade('465sEDzrBECGDiVaVyxP', 52.96875),
     /* "Manage Change Requests for SQF Food Safety Code Updates" — change impact analysis */
     docs:     arcade('cBFS9NrdbaO31ZYF8530', 49.296875),
     /* "Submit a Batch Record and Resolve COA Holds" — the production record flow */
