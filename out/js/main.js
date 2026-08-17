@@ -1050,8 +1050,8 @@
     url: 'https://demo.arcade.software/' + id + ARCADE_EMBED,
     /* `aspect` is the demo's own height-to-width percentage, which Arcade derives from the
        recording and bakes into its embed snippet. It is NOT a constant across demos: the
-       first four were recorded at 2560x1262 (49.296875%) and the supplier one at 2560x1356
-       (52.96875%). Get it wrong and the player is handed the wrong shape, which is what
+       older recordings are 2560x1262 (49.296875%) and the newer ones 2560x1356 (52.96875%),
+       so check every time. Get it wrong and the player is handed the wrong shape, which is what
        previously mis-scaled its interactive layer and clipped its control bar. To find it
        for a new demo, open demo.arcade.software/<id> and divide the largest asset's height
        by its width. */
@@ -1064,8 +1064,9 @@
     supplier: arcade('R7wWuEgkyR5pzHUZqFZe', 52.96875),
     /* "Link Documentation to Food Safety Compliance Requirements" — records mapped to GFSI */
     gfsi:     arcade('465sEDzrBECGDiVaVyxP', 52.96875),
-    /* "Manage Change Requests for SQF Food Safety Code Updates" — change impact analysis */
-    docs:     arcade('cBFS9NrdbaO31ZYF8530', 49.296875),
+    /* "Submit Change Management SOP Responses for Review and Training" — a document change
+       fanned out into impact analysis, review tasks and retraining */
+    docs:     arcade('YvtoXxmJ1J5wov3f6bZQ', 52.96875),
     /* "Submit a Batch Record and Resolve COA Holds" — the production record flow */
     forms:    arcade('tij5FFovUpB2Osh5YYAp', 49.296875),
     recall:   null,
