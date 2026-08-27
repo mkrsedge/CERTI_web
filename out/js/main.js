@@ -1069,10 +1069,14 @@
     docs:     arcade('YvtoXxmJ1J5wov3f6bZQ', 52.96875),
     /* "Submit a Batch Record and Resolve COA Holds" — the production record flow */
     forms:    arcade('tij5FFovUpB2Osh5YYAp', 49.296875),
-    recall:   null,
+    /* "Complete a Recall and Traceability Audit for a Production Lot" — a lot traced
+       both ways, with the audit pack assembled from the records */
+    recall:   arcade('MRaUY6TfTm2sm5CWczbA', 52.96875),
     /* "Review and Resolve an Allergen Mismatch in Product Labeling" — spec conflict caught */
     label:    arcade('bP7Y8IEhBHDzW04BhAvw', 49.296875),
-    em:       null,
+    /* "Manage Environmental Monitoring Program Tasks and Compliance" — the swab
+       schedule run to plan, with results held against the program */
+    em:       arcade('NCucpfdBEH56vbGUBlxQ', 52.96875),
     /* "Automate RFIs and Buyer Questionnaire" — answers grounded in your own records */
     buyer:    arcade('I9RyGunscamGLALWY4BO', 52.96875),
   };
