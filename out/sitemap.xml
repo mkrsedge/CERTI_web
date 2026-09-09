@@ -1,27 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Sitemap for getcerti.com
-  On a framework build this should be GENERATED at build time (e.g. next-sitemap,
-  @astrojs/sitemap, vite-plugin-sitemap) and regenerated on every deploy so new
-  blog posts appear automatically. This static version lists the current URLs;
-  append <url> entries for each /blog/<slug> as posts are published.
+  Sitemap for getcerti.com.
+
+  There is no build step in this repo, so this file is maintained by
+  assets-src/gen-pages.py: add a demo to the DEMOS list there and re-run,
+  rather than hand-editing here.
+
+  Every URL below must return 200 and be self-canonical. A sitemap that
+  lists redirects, fragments or noindex pages is worse than no sitemap:
+  it spends crawl budget teaching Google what not to trust.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://getcerti.com/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://getcerti.com/demos/</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/quality-investigations-capa</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/supplier-incoming-quality</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/gfsi-compliance</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/documentation-change-management</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/digital-forms-production-records</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/recall-readiness-traceability</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/label-spec-validation</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/environmental-monitoring</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/demos/buyer-requirements-questionnaires</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getcerti.com/book-a-demo</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://getcerti.com/privacy-policy</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://getcerti.com/terms</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

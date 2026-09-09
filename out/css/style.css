@@ -2181,6 +2181,300 @@ ul { list-style: none; }
 .legal__back { margin-top: 3rem; }
 @media (max-width: 640px) { .legal__toc ol { columns: 1; } }
 
+/* ═══════════════ DEMO / BOOKING PAGES ═══════════════
+   Shared by demos/index.html, the nine demos/<slug>.html pages and book-a-demo.html.
+
+   Like the legal pages these are STANDALONE: they load this stylesheet but not main.js,
+   so nothing here may depend on JS having run. That is why they reuse .legal__head,
+   .legal__logo, .legal__kicker and .legal__title for the masthead rather than the
+   homepage's animated header, and why the .btn hover label-swap degrades to the
+   background slide (that swap needs main.js to wrap the text). These pages exist so each
+   demo has a real indexable URL instead of living only inside the homepage modal.
+
+   THE ONE RULE ABOUT .dpage__frame: it may set the outer box's WIDTH only. Arcade scales
+   its interactive layer to the iframe's frame, so anything of ours that sets the iframe's
+   width, height or aspect-ratio mis-scales its hit targets and clips the 41px control bar
+   that its own fullscreen and copy-link buttons live in. The inner aspect box is Arcade's
+   own markup, reproduced verbatim by assets-src/gen-pages.py. */
+
+.dpage__head { padding-bottom: 2rem; }
+
+.dpage__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.dpage__crumbs a { color: var(--muted); text-decoration: none; transition: color 0.25s; }
+.dpage__crumbs a:hover { color: var(--plum); }
+.dpage__crumbs [aria-current] { color: var(--ink); }
+
+.dpage__lede {
+  margin-top: 1.4rem;
+  max-width: 60ch;
+  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.dpage { padding: 3rem 0 0; }
+
+/* ── The embed ── */
+.dpage__demo { margin: 0 0 3.5rem; }
+/* Cap the width so the demo's own height can never exceed the viewport: the frame is
+   (width × --qs-aspect) + 41px tall, so solving for width against 74vh keeps the whole
+   player, control bar included, on screen. Same derivation as the homepage modal panel. */
+.dpage__frame {
+  width: 100%;
+  max-width: min(100%, calc((74vh - 41px) / var(--qs-aspect, 0.5296875)));
+  margin-inline: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.dpage__cap {
+  margin: 1rem auto 0;
+  max-width: 62ch;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ── Prose + aside ── */
+.dpage__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20rem;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--line);
+}
+.dpage__prose { max-width: 66ch; }
+.dpage__quote {
+  margin: 0 0 1.8rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--plum);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--ink);
+}
+.dpage__prose p { margin-bottom: 1.1rem; color: var(--muted); line-height: 1.7; }
+
+.dpage__aside {
+  align-self: start;
+  padding: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+}
+.dpage__asideh {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--plum);
+}
+.dpage__list { margin: 1rem 0 0; padding: 0; list-style: none; }
+.dpage__list li {
+  position: relative;
+  margin-bottom: 0.7rem;
+  padding-left: 1.1rem;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.dpage__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--plum);
+}
+/* no display property here: .btn's own inline-flex must win, or the label and the arrow
+   stack vertically instead of sitting in a row (same trap as .legal__back) */
+.dpage__asidebtn { margin-top: 1.4rem; }
+
+/* ── Closing CTA ── */
+.dpage__cta { padding: 4rem 0; text-align: center; }
+.dpage__cta h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.dpage__cta p {
+  margin: 1rem auto 1.8rem;
+  max-width: 52ch;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── Sibling demos ── */
+.dpage__more { padding: 2.5rem 0 4rem; border-top: 1px solid var(--line); }
+.dpage__more h2 {
+  margin-bottom: 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dpage__more ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.2rem 2rem;
+  list-style: none;
+}
+.dpage__more a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.96rem;
+  transition: color 0.25s;
+}
+.dpage__more a:hover { color: var(--plum); }
+.dpage__moren { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+
+/* ── Footer ── */
+.dpage__foot { padding: 2.5rem 0 3rem; border-top: 1px solid var(--line); background: var(--bg-2); }
+.dpage__footgrid { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem 2.5rem; }
+.dpage__footlogo img { height: 1.5rem; width: auto; display: block; }
+.dpage__footnav { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; }
+.dpage__footnav a {
+  font-size: 0.88rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.dpage__footnav a:hover { color: var(--plum); }
+.dpage__footnote { margin-left: auto; font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+
+/* ═══════ /demos/ hub grid ═══════ */
+.dhub {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1.6rem;
+  padding-bottom: 1rem;
+  list-style: none;
+}
+.dhub__item > a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--white);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.dhub__item > a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -24px rgba(44, 44, 52, 0.35);
+}
+.dhub__media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; }
+.dhub__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dhub__num {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--bg);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+.dhub__body { display: flex; flex-direction: column; flex: 1; padding: 1.2rem 1.3rem 1.3rem; }
+.dhub__tag {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--plum);
+}
+.dhub__name {
+  margin: 0.5rem 0 0.6rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.16rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.dhub__desc { flex: 1; font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
+.dhub__cta {
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--plum);
+}
+.dhub__cta i { display: inline-block; font-style: normal; transition: transform 0.3s var(--ease-out); }
+.dhub__item > a:hover .dhub__cta i { transform: translateX(4px); }
+
+/* ═══════ /book-a-demo ═══════ */
+.dbook {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20rem;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-bottom: 4rem;
+}
+.dbook__cal {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  overflow: hidden;
+}
+/* Cal renders month_view as calendar + slots side by side only while the container is
+   wide enough; below roughly 700px it stacks them and the embed doubles in height. So
+   this column stays the wide one at every breakpoint rather than being squeezed. */
+.dbook__mount { min-height: 34rem; min-width: 0; }
+.dbook__mount.is-loading { display: grid; place-items: center; }
+.dbook__mount.is-loading::after {
+  content: "Loading the calendar…";
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.dbook__fallback { padding: 3rem 2rem; text-align: center; }
+.dbook__fallback p { margin-bottom: 1.2rem; color: var(--muted); }
+.dbook__nojs { padding: 2.5rem 2rem; text-align: center; color: var(--muted); }
+.dbook__nojs a { color: var(--plum); }
+.dbook__aside { align-self: start; }
+.dbook__asideh2 { display: block; margin-top: 2.2rem; }
+.dbook__asidep { margin-top: 0.8rem; font-size: 0.94rem; line-height: 1.55; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .dpage__cols, .dbook { grid-template-columns: minmax(0, 1fr); }
+  .dpage__aside { order: -1; }   /* the three-line summary reads before a long passage */
+  .dbook__aside { order: 1; }    /* but the calendar comes first when booking is the job */
+  .dpage__footnote { margin-left: 0; width: 100%; }
+}
+@media (max-width: 640px) {
+  .dpage { padding-top: 2rem; }
+  .dpage__demo { margin-bottom: 2.5rem; }
+  /* On a phone the height cap is what would turn the embed into a letterbox sliver, so
+     it is dropped: full width, and the page scrolls instead. */
+  .dpage__frame { max-width: 100%; }
+}
+
 /* ═══════════════ REVEAL DEFAULTS (JS toggles) ═══════════════ */
 [data-reveal] { opacity: 0; transform: translateY(40px); }
 [data-hero-fade] { opacity: 0; }

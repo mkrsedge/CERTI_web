@@ -91,6 +91,31 @@
     else document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  /* ═══════════ Deep links ═══════════
+     Everything on this page used to share one URL: the address bar never moved, so no
+     section, demo or booking step could be linked, shared or reopened. Three things fix
+     that, and they must not fight each other:
+
+       · sections get a fragment (#platform, #ai, …) via replaceState — a fragment, not a
+         history entry, because scrolling is not navigation and should not fill the Back
+         button with places the reader merely passed through;
+       · the quickstart demos and the booking dialog get REAL paths (/demos/<slug>,
+         /book-a-demo) via pushState, because those are real generated pages. Reload one
+         and the modal becomes the page it was standing in for;
+       · `urlLocked` keeps the section spy from overwriting a modal's path while the modal
+         owns the URL. Without it the spy's next tick would drop the reader back to
+         /#quickstarts and quietly break the shared link. */
+  const SECTIONS = ['platform', 'ai', 'archetypes', 'quickstarts', 'contact'];
+  let urlLocked = false;
+
+  function setHash(hash) {
+    if (urlLocked) return;
+    const url = new URL(location.href);
+    url.hash = hash || '';
+    if (url.href === location.href) return;         // nothing to write, so write nothing
+    history.replaceState(history.state, '', url.href);
+  }
+
   /* ═══════════ Anchor links ═══════════ */
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
@@ -99,8 +124,28 @@
       e.preventDefault();
       if (menuOpen) closeMenu(() => scrollToTarget(id));
       else scrollToTarget(id);
+      /* #top is the whole <main>, i.e. the top of the page, which reads better as the
+         bare URL than as a fragment nobody would type. */
+      setHash(id === '#top' ? '' : id);
     });
   });
+
+  /* Which section the reader is actually looking at, so copying the URL copies the place.
+     The band is a thin strip across the middle of the viewport (-45% top and bottom), so
+     the active section is whichever one crosses the centre rather than whichever happens
+     to be touching an edge. replaceState, so Back still leaves the page. */
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        setHash(entry.target.id === 'hero' ? '' : '#' + entry.target.id);
+      });
+    }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+    ['hero'].concat(SECTIONS).forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) spy.observe(el);
+    });
+  }
 
   /* ═══════════ Preloader ═══════════ */
   const preloader = document.getElementById('preloader');
@@ -123,6 +168,23 @@
   gsap.set('.hero .line__inner', { y: '110%' });
   gsap.set('.cta .line__inner', { y: '110%' });
 
+  /* Honour an incoming #section link.
+     It cannot be left to the browser: the preloader holds the page under
+     body[data-loading] while Lenis is stopped, so the native jump either lands nowhere or
+     is undone the moment Lenis starts. It also has to happen AFTER the pinned sections are
+     measured, or the offsets are computed against a layout that no longer exists — hence
+     the ScrollTrigger.refresh() first and `immediate` rather than an animated scroll,
+     which would be a 1.4s crawl down the page on arrival. */
+  function jumpToHash() {
+    if (location.hash.length < 2) return;
+    let el = null;
+    try { el = document.querySelector(location.hash); } catch (e) { return; }  // bad selector
+    if (!el) return;
+    ScrollTrigger.refresh();
+    if (lenis) lenis.scrollTo(el, { immediate: true, force: true });
+    else el.scrollIntoView();
+  }
+
   let released = false;
   function releaseSite() {
     if (released) return;
@@ -130,6 +192,7 @@
     document.body.removeAttribute('data-loading');
     if (lenis) lenis.start();
     heroIntro();
+    jumpToHash();
   }
 
   /* Safety net: rAF-driven timelines stall in a backgrounded tab, which would
@@ -149,6 +212,10 @@
     gsap.set('.hero .line__inner, .cta .line__inner', { y: 0 });
     document.body.removeAttribute('data-loading');
     if (lenis) lenis.start();
+    /* Deferred by one frame: this branch runs during parse, before the pinned sections
+       further down this file exist, so measuring now would measure the wrong layout.
+       One rAF is enough — the whole module is a single task. */
+    requestAnimationFrame(jumpToHash);
   } else {
     const counter = { v: 0 };
     const loadTl = gsap.timeline();
@@ -1000,7 +1067,13 @@
       }, 250);
     }
 
-    function openDemo() {
+    /* The dialog stands in for /book-a-demo, a real page carrying the same calendar, so
+       it takes that path while it is open. `dPushed` records whether this session put the
+       entry there, so closing can walk it back with history.back() instead of pushing a
+       second entry — that keeps Back meaning "close the dialog" exactly once. */
+    let dPushed = false;
+
+    function openDemo(fromHistory) {
       dLastFocused = document.activeElement;
       initCal();
       dmodal.classList.add('is-open');
@@ -1008,29 +1081,50 @@
       if (cursor) cursor.dataset.state = '';
       if (lenis) lenis.stop();
       dClose.focus();
+      urlLocked = true;                  // the section spy must not overwrite the path
+      if (!fromHistory) {
+        dPushed = true;
+        history.pushState({ book: true }, '', '/book-a-demo');
+      }
     }
 
-    function closeDemo() {
+    function closeDemo(fromHistory) {
       dmodal.classList.remove('is-open');
       dmodal.setAttribute('aria-hidden', 'true');
       if (lenis) lenis.start();          // no scrollTo here, so no Lenis race
       if (dLastFocused) dLastFocused.focus();
+      urlLocked = false;
+      if (dPushed && !fromHistory) {
+        dPushed = false;
+        history.back();                  // popstate will not re-close: we are already shut
+      } else {
+        dPushed = false;
+      }
     }
 
-    /* Buttons are real links to cal.com, so they still work without JS.
-       With JS we intercept and keep people on-site in the modal. */
+    /* Buttons are real links to /book-a-demo, so they work without JS and count as
+       internal links. With JS we intercept and keep people on-site in the dialog. */
     document.querySelectorAll('[data-demo]').forEach((el) => {
       el.addEventListener('click', (e) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let new-tab clicks through
         e.preventDefault();
-        openDemo();
+        openDemo(false);
       });
     });
 
-    dmodal.querySelectorAll('[data-dm-close]').forEach((el) => el.addEventListener('click', closeDemo));
-    dClose.addEventListener('click', closeDemo);
+    dmodal.querySelectorAll('[data-dm-close]').forEach((el) => el.addEventListener('click', () => closeDemo(false)));
+    dClose.addEventListener('click', () => closeDemo(false));
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && dmodal.classList.contains('is-open')) closeDemo();
+      if (e.key === 'Escape' && dmodal.classList.contains('is-open')) closeDemo(false);
+    });
+
+    /* Back/Forward. Guarded on this dialog's own state key so the quickstart handler's
+       popstate listener and this one cannot act on each other's entries. */
+    window.addEventListener('popstate', (e) => {
+      const wantsBooking = !!(e.state && e.state.book);
+      const open = dmodal.classList.contains('is-open');
+      if (open && !wantsBooking) closeDemo(true);
+      else if (!open && wantsBooking) openDemo(true);
     });
   }
 
@@ -1082,6 +1176,24 @@
   };
   const QS_KEYS = ['capa', 'supplier', 'gfsi', 'docs', 'forms', 'recall', 'label', 'em', 'buyer'];
 
+  /* key -> /demos/<slug>. Each of these is a REAL page, generated by
+     assets-src/gen-pages.py and listed in sitemap.xml, so the modal pushes the very URL
+     the standalone page lives at. Sharing from the modal therefore yields an indexable
+     page, and reloading turns the modal into the page it was standing in for.
+     Keep this in step with the DEMOS table in that script: a slug that exists here and
+     not there pushes a URL that 404s on reload. */
+  const QS_SLUGS = {
+    capa: 'quality-investigations-capa',
+    supplier: 'supplier-incoming-quality',
+    gfsi: 'gfsi-compliance',
+    docs: 'documentation-change-management',
+    forms: 'digital-forms-production-records',
+    recall: 'recall-readiness-traceability',
+    label: 'label-spec-validation',
+    em: 'environmental-monitoring',
+    buyer: 'buyer-requirements-questionnaires',
+  };
+
   const qsCards = [...document.querySelectorAll('#quickstarts .mcard')];
   const qsmodal = document.getElementById('qsmodal');
   if (qsCards.length && qsmodal) {
@@ -1095,8 +1207,12 @@
 
     let lastFocus = null;
     let isOpen = false;
+    /* Whether this session pushed the /demos/<slug> entry, so closing walks it back with
+       history.back() rather than pushing another. See the booking dialog for the same
+       pattern and the Deep links block for why these get paths and sections get hashes. */
+    let qsPushed = false;
 
-    function openQs(card, key) {
+    function openQs(card, key, fromHistory) {
       const demo = ARCADE[key];
       qsTitle.textContent = label(card);
       /* Arcade's official embed, verbatim: a padding-bottom aspect box carrying this demo's
@@ -1130,9 +1246,15 @@
       /* drop the panel's entrance transform once it has landed, so nothing transformed sits
          above the iframe while the user is actually clicking around in it */
       setTimeout(() => { if (isOpen) qsmodal.classList.add('is-settled'); }, 480);
+
+      urlLocked = true;                  // the section spy must not overwrite the path
+      if (!fromHistory && QS_SLUGS[key]) {
+        qsPushed = true;
+        history.pushState({ qs: key }, '', '/demos/' + QS_SLUGS[key]);
+      }
     }
 
-    function closeQs() {
+    function closeQs(fromHistory) {
       if (!isOpen) return;
       isOpen = false;
       /* leave fullscreen before the iframe it belongs to is removed */
@@ -1148,6 +1270,14 @@
       /* unload the iframe once the fade has finished, so it does not vanish mid-transition */
       setTimeout(() => { if (!isOpen) qsMount.innerHTML = ''; }, 420);
       if (lastFocus && lastFocus.focus) lastFocus.focus();
+
+      urlLocked = false;
+      if (qsPushed && !fromHistory) {
+        qsPushed = false;
+        history.back();
+      } else {
+        qsPushed = false;
+      }
     }
 
     qsCards.forEach((card, i) => {
@@ -1165,21 +1295,33 @@
       card.setAttribute('tabindex', '0');
       card.setAttribute('aria-haspopup', 'dialog');
       card.setAttribute('aria-label', label(card) + ', view interactive demo');
-      card.addEventListener('click', () => openQs(card, key));
+      card.addEventListener('click', () => openQs(card, key, false));
       card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openQs(card, key); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openQs(card, key, false); }
       });
     });
 
-    qsmodal.querySelectorAll('[data-qs-close]').forEach((el) => el.addEventListener('click', closeQs));
-    qsClose.addEventListener('click', closeQs);
+    qsmodal.querySelectorAll('[data-qs-close]').forEach((el) => el.addEventListener('click', () => closeQs(false)));
+    qsClose.addEventListener('click', () => closeQs(false));
     /* clicks inside the panel must not reach the scrim */
     qsPanel.addEventListener('click', (e) => e.stopPropagation());
     /* Escape belongs to fullscreen first: the browser uses it to exit, and closing the modal
        on the same keystroke would tear the demo away mid-view. */
     window.addEventListener('keydown', (e) => {
       const fs = document.fullscreenElement || document.webkitFullscreenElement;
-      if (e.key === 'Escape' && isOpen && !fs) closeQs();
+      if (e.key === 'Escape' && isOpen && !fs) closeQs(false);
+    });
+
+    /* Back/Forward across the demo URLs. Guarded on this dialog's own state key, so this
+       listener and the booking one never act on each other's entries. */
+    window.addEventListener('popstate', (e) => {
+      const key = e.state && e.state.qs;
+      if (isOpen && !key) {
+        closeQs(true);
+      } else if (key && !isOpen) {
+        const card = qsCards[QS_KEYS.indexOf(key)];
+        if (card) openQs(card, key, true);
+      }
     });
   }
 
