@@ -54,23 +54,18 @@
 # CORS is open because these are meant to be pulled into other people's decks,
 # sites and press pages. Cache is a day and revalidating, not immutable: the
 # filenames carry no content hash, so a re-cut logo has to be able to replace one.
+# One rule for everything under /brand/, Cache-Control included. It was briefly split
+# so that brand/index.html could fall through to /*.html and revalidate, but there is no
+# HTML under /brand/ any more, and leaving a path here with NO matching rule is exactly
+# what let Pages' default "s-maxage=604800" apply - the edge then served a deleted page
+# for a week while the origin returned 404. Every path under /brand/ now gets an
+# explicit, revalidating header.
+#
+# Still not immutable: filenames carry no content hash, so a re-cut logo has to be able
+# to replace one in place.
 /brand/*
   X-Robots-Tag: noindex, nofollow
   Access-Control-Allow-Origin: *
-
-# Cache is set on the FILES, not on /brand/* as a whole, so that brand/index.html
-# falls through to the /*.html rule above and revalidates on every visit. Putting
-# Cache-Control on /brand/* covered the page too and pinned it for a day, which is
-# the same "why is my edit not live" trap as the immutable header. Note that
-# Cloudflare CONCATENATES a header set by two matching rules rather than letting the
-# later one win (/brand/index.html briefly returned
-# "max-age=0, must-revalidate, public, max-age=86400, must-revalidate"), so these
-# patterns are written to be mutually exclusive with the HTML rule instead.
-/brand/*/svg/*
-  Cache-Control: public, max-age=86400, must-revalidate
-/brand/*/png/*
-  Cache-Control: public, max-age=86400, must-revalidate
-/brand/CERTI-logo-pack.zip
   Cache-Control: public, max-age=86400, must-revalidate
 
 # Fonts genuinely never change in place — a new font is a new family and a new

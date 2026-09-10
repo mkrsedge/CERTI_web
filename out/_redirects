@@ -24,6 +24,22 @@ https://www.getcerti.com/*   https://getcerti.com/:splat   301
 /TaC              /terms            301
 /tac              /terms            301
 
+# ─── Brand directory has no front door ───────────────────────────────
+# The logo files at /brand/<colourway>/<svg|png>/... stay fetchable by their exact URLs,
+# but /brand/ itself must not be browsable. It had an index page; that was removed on
+# request, because a browsable index is itself a way of advertising the directory.
+#
+# Deleting the file was not enough on its own. With no index.html the path matched no
+# _headers rule and inherited Pages' default "Cache-Control: public, s-maxage=604800",
+# so Cloudflare's edge kept serving the deleted page for SEVEN DAYS while the origin
+# was already returning 404. An explicit redirect is deterministic: it does not depend
+# on asset resolution or on which header rule happens to match.
+#
+# _redirects cannot return a 404 (only 200 rewrites and 3xx), so this bounces to the
+# homepage, which is also friendlier than a 404 for anyone who trims a file URL back.
+/brand/   /   301
+/brand    /   301
+
 # ─── Retired locale paths ─────────────────────────────────────────────────────
 # The old site had /en/ and /tr/. The new site is single-locale English at the root.
 /en/*   /   301
