@@ -1,23 +1,32 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Generates brand/index.html — the unlisted brand-assets page.
+Generated brand/index.html — the brand-assets index page.
 
-WHY IT EXISTS
-    Cloudflare Pages does not serve directory listings, so without this page /brand/
-    returns 404 and each of the 24 files has to be linked individually. One page turns
-    "send me your logo" into one link.
+    ⚠ DO NOT RUN THIS UNLESS A BRAND PAGE IS WANTED AGAIN.
 
-UNLISTED, NOT PRIVATE
-    Nothing on the site links here, it is not in sitemap.xml, and out/_headers serves
-    /brand/* with X-Robots-Tag: noindex, nofollow. There is deliberately no
-    "Disallow: /brand/" in robots.txt: that file is world-readable, so a Disallow line
-    would publish the very path we are not advertising. See the comment in _headers.
-    Anyone with the link can fetch anything here, so treat it as public.
+    The page it produces was REMOVED on the user's instruction (2026-09-10): a browsable
+    index at /brand/ was itself a form of advertising the directory. /brand/ now returns
+    404 and the 24 files are reachable only by their exact URLs. Running this script
+    recreates the page, and copying it into out/ would put it back on the live site.
 
-REGENERATE
-    python assets-src/gen-brand.py
-    Re-run assets-src/lay-brand equivalent (or just drop new files in) if the pack changes.
+    Kept rather than deleted because the file inventory below, the per-colourway grounds
+    and the do/don't copy are the useful part, and they would have to be rewritten from
+    scratch if a brand page is ever wanted — as a page here, in a PDF, or in a deck.
+
+WHAT /brand/ LOOKS LIKE NOW
+    24 files under brand/<colourway>/<svg|png>/ plus brand/CERTI-logo-pack.zip. No HTML.
+    Cloudflare Pages serves no directory listing, so /brand/, /brand/charcoal/ and
+    /brand/charcoal/svg/ all 404.
+
+    Nothing links to it, it is not in sitemap.xml, and out/_headers serves /brand/* with
+    X-Robots-Tag: noindex, nofollow. There is deliberately no "Disallow: /brand/" in
+    robots.txt: that file is world-readable, so a Disallow line would publish the very
+    path we are not advertising. See the comment in _headers.
+
+    It is UNADVERTISED, not private. Anyone holding a file URL can fetch it, and CORS is
+    open so it can be hot-linked. If it ever needs to be genuinely restricted, that is
+    Cloudflare Access in front of /brand/*, which would also break hot-linking.
 """
 
 import io
