@@ -42,6 +42,14 @@ https://www.getcerti.com/*   https://getcerti.com/:splat   301
 
 # ─── Retired locale paths ─────────────────────────────────────────────────────
 # The old site had /en/ and /tr/. The new site is single-locale English at the root.
+# The wildcard forms cover /en/anything but NOT the bare /en - Cloudflare treats
+# "/en/*" as requiring the slash, so /en, /tr and /blog were returning 404 while
+# /en/, /tr/ and /blog/ redirected correctly. Search Console is still holding a
+# sitemap entry for https://www.getcerti.com/en, which means Google knows that URL
+# and was getting a 404 from it: an indexed old URL that 404s passes nothing on,
+# where a 301 hands its signals to the homepage. Hence the bare forms below.
+/en     /   301
+/tr     /   301
 /en/*   /   301
 /tr/*   /   301
 
@@ -52,6 +60,7 @@ https://www.getcerti.com/*   https://getcerti.com/:splat   301
 # delete the matching line and publish at the same slug so the redirect becomes
 # the article. Keep /blog/ itself listed rather than using /blog/* — a wildcard
 # would pre-break the new blog the moment it launches.
+/blog                                             /   301
 /blog/                                            /   301
 /blog/ai-native-vs-legacy-qms/                    /   301
 /blog/best-qms-software-small-manufacturers/      /   301

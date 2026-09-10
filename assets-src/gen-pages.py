@@ -49,7 +49,7 @@ DEMOS = [
     dict(
         key='capa', num='01', slug='quality-investigations-capa',
         arcade='PWBNgAKPv8EJf19bvGFh', aspect='49.296875',
-        title='CAPA &amp; Quality Investigation Software Demo | CERTI',
+        title='CAPA Software Demo for Food Manufacturers | CERTI',
         metadesc='See how CERTI investigates a complaint, drafts the CAPA in your '
                  'auditor&rsquo;s format, chases approvers and verifies the fix held. '
                  'Interactive demo, no signup.',
@@ -75,7 +75,7 @@ DEMOS = [
     dict(
         key='supplier', num='02', slug='supplier-incoming-quality',
         arcade='R7wWuEgkyR5pzHUZqFZe', aspect='52.96875',
-        title='Supplier Quality &amp; COA Verification Demo | CERTI',
+        title='Supplier Quality &amp; COA Demo for Food Plants | CERTI',
         metadesc='Watch every COA checked against spec on arrival, bad lots caught before '
                  'they reach your floor, and suppliers risk-ranked on real performance.',
         body=[
@@ -99,7 +99,7 @@ DEMOS = [
     dict(
         key='gfsi', num='03', slug='gfsi-compliance',
         arcade='465sEDzrBECGDiVaVyxP', aspect='52.96875',
-        title='GFSI Audit Compliance Software Demo | CERTI',
+        title='GFSI Audit Software Demo for Food Plants | CERTI',
         metadesc='See records mapped to every standard you are held to, gaps surfaced '
                  'continuously, and the full evidence pack assembled on demand. '
                  'Interactive GFSI demo.',
@@ -123,7 +123,7 @@ DEMOS = [
     dict(
         key='docs', num='04', slug='documentation-change-management',
         arcade='YvtoXxmJ1J5wov3f6bZQ', aspect='52.96875',
-        title='Document Control &amp; Change Management Demo | CERTI',
+        title='Food Safety Document Control Demo | CERTI',
         metadesc='See one document change fan out into impact analysis, review tasks and '
                  'retraining, with every response tracked. Interactive demo, no signup '
                  'required.',
@@ -147,7 +147,7 @@ DEMOS = [
     dict(
         key='forms', num='05', slug='digital-forms-production-records',
         arcade='tij5FFovUpB2Osh5YYAp', aspect='49.296875',
-        title='Digital Forms &amp; Production Records Demo | CERTI',
+        title='Digital Batch Record Demo for Food Plants | CERTI',
         metadesc='Watch a batch record completed on the line and a COA hold resolved '
                  'without paper. Interactive demo of CERTI digital forms, no signup '
                  'required.',
@@ -171,7 +171,7 @@ DEMOS = [
     dict(
         key='recall', num='06', slug='recall-readiness-traceability',
         arcade='MRaUY6TfTm2sm5CWczbA', aspect='52.96875',
-        title='Recall Readiness &amp; Traceability Demo | CERTI',
+        title='Food Recall &amp; Lot Traceability Demo | CERTI',
         metadesc='See a production lot traced forward and back in minutes and the recall '
                  'audit record assembled from data you already hold. Interactive demo.',
         body=[
@@ -194,7 +194,7 @@ DEMOS = [
     dict(
         key='label', num='07', slug='label-spec-validation',
         arcade='bP7Y8IEhBHDzW04BhAvw', aspect='49.296875',
-        title='Label &amp; Spec Validation Software Demo | CERTI',
+        title='Allergen Label &amp; Spec Validation Demo | CERTI',
         metadesc='See an allergen mismatch caught between a supplier spec and a finished '
                  'label before it prints. Interactive demo of CERTI label and spec '
                  'validation.',
@@ -217,7 +217,7 @@ DEMOS = [
     dict(
         key='em', num='08', slug='environmental-monitoring',
         arcade='NCucpfdBEH56vbGUBlxQ', aspect='52.96875',
-        title='Environmental Monitoring Program Demo | CERTI',
+        title='Environmental Monitoring Demo for Food Plants | CERTI',
         metadesc='See the swab schedule run to plan, results trended by zone, and a '
                  'corrective response raised the moment a positive lands. Interactive '
                  'demo.',
@@ -242,7 +242,7 @@ DEMOS = [
     dict(
         key='buyer', num='09', slug='buyer-requirements-questionnaires',
         arcade='I9RyGunscamGLALWY4BO', aspect='52.96875',
-        title='Buyer Questionnaire &amp; RFI Automation Demo | CERTI',
+        title='Retailer Questionnaire Automation Demo | CERTI',
         metadesc='See retailer questionnaires and RFIs answered from your own records, '
                  'every answer cited to its source, and nothing sent without your '
                  'approval.',
