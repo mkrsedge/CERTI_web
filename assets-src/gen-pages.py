@@ -28,7 +28,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VER = '20260909'          # asset cache-busting version; must match index.html
+VER = '20260910'          # asset cache-busting version; must match index.html
 TODAY = '2026-09-09'
 SITE = 'https://getcerti.com'
 ARCADE_PARAMS = '?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true'

@@ -39,6 +39,26 @@
 /img/*
   Cache-Control: public, max-age=3600, must-revalidate
 
+# ─── Brand assets (/brand/) ───────────────────────────────────────────────────
+# Publicly fetchable, deliberately not publicly advertised. Nothing on the site
+# links to /brand/, it is not in sitemap.xml, and this header keeps it out of
+# search results if anyone ever does link to it.
+#
+# NOTE ON robots.txt: there is deliberately NO "Disallow: /brand/" line. robots.txt
+# is world-readable, so a Disallow entry would publish the existence of the exact
+# directory we are trying not to advertise, and it would not stop indexing anyway
+# (Disallow blocks crawling; a blocked URL can still be indexed from a link
+# elsewhere). X-Robots-Tag: noindex is the header that actually keeps it out of
+# results, and it says nothing to anyone who has not already found the file.
+#
+# CORS is open because these are meant to be pulled into other people's decks,
+# sites and press pages. Cache is a day and revalidating, not immutable: the
+# filenames carry no content hash, so a re-cut logo has to be able to replace one.
+/brand/*
+  X-Robots-Tag: noindex, nofollow
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400, must-revalidate
+
 # Fonts genuinely never change in place — a new font is a new family and a new
 # filename — so these are the one safe case for immutable.
 /fonts/*
