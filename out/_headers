@@ -57,6 +57,20 @@
 /brand/*
   X-Robots-Tag: noindex, nofollow
   Access-Control-Allow-Origin: *
+
+# Cache is set on the FILES, not on /brand/* as a whole, so that brand/index.html
+# falls through to the /*.html rule above and revalidates on every visit. Putting
+# Cache-Control on /brand/* covered the page too and pinned it for a day, which is
+# the same "why is my edit not live" trap as the immutable header. Note that
+# Cloudflare CONCATENATES a header set by two matching rules rather than letting the
+# later one win (/brand/index.html briefly returned
+# "max-age=0, must-revalidate, public, max-age=86400, must-revalidate"), so these
+# patterns are written to be mutually exclusive with the HTML rule instead.
+/brand/*/svg/*
+  Cache-Control: public, max-age=86400, must-revalidate
+/brand/*/png/*
+  Cache-Control: public, max-age=86400, must-revalidate
+/brand/CERTI-logo-pack.zip
   Cache-Control: public, max-age=86400, must-revalidate
 
 # Fonts genuinely never change in place — a new font is a new family and a new
